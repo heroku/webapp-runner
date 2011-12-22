@@ -1,32 +1,51 @@
 package launch;
 import java.io.File;
+import java.util.Map;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.startup.Tomcat;
 
 public class Main {
 	
-	private static String parseWebApppDir(String[] args) {
-		return args[0];
+	public static void printHelp() {
+		System.out.println("Tomcat Runner runs a Java web application that is represented as an exploded war in a Tomcat container");
+		System.out.println("Usage: java -jar tomcat-runner.jar [arguments...] path/to/webapp");
+		System.out.println("Arguments:");
+		for (Argument argument : Argument.values()) {
+			System.out.println(argument.argName() + "     " + argument.helpText());
+		}
 	}
 
     public static void main(String[] args) throws Exception {
 
+    	if("help".equals(args[0])) {
+    		printHelp();
+    		System.exit(0);
+    	}
+    	
+    	Map<Argument, String> argMap = null;
+		try {
+			argMap = ArgParser.parseArgs(args);
+		} catch (ArgumentNotFoundException e) {
+			System.out.println("Unexpected Argument!!!");
+			System.out.println("For usage information run `java -jar tomcat-runner.jar help`");
+			System.exit(1);
+		}
+    	
         Tomcat tomcat = new Tomcat();
 
-        //The port that we should run on can be set into an environment variable
-        //Look for that variable and default to 8080 if it isn't there.
-        String webPort = System.getenv("PORT");
-        if(webPort == null || webPort.isEmpty()) {
-            webPort = "8080";
-        }
+        String webPort = 
+        		argMap.containsKey(Argument.PORT) ? argMap.get(Argument.PORT) : "8080";
 
         tomcat.setPort(Integer.valueOf(webPort));
 
-        Context ctx = tomcat.addWebapp("/", new File(parseWebApppDir(args)).getAbsolutePath());
-        ctx.setSessionTimeout(30);
+        Context ctx = tomcat.addWebapp("/", new File(argMap.get(Argument.APPLICATION_DIR)).getAbsolutePath());
         
-        System.out.println("configuring app with basedir: " + new File(parseWebApppDir(args)).getAbsolutePath());
+        if(argMap.containsKey(Argument.SESSION_TIMEOUT)) {
+        	ctx.setSessionTimeout(Integer.valueOf(argMap.get(Argument.SESSION_TIMEOUT)));
+        }
+        
+        System.out.println("configuring app with basedir: " + new File(argMap.get(Argument.APPLICATION_DIR)).getAbsolutePath());
 
         tomcat.start();
         tomcat.getServer().await();  

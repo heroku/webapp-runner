@@ -11,4 +11,10 @@ Tomcat runner is designed to allow you to launch an exploded war that is on your
 
 ### Execute
 
-    java -jar target/tomcat-runner-jar-with-dependencies.jar path/to/my/project
+    java -jar target/tomcat-runner.jar path/to/my/project
+
+### Help
+
+    java -jar target/tomcat-runner.jar help
+
+Prints out all arguments accepted
