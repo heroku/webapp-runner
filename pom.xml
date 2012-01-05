@@ -38,10 +38,10 @@
         <version>7.0.22</version>
     </dependency>
     <dependency>
-    	<groupId>junit</groupId>
-    	<artifactId>junit</artifactId>
-    	<version>4.10</version>
-    	<scope>test</scope>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.10</version>
+        <scope>test</scope>
     </dependency>
   </dependencies>
   <build>
@@ -52,7 +52,7 @@
         <configuration>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
-	        </descriptorRefs>
+            </descriptorRefs>
             <finalName>tomcat-runner</finalName>
             <appendAssemblyId>false</appendAssemblyId>
           <archive>

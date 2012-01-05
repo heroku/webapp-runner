@@ -23,6 +23,6 @@ public enum Argument {
 			}
 		}
 		
-		throw new ArgumentNotFoundException();
+		throw new ArgumentNotFoundException(argName);
 	}
 }

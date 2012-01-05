@@ -27,7 +27,7 @@ public class Main {
 		try {
 			argMap = ArgParser.parseArgs(args);
 		} catch (ArgumentNotFoundException e) {
-			System.out.println("Unexpected Argument!!!");
+			System.out.println("Unexpected Argument: " + e.getArgName());
 			System.out.println("For usage information run `java -jar tomcat-runner.jar help`");
 			System.exit(1);
 		}
