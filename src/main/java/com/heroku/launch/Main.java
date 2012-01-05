@@ -1,4 +1,4 @@
-package launch;
+package com.heroku.launch;
 import java.io.File;
 import java.util.Map;
 
@@ -18,7 +18,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-    	if("help".equals(args[0])) {
+    	if("help".equals(args[0]) || "--help".equals(args[0])) {
     		printHelp();
     		System.exit(0);
     	}

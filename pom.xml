@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>heroku.runner</groupId>
   <artifactId>tomcat-runner</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.3</version>
   <name>tomcat-runner</name>
   <url>http://maven.apache.org</url>
   <dependencies>
@@ -57,7 +57,7 @@
             <appendAssemblyId>false</appendAssemblyId>
           <archive>
               <manifest>
-                  <mainClass>launch.Main</mainClass>
+                  <mainClass>com.heroku.launch.Main</mainClass>
               </manifest>
           </archive>
         </configuration>

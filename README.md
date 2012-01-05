@@ -1,6 +1,6 @@
 # Tomcat Runner
 
-Tomcat runner is designed to allow you to launch an exploded war that is on your filesystem into a tomcat container with a simple `java -jar` command.
+Tomcat runner is designed to allow you to launch an exploded or compressed war that is on your filesystem into a tomcat container with a simple `java -jar` command.
 
 ## Usage
 
@@ -12,6 +12,10 @@ Tomcat runner is designed to allow you to launch an exploded war that is on your
 ### Execute
 
     java -jar target/tomcat-runner.jar path/to/my/project
+
+or
+
+    java -jar target/tomcat-runner.jar myProject.war
 
 ### Help
 

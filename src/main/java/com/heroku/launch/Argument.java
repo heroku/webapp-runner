@@ -1,4 +1,4 @@
-package launch;
+package com.heroku.launch;
 
 public enum Argument {
 	SESSION_TIMEOUT ("--session-timeout", "The number of minutes of inactivity before a user's session is timed out"),

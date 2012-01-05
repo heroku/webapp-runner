@@ -1,4 +1,4 @@
-package launch;
+package com.heroku.launch;
 
 import java.util.HashMap;
 import java.util.Map;

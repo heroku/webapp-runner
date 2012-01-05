@@ -1,9 +1,13 @@
-package launch;
+package com.heroku.launch;
 
 import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.heroku.launch.ArgParser;
+import com.heroku.launch.Argument;
+import com.heroku.launch.ArgumentNotFoundException;
 
 public class ArgParserTest {
 	

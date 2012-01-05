@@ -1,4 +1,4 @@
-package launch;
+package com.heroku.launch;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -8,6 +8,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+
+import com.heroku.launch.ArgParser;
+import com.heroku.launch.Argument;
+import com.heroku.launch.ArgumentNotFoundException;
 
 @RunWith(value = Parameterized.class)
 public class ArgParserNegativeTest {
