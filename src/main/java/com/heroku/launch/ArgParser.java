@@ -3,8 +3,22 @@ package com.heroku.launch;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Util class for parsing arguments from the command line.
+ * 
+ * @author johnsimone
+ *
+ */
 public class ArgParser {
 	
+	/**
+	 * Parse the argument list. The Argument enum takes care of deciding which arguments
+	 * are understood
+	 * 
+	 * @param args
+	 * @return
+	 * @throws ArgumentNotFoundException
+	 */
 	public static Map<Argument, String> parseArgs(String[] args) throws ArgumentNotFoundException {
 		Map<Argument, String> argMap = new HashMap<Argument, String>();
 		

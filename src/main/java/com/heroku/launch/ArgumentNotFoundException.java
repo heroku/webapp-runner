@@ -1,5 +1,12 @@
 package com.heroku.launch;
 
+/**
+ * ArgumentNotFoundException is thrown when an argument that isn't understood
+ * is passed in.
+ * 
+ * @author johnsimone
+ *
+ */
 public class ArgumentNotFoundException extends Exception {
 	
 	private String argName;
