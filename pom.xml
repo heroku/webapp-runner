@@ -6,6 +6,14 @@
   <version>0.0.3</version>
   <name>tomcat-runner</name>
   <url>http://maven.apache.org</url>
+  
+	<distributionManagement>
+	  <repository>
+	    <id>gh-pages</id>
+	    <url>file:///${basedir}/../tomcat-runner-pages/repository/</url>
+	  </repository>
+	</distributionManagement>
+  
   <dependencies>
     <dependency>
         <groupId>org.apache.tomcat.embed</groupId>
