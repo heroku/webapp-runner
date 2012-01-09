@@ -50,10 +50,10 @@ public class Main {
         String webPort = 
         		argMap.containsKey(Argument.PORT) ? argMap.get(Argument.PORT) : "8080";
 
-        tomcat.setPort(Integer.valueOf(webPort));
+        tomcat.setPort(Integer.valueOf(webPort));     
 
         //create a context with the webapp
-        Context ctx = tomcat.addWebapp("/", new File(argMap.get(Argument.APPLICATION_DIR)).getAbsolutePath());
+        Context ctx = tomcat.addWebapp("", new File(argMap.get(Argument.APPLICATION_DIR)).getAbsolutePath());
         
         //set the session timeout
         if(argMap.containsKey(Argument.SESSION_TIMEOUT)) {
