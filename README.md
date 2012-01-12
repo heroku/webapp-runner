@@ -54,7 +54,7 @@ Add the following to your pom.xml:
                       <configuration>
                           <artifactItems>
                               <artifactItem>
-                                  <groupId>heroku.runner</groupId>
+                                  <groupId>tomcat.runner</groupId>
                                   <artifactId>tomcat-runner</artifactId>
                                   <version>0.0.5</version>
                                   <destFileName>tomcat-runner.jar</destFileName>
