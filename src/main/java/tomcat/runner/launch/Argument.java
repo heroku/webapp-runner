@@ -1,4 +1,4 @@
-package com.heroku.launch;
+package tomcat.runner.launch;
 
 /**
  * The argument enum holds which arguments are supported.
@@ -9,6 +9,7 @@ package com.heroku.launch;
 public enum Argument {
 	SESSION_TIMEOUT ("--session-timeout", "The number of minutes of inactivity before a user's session is timed out"),
 	PORT ("--port", "The port that the server will accept http requests on"),
+	CONTEXT_XML ("--context_xml", "The parth to the context xml to use"),
 	APPLICATION_DIR ("", "");
 	
 	private String argName;

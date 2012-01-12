@@ -4,3 +4,4 @@ tomcat.8080
 .project
 .settings/
 tomcat.*/
+test-output/

@@ -1,5 +1,6 @@
-package com.heroku.launch;
+package tomcat.runner.launch;
 import java.io.File;
+import java.net.URL;
 import java.util.Map;
 
 import org.apache.catalina.Context;
@@ -22,14 +23,14 @@ public class Main {
 		System.out.println("Usage: java -jar tomcat-runner.jar [arguments...] path/to/webapp");
 		System.out.println("Arguments:");
 		for (Argument argument : Argument.values()) {
-			System.out.println(argument.argName() + "     " + argument.helpText());
+			System.out.format("%-30s%-90s%n", argument.argName(), argument.helpText());
 		}
 	}
 
     public static void main(String[] args) throws Exception {
     	
     	//print help text when asked for
-    	if("help".equals(args[0]) || "--help".equals(args[0])) {
+    	if(args.length == 0 || "help".equals(args[0]) || "--help".equals(args[0])) {
     		printHelp();
     		System.exit(0);
     	}
@@ -40,6 +41,10 @@ public class Main {
 			argMap = ArgParser.parseArgs(args);
 		} catch (ArgumentNotFoundException e) {
 			System.out.println("Unexpected Argument: " + e.getArgName());
+			System.out.println("For usage information run `java -jar tomcat-runner.jar help`");
+			System.exit(1);
+		} catch (MissingAppException e) {
+			System.out.println("Application location not defined");
 			System.out.println("For usage information run `java -jar tomcat-runner.jar help`");
 			System.exit(1);
 		}
@@ -60,7 +65,7 @@ public class Main {
         	ctx.setSessionTimeout(Integer.valueOf(argMap.get(Argument.SESSION_TIMEOUT)));
         }
         
-        System.out.println("configuring app at: " + new File(argMap.get(Argument.APPLICATION_DIR)).getAbsolutePath());
+        System.out.println("deploying app from: " + new File(argMap.get(Argument.APPLICATION_DIR)).getAbsolutePath());
 
         //start the server
         tomcat.start();
