@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>tomcat.runner</groupId>
-  <artifactId>tomcat-runner</artifactId>
+  <groupId>webapp.runner</groupId>
+  <artifactId>webapp-runner</artifactId>
   <version>0.0.5</version>
-  <name>tomcat-runner</name>
+  <name>webapp-runner</name>
   <url>http://maven.apache.org</url>
   
 	<distributionManagement>
@@ -53,7 +53,7 @@
 	</dependency>
   </dependencies>
   <build>
-    <finalName>tomcat-runner-no-dep</finalName>
+    <finalName>webapp-runner-no-dep</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -61,11 +61,11 @@
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
             </descriptorRefs>
-            <finalName>tomcat-runner</finalName>
+            <finalName>webapp-runner</finalName>
             <appendAssemblyId>false</appendAssemblyId>
           <archive>
               <manifest>
-                  <mainClass>com.heroku.launch.Main</mainClass>
+                  <mainClass>webapp.runner.launch.Main</mainClass>
               </manifest>
           </archive>
         </configuration>
