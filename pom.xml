@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>webapp.runner</groupId>
   <artifactId>webapp-runner</artifactId>
-  <version>0.0.5</version>
+  <version>0.0.6</version>
   <name>webapp-runner</name>
   <url>http://maven.apache.org</url>
   
@@ -81,5 +81,52 @@
       </plugin>
     </plugins>
   </build>
+  
+  <profiles>
+    <profile>
+      <id>license-check</id>
+      <activation>
+        <property>
+          <name>staticAnalysis</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.mycila.maven-license-plugin</groupId>
+            <artifactId>maven-license-plugin</artifactId>
+            <configuration>
+              <aggregate>true</aggregate>
+              <header>license/header.txt</header>
+              <excludes>
+                <exclude>target/**</exclude>
+                <exclude>**/license/header.txt</exclude>
+                <exclude>**/*.md</exclude>
+                <exclude>**/.gitignore</exclude>
+              </excludes>
+              <failIfMissing>${staticAnalysis.failOnError}</failIfMissing>
+              <headerDefinitions>
+                <headerDefinition>license/stringtemplatedefinition.xml</headerDefinition>
+              </headerDefinitions>
+              <mapping>
+                <policy>DOUBLESLASH_STYLE</policy>
+                <props>SCRIPT_STYLE</props>
+              </mapping>
+              <strictCheck>true</strictCheck>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>test</phase>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>

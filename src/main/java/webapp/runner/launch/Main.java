@@ -58,7 +58,13 @@ public class Main {
         tomcat.setPort(Integer.valueOf(webPort));     
 
         //create a context with the webapp
-        String path = argMap.containsKey(Argument.PATH) ? argMap.get(Argument.PATH) : "/";
+        String path = argMap.containsKey(Argument.PATH) ? argMap.get(Argument.PATH) : "";
+        
+        //warn if the path doesn't start with a '/'. This causes issues serving content at the context root.
+        if(path.length() > 0 && !path.startsWith("/")) {
+        	System.out.println("WARNING: you entered a path: [" + path + "]. Your path should start with a '/'. Tomcat will update this for you, but you may still experience issues.");
+        }
+        
         Context ctx = tomcat.addWebapp(path, new File(argMap.get(Argument.APPLICATION_DIR)).getAbsolutePath());
         
         //set the session timeout
