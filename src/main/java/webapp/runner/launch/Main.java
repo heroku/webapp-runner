@@ -58,7 +58,8 @@ public class Main {
         tomcat.setPort(Integer.valueOf(webPort));     
 
         //create a context with the webapp
-        Context ctx = tomcat.addWebapp("", new File(argMap.get(Argument.APPLICATION_DIR)).getAbsolutePath());
+        String path = argMap.containsKey(Argument.PATH) ? argMap.get(Argument.PATH) : "/";
+        Context ctx = tomcat.addWebapp(path, new File(argMap.get(Argument.APPLICATION_DIR)).getAbsolutePath());
         
         //set the session timeout
         if(argMap.containsKey(Argument.SESSION_TIMEOUT)) {

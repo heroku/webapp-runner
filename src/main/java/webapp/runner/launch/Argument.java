@@ -10,6 +10,7 @@ public enum Argument {
 	SESSION_TIMEOUT ("--session-timeout", "The number of minutes of inactivity before a user's session is timed out"),
 	PORT ("--port", "The port that the server will accept http requests on"),
 	CONTEXT_XML ("--context_xml", "The parth to the context xml to use"),
+	PATH ("--path", "context path (default is /)"),
 	APPLICATION_DIR ("", "");
 	
 	private String argName;
