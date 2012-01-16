@@ -56,7 +56,7 @@ Add the following to your pom.xml:
                               <artifactItem>
                                   <groupId>webapp.runner</groupId>
                                   <artifactId>webapp-runner</artifactId>
-                                  <version>0.0.5</version>
+                                  <version>0.0.6</version>
                                   <destFileName>webapp-runner.jar</destFileName>
                               </artifactItem>
                           </artifactItems>
