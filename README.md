@@ -104,7 +104,7 @@ This will cause Eclipse to include webapp-runner on the classpath of your projec
 
 Your application should start and you should see the log output in the Eclipse console. Since you have a debugger attached to your application you'll now see changes to your code get automatically loaded without restarting and can set breakpoints.
 
-You can stop the application from the red square in the console pane or from the debug perspective.
+You can stop the application from the red square in the console pane or from the debug perspective. It can be restarted by right-clicking on the project and choosing your new launch configuration from the 'Debug As' menu or from the debug menu in the Eclipse toolbar (the icon with the little bug).
      
 ### License
 
