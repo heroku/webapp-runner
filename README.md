@@ -73,6 +73,38 @@ Add the following to your pom.xml:
 Now when you run `maven package` webapp runner will be downloaded for you. You can then launch your application with:
 
      $ java -jar target/dependency/webapp-runner.jar target/<appname>.war
+
+## Running your application in Eclipse
+
+Since your application will just be a standard webapp you can still use WTP and the traditional Tomcat integration points to run your application within Eclipse. However the containerless nature of webapp runner allows you to run from within Eclipse in a simpler way.
+
+Start by importing your project into Eclipse. It is best to import it as an existing Maven project using the [m2eclipse plugin](http://eclipse.org/m2e/).
+
+### Make your application dependant on webapp runner
+
+Add the following dependency to your pom.xml:
+
+    <dependency>
+      <groupId>webapp.runner</groupId>
+      <artifactId>webapp-runner</artifactId>
+      <version>0.0.6</version>
+      <scope>provided</scope>
+    </dependency>
+
+This will cause Eclipse to include webapp-runner on the classpath of your project so that it can be used for launching. It won't affect the final artifact built for your application.
+
+### Create a launch configuration
+
+1. Right-click on your project and choose 'Debug As -> Debug Configurations...'
+2. From the 'Debug Configuration' window create a new 'Java Application' launch configuration by double-clicking on 'Java Application' in the left hand list or right-clicking on it and selecting 'New'
+3. Give your launch configuration a sensible name. Then enter the name of your project in the 'Project' box
+4. Enter 'webapp.runner.launch.Main' in the 'Main Class' box
+5. Click on the 'Arguments' tab and enter './src/main/webapp' in the 'Program Arguments' box
+6. Click 'Apply' and then 'Run'
+
+Your application should start and you should see the log output in the Eclipse console. Since you have a debugger attached to your application you'll now see changes to your code get automatically loaded without restarting and can set breakpoints.
+
+You can stop the application from the red square in the console pane or from the debug perspective.
      
 ### License
 
