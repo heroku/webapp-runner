@@ -85,7 +85,7 @@ Start by importing your project into Eclipse. It is best to import it as an exis
 Add the following dependency to your pom.xml:
 
     <dependency>
-      <groupId>webapp.runner</groupId>
+      <groupId>com.github.jsimone</groupId>
       <artifactId>webapp-runner</artifactId>
       <version>0.0.7</version>
       <scope>provided</scope>
