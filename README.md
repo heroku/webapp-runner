@@ -31,15 +31,6 @@ You can use the Maven dependency plugin to download webapp-runner as part of you
 
 Add the following to your pom.xml:
 
-    ...
-    <repositories>
-      <repository>
-        <id>webapp-runner-repo</id>
-        <name>webapp runner repository on GitHub</name>
-        <url>http://jsimone.github.com/webapp-runner/repository/</url>
-      </repository>
-    </repositories>
-    ...
     <build>
     ...
       <plugins>
@@ -56,7 +47,7 @@ Add the following to your pom.xml:
                               <artifactItem>
                                   <groupId>com.github.jsimone</groupId>
                                   <artifactId>webapp-runner</artifactId>
-                                  <version>0.0.7</version>
+                                  <version>7.0.22</version>
                                   <destFileName>webapp-runner.jar</destFileName>
                               </artifactItem>
                           </artifactItems>
@@ -87,7 +78,7 @@ Add the following dependency to your pom.xml:
     <dependency>
       <groupId>com.github.jsimone</groupId>
       <artifactId>webapp-runner</artifactId>
-      <version>0.0.7</version>
+      <version>7.0.22</version>
       <scope>provided</scope>
     </dependency>
 
@@ -105,6 +96,9 @@ This will cause Eclipse to include webapp-runner on the classpath of your projec
 Your application should start and you should see the log output in the Eclipse console. Since you have a debugger attached to your application you'll now see changes to your code get automatically loaded without restarting and can set breakpoints.
 
 You can stop the application from the red square in the console pane or from the debug perspective. It can be restarted by right-clicking on the project and choosing your new launch configuration from the 'Debug As' menu or from the debug menu in the Eclipse toolbar (the icon with the little bug).
+
+### Maven Central
+Note: webapp runner is now available in Maven Central. The version scheme has also chanaged to match the version of Tomcat that it relies on. The latest version is now 7.0.22. Versions 0.0.1 to 0.0.7 are still available at http://jsimone.github.com/webapp-runner/repository.
      
 ### License
 
