@@ -92,6 +92,12 @@ public class Main {
         
         Context ctx = tomcat.addWebapp(path, new File(argMap.get(Argument.APPLICATION_DIR)).getAbsolutePath());
         
+        
+        if(argMap.containsKey(Argument.CONTEXT_XML)) {
+        	System.out.println("Using context config: " + argMap.get(Argument.CONTEXT_XML));
+        	ctx.setConfigFile(new File(argMap.get(Argument.CONTEXT_XML)).toURI().toURL());
+        }
+        
         //set the session timeout
         if(argMap.containsKey(Argument.SESSION_TIMEOUT)) {
         	ctx.setSessionTimeout(Integer.valueOf(argMap.get(Argument.SESSION_TIMEOUT)));
