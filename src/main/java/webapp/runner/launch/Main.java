@@ -111,7 +111,6 @@ public class Main {
 		}
     	
         Tomcat tomcat = new Tomcat();
-        tomcat.setBaseDir("/Users/johnsimone/dev/gitrepos/WarSample/catalinaHome");
 
         //set the port
         String webPort = 
