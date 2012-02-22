@@ -50,7 +50,7 @@ public class Main {
 		System.out.println("Usage: java -jar tomcat-runner.jar [arguments...] path/to/webapp");
 		System.out.println("Arguments:");
 		for (Argument argument : Argument.values()) {
-			System.out.format("%-30s%-90s%n", argument.argName(), argument.helpText());
+			System.out.format("%-40s%-60s%n", argument.argName(), argument.helpText());
 		}
 	}
 	
