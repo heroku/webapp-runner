@@ -97,6 +97,11 @@
 		  <version>6.1.1</version>
 		  <scope>test</scope>
 	</dependency>
+    <dependency>
+        <groupId>de.javakaffee.msm</groupId>
+        <artifactId>memcached-session-manager-tc7</artifactId>
+        <version>1.6.1</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>webapp-runner-no-dep</finalName>
