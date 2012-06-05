@@ -8,7 +8,7 @@
 
   <groupId>com.github.jsimone</groupId>
   <artifactId>webapp-runner</artifactId>
-  <version>7.0.22.4-SNAPSHOT</version>
+  <version>7.0.27.1-SNAPSHOT</version>
 
 
     <name>webapp-runner</name>
@@ -58,38 +58,39 @@
         <source.plugin.version>2.1.2</source.plugin.version>
         <gpg.plugin.version>1.2</gpg.plugin.version>
         <javadoc.plugin.version>2.7</javadoc.plugin.version>
+        <tomcat.version>7.0.27</tomcat.version>
     </properties>
 
   <dependencies>
     <dependency>
         <groupId>org.apache.tomcat.embed</groupId>
         <artifactId>tomcat-embed-core</artifactId>
-        <version>7.0.22</version>
+        <version>${tomcat.version}</version>
     </dependency>
     <dependency>
         <groupId>org.apache.tomcat.embed</groupId>
         <artifactId>tomcat-embed-logging-juli</artifactId>
-        <version>7.0.22</version>
+        <version>${tomcat.version}</version>
     </dependency>
     <dependency>
         <groupId>org.apache.tomcat.embed</groupId>
         <artifactId>tomcat-embed-jasper</artifactId>
-        <version>7.0.22</version>
+        <version>${tomcat.version}</version>
     </dependency>
     <dependency>
         <groupId>org.apache.tomcat</groupId>
         <artifactId>tomcat-jasper</artifactId>
-        <version>7.0.22</version>
+        <version>${tomcat.version}</version>
     </dependency>
     <dependency>
         <groupId>org.apache.tomcat</groupId>
         <artifactId>tomcat-jasper-el</artifactId>
-        <version>7.0.22</version>
+        <version>${tomcat.version}</version>
     </dependency>
     <dependency>
         <groupId>org.apache.tomcat</groupId>
         <artifactId>tomcat-jsp-api</artifactId>
-        <version>7.0.22</version>
+        <version>${tomcat.version}</version>
     </dependency>
 	<dependency>
 		  <groupId>org.testng</groupId>
