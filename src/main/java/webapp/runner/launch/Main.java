@@ -25,7 +25,7 @@
  */
 package webapp.runner.launch;
 import java.io.File;
-import java.net.URL;
+import java.io.IOException;
 import java.util.Map;
 
 import org.apache.catalina.Context;
@@ -116,7 +116,10 @@ public class Main {
         String webPort = 
         		argMap.containsKey(Argument.PORT) ? argMap.get(Argument.PORT) : "8080";
 
-        tomcat.setPort(Integer.valueOf(webPort));     
+        tomcat.setPort(Integer.valueOf(webPort));
+
+        // set directory for temp files
+        tomcat.setBaseDir(resolveTomcatBaseDir(webPort));
 
         //create a context with the webapp
         String path = argMap.containsKey(Argument.PATH) ? argMap.get(Argument.PATH) : "";
@@ -155,5 +158,26 @@ public class Main {
         //start the server
         tomcat.start();
         tomcat.getServer().await();  
+    }
+
+    /**
+     * Gets or creates temporary Tomcat base directory within target dir
+     *
+     * @param port port of web process
+     * @return absolute dir path
+     * @throws IOException if dir fails to be created
+     */
+    static String resolveTomcatBaseDir(String port) throws IOException {
+        final File baseDir = new File(System.getProperty("user.dir") + "/target/tomcat." + port);
+
+        if (!baseDir.isDirectory() && !baseDir.mkdirs()) {
+            throw new IOException("Could not create temp dir: " + baseDir);
+        }
+
+        try {
+            return baseDir.getCanonicalPath();
+        } catch (IOException e) {
+            return baseDir.getAbsolutePath();
+        }
     }
 }
