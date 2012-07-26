@@ -8,8 +8,8 @@ import java.net.URI;
 import ru.zinin.redis.session.RedisManager;
 
 class RedisSessionManager extends SessionManager {
-    
-    
+
+    @Override
     public void configureSessionManager(Map<Argument, String> argMap, Context ctx){
         RedisManager redisManager = new RedisManager();
         redisManager.setDisableListeners(true);

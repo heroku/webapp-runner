@@ -6,7 +6,8 @@ import org.apache.catalina.Context;
 import de.javakaffee.web.msm.MemcachedBackupSessionManager;
 
 class MemcacheSessionManager extends SessionManager {
-    
+
+    @Override
     public void configureSessionManager(Map<Argument, String> argMap, Context ctx){
         if(System.getenv("MEMCACHE_SERVERS") == null
                 || System.getenv("MEMCACHE_USERNAME") == null
