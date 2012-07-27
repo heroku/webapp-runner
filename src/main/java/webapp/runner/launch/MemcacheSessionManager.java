@@ -7,6 +7,12 @@ import de.javakaffee.web.msm.MemcachedBackupSessionManager;
 
 class MemcacheSessionManager extends SessionManager {
 
+    /**
+     * Configures Memcache session manager
+     *
+     * @param argMap Arguments map
+     * @param ctx Tomcat context
+     */
     @Override
     public void configureSessionManager(Map<Argument, String> argMap, Context ctx){
         if(System.getenv("MEMCACHE_SERVERS") == null

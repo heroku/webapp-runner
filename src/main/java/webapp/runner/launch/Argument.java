@@ -59,12 +59,15 @@ public enum Argument {
 	/**
 	 * Returns an argument based on the argument name passed in
 	 * 
-	 * @param argName
-	 * @return
+	 * @param argName argument name to look up
+	 * @return Argument
 	 * @throws ArgumentNotFoundException if the requested argument isn't in the enum
 	 */
 	public static Argument getArgFor(String argName) throws ArgumentNotFoundException{
+        System.out.println("argument: "+argName);
 		for (Argument argument : Argument.values()) {
+            System.out.println("loop: "+argument.argName);
+            System.out.println("loop: "+argument.toString());
 			if(argName.equalsIgnoreCase(argument.argName)) {
 				return argument;
 			}

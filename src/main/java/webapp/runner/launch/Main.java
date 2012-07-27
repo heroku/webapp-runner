@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.apache.catalina.Context;
+import org.apache.catalina.connector.Connector;
 import org.apache.catalina.startup.Tomcat;
 
 
@@ -80,6 +81,13 @@ public class Main {
         //set the port
         String webPort = 
         		argMap.containsKey(Argument.PORT) ? argMap.get(Argument.PORT) : "8080";
+
+        // initialize the connector
+        Connector nioConnector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
+        nioConnector.setPort(Integer.valueOf(webPort));
+
+        tomcat.setConnector(nioConnector);
+        tomcat.getService().addConnector(tomcat.getConnector());
 
         tomcat.setPort(Integer.valueOf(webPort));
 

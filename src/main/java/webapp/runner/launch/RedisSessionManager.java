@@ -9,6 +9,12 @@ import ru.zinin.redis.session.RedisManager;
 
 class RedisSessionManager extends SessionManager {
 
+    /**
+     * Configures Redis session manager
+     *
+     * @param argMap Arguments map
+     * @param ctx Tomcat context
+     */
     @Override
     public void configureSessionManager(Map<Argument, String> argMap, Context ctx){
         RedisManager redisManager = new RedisManager();
