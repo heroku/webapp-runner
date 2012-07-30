@@ -75,6 +75,16 @@ To use it add `--session_manager memcache` to your startup command:
 
 Then make sure that three environment variables are available for configuration: MEMCACHE_SERVERS, MEMCACHE_USERNAME, MEMCACHE_PASSWORD
 
+## Store your sessions in redis
+
+In versions 7.0.22.3 and newer support for a [session manager](https://github.com/zinin/tomcat-redis-session) that stores sessions in redis is built in.
+
+To use it add `--session_manager redis` to your startup command:
+
+    $ java -jar target/dependency/webapp-runner.jar --session_manager redis target/<appname>.war
+
+Then make sure that Redis environment variable is available for configuration: REDIS_URL
+
 ## Running your application in Eclipse
 
 Since your application will just be a standard webapp you can still use WTP and the traditional Tomcat integration points to run your application within Eclipse. However the containerless nature of webapp runner allows you to run from within Eclipse in a simpler way.
