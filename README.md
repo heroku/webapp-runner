@@ -47,7 +47,7 @@ Add the following to your pom.xml:
                               <artifactItem>
                                   <groupId>com.github.jsimone</groupId>
                                   <artifactId>webapp-runner</artifactId>
-                                  <version>7.0.27.1</version>
+                                  <version>7.0.29.1</version>
                                   <destFileName>webapp-runner.jar</destFileName>
                               </artifactItem>
                           </artifactItems>
@@ -67,7 +67,7 @@ Now when you run `maven package` webapp runner will be downloaded for you. You c
 
 ## Store your sessions in memcache
 
-In versions 7.0.22.3 and newer support for a [session manager](http://code.google.com/p/memcached-session-manager/) that stores sessions in memcache is built in.
+In versions 7.0.29.1 and newer support for a [session manager](http://code.google.com/p/memcached-session-manager/) that stores sessions in memcache is built in.
 
 To use it add `--session_manager memcache` to your startup command:
 
@@ -77,7 +77,7 @@ Then make sure that three environment variables are available for configuration:
 
 ## Store your sessions in redis
 
-In versions 7.0.22.3 and newer support for a [session manager](https://github.com/zinin/tomcat-redis-session) that stores sessions in redis is built in.
+In versions 7.0.29.1 and newer support for a [session manager](https://github.com/zinin/tomcat-redis-session) that stores sessions in redis is built in.
 
 To use it add `--session_manager redis` to your startup command:
 
@@ -98,7 +98,7 @@ Add the following dependency to your pom.xml:
     <dependency>
       <groupId>com.github.jsimone</groupId>
       <artifactId>webapp-runner</artifactId>
-      <version>7.0.27.1</version>
+      <version>7.0.29.1</version>
       <scope>provided</scope>
     </dependency>
 
@@ -118,7 +118,7 @@ Your application should start and you should see the log output in the Eclipse c
 You can stop the application from the red square in the console pane or from the debug perspective. It can be restarted by right-clicking on the project and choosing your new launch configuration from the 'Debug As' menu or from the debug menu in the Eclipse toolbar (the icon with the little bug).
 
 ### Maven Central
-Note: webapp runner is now available in Maven Central. The version scheme has also chanaged to match the version of Tomcat that it relies on. The format is <tomcat version>.<minor webapp runner version>. The latest version is now 7.0.27.x. Versions 0.0.1 to 0.0.7 are still available at http://jsimone.github.com/webapp-runner/repository.
+Note: webapp runner is now available in Maven Central. The version scheme has also chanaged to match the version of Tomcat that it relies on. The format is <tomcat version>.<minor webapp runner version>. The latest version is now 7.0.29.x. Versions 0.0.1 to 0.0.7 are still available at http://jsimone.github.com/webapp-runner/repository.
      
 ### License
 

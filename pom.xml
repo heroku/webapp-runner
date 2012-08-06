@@ -8,7 +8,7 @@
 
   <groupId>com.github.jsimone</groupId>
   <artifactId>webapp-runner</artifactId>
-  <version>7.0.27.2-SNAPSHOT</version>
+  <version>7.0.29.1-SNAPSHOT</version>
 
 
     <name>webapp-runner</name>
@@ -58,7 +58,7 @@
         <source.plugin.version>2.1.2</source.plugin.version>
         <gpg.plugin.version>1.2</gpg.plugin.version>
         <javadoc.plugin.version>2.7</javadoc.plugin.version>
-        <tomcat.version>7.0.27</tomcat.version>
+        <tomcat.version>7.0.29</tomcat.version>
     </properties>
 
   <dependencies>

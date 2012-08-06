@@ -29,7 +29,12 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.apache.catalina.Context;
+import org.apache.catalina.authenticator.AuthenticatorBase;
+import org.apache.catalina.authenticator.BasicAuthenticator;
 import org.apache.catalina.connector.Connector;
+import org.apache.catalina.core.StandardContext;
+import org.apache.catalina.deploy.SecurityConstraint;
+import org.apache.catalina.realm.UserDatabaseRealm;
 import org.apache.catalina.startup.Tomcat;
 
 
@@ -105,8 +110,8 @@ public class Main {
         Context ctx = tomcat.addWebapp(path, new File(argMap.get(Argument.APPLICATION_DIR)).getAbsolutePath());
         
         //set the session manager
-        if(argMap.containsKey(Argument.SESSION_MANAGER)) {
-           SessionManager.getInstance(argMap.get(Argument.SESSION_MANAGER)).configureSessionManager(argMap, ctx);
+        if(argMap.containsKey(Argument.SESSION_STORE)) {
+           SessionStore.getInstance(argMap.get(Argument.SESSION_STORE)).configureSessionStore(argMap, ctx);
         }
         
         //set the context xml location
