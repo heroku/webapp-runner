@@ -7,7 +7,7 @@ import java.net.URI;
 
 import ru.zinin.redis.session.RedisManager;
 
-class RedisSessionManager extends SessionManager {
+class RedisSessionStore extends SessionStore {
 
     /**
      * Configures Redis session manager
@@ -16,16 +16,21 @@ class RedisSessionManager extends SessionManager {
      * @param ctx Tomcat context
      */
     @Override
-    public void configureSessionManager(Map<Argument, String> argMap, Context ctx){
+    public void configureSessionStore(Map<Argument, String> argMap, Context ctx){
         RedisManager redisManager = new RedisManager();
         redisManager.setDisableListeners(true);
 
-        if(System.getenv("REDIS_URL") == null){
+        if(System.getenv("REDIS_URL") == null && System.getenv("REDISTOGO_URL") == null){
             System.out.println("WARNING: redis session store being used, but the required environment variable isn't set.");
-            System.out.println("Redis session store is configured with REDIS_URL");
+            System.out.println("Redis session store is configured with REDIS_URL or REDISTOGO_URL");
         } else {
             try {
-                URI redisUri = new URI(System.getenv("REDIS_URL"));
+                URI redisUri = null;
+                if(System.getenv("REDIS_URL") != null) {                    
+                    redisUri = new URI(System.getenv("REDIS_URL"));                    
+                } else {
+                    redisUri = new URI(System.getenv("REDISTOGO_URL"));                    
+                }
 
                 if(redisUri.getHost() != null) {
                     redisManager.setRedisHostname(redisUri.getHost());

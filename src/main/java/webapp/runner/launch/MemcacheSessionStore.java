@@ -5,7 +5,7 @@ import org.apache.catalina.Context;
 
 import de.javakaffee.web.msm.MemcachedBackupSessionManager;
 
-class MemcacheSessionManager extends SessionManager {
+class MemcacheSessionStore extends SessionStore {
 
     /**
      * Configures Memcache session manager
@@ -14,7 +14,7 @@ class MemcacheSessionManager extends SessionManager {
      * @param ctx Tomcat context
      */
     @Override
-    public void configureSessionManager(Map<Argument, String> argMap, Context ctx){
+    public void configureSessionStore(Map<Argument, String> argMap, Context ctx){
         if(System.getenv("MEMCACHE_SERVERS") == null
                 || System.getenv("MEMCACHE_USERNAME") == null
                 || System.getenv("MEMCACHE_PASSWORD") == null) {

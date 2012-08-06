@@ -34,14 +34,14 @@ package webapp.runner.launch;
 public enum Argument {
 	SESSION_TIMEOUT ("--session-timeout", "The number of minutes of inactivity before a user's session is timed out"),
 	PORT ("--port", "The port that the server will accept http requests on"),
-	CONTEXT_XML ("--context_xml", "The parth to the context xml to use"),
+	CONTEXT_XML ("--context-xml", "The parth to the context xml to use"),
 	PATH ("--path", "context path (default is /)"),
-	SESSION_MANAGER ("--session_manager", "session store to use (valid options are 'memcache','redis')"),
-	SESSION_MANAGER_OPERATION_TIMEOUT ("--session_manager_operation_timeout", 
+	SESSION_STORE ("--session-store", "session store to use (valid options are 'memcache','redis')"),
+	SESSION_MANAGER_OPERATION_TIMEOUT ("--session-manager-operation-timeout", 
 		"operation timeout for the memcached session manager. (default is 5000ms)"),
-	SESSION_MANAGER_LOCKING_MODE ("--session_manager_locking_mode", 
+	SESSION_MANAGER_LOCKING_MODE ("--session-manager-locking-mode", 
 		"Session locking mode for use with memcache session store. (default is all)"),
-	SESSION_MANAGER_IGNORE_PATTERN ("--session_manager_ignore_pattern", 
+	SESSION_MANAGER_IGNORE_PATTERN ("--session-manager-ignore-pattern", 
 		"Request pattern to not track sessions for. Valid only with memcache session store. (default is '.*\\.(png|gif|jpg|css|js)$'"),
 	APPLICATION_DIR ("", "");
 	
