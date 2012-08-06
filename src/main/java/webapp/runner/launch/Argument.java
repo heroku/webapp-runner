@@ -36,7 +36,7 @@ public enum Argument {
 	PORT ("--port", "The port that the server will accept http requests on"),
 	CONTEXT_XML ("--context_xml", "The parth to the context xml to use"),
 	PATH ("--path", "context path (default is /)"),
-	SESSION_MANAGER ("--session_manager", "session store to use (valid options are 'memcache')"),
+	SESSION_MANAGER ("--session_manager", "session store to use (valid options are 'memcache','redis')"),
 	SESSION_MANAGER_OPERATION_TIMEOUT ("--session_manager_operation_timeout", 
 		"operation timeout for the memcached session manager. (default is 5000ms)"),
 	SESSION_MANAGER_LOCKING_MODE ("--session_manager_locking_mode", 
@@ -59,8 +59,8 @@ public enum Argument {
 	/**
 	 * Returns an argument based on the argument name passed in
 	 * 
-	 * @param argName
-	 * @return
+	 * @param argName argument name to look up
+	 * @return Argument
 	 * @throws ArgumentNotFoundException if the requested argument isn't in the enum
 	 */
 	public static Argument getArgFor(String argName) throws ArgumentNotFoundException{

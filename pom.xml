@@ -92,6 +92,11 @@
         <artifactId>tomcat-jsp-api</artifactId>
         <version>${tomcat.version}</version>
     </dependency>
+    <dependency>
+        <groupId>ru.zinin</groupId>
+        <artifactId>tomcat-redis-session</artifactId>
+        <version>0.4</version>
+    </dependency>
 	<dependency>
 		  <groupId>org.testng</groupId>
 		  <artifactId>testng</artifactId>

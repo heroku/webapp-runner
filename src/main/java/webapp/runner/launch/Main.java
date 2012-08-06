@@ -29,9 +29,9 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.apache.catalina.Context;
+import org.apache.catalina.connector.Connector;
 import org.apache.catalina.startup.Tomcat;
 
-import de.javakaffee.web.msm.MemcachedBackupSessionManager;
 
 /**
  * This is the main entry point to tomcat-runner. Helpers are called to parse the arguments.
@@ -52,40 +52,6 @@ public class Main {
 		for (Argument argument : Argument.values()) {
 			System.out.format("%-40s%-60s%n", argument.argName(), argument.helpText());
 		}
-	}
-	
-	public static void configureMemcacheSessionManager(Map<Argument, String> argMap, Context ctx) {
-		if(System.getenv("MEMCACHE_SERVERS") == null
-    			|| System.getenv("MEMCACHE_USERNAME") == null
-    			|| System.getenv("MEMCACHE_PASSWORD") == null) {
-    			System.out.println("WARNING: memcache session store being used, but the required environment variables aren't set.");
-    			System.out.println("Memcache session store is configured with MEMCACHE_SERVERS, MEMCACHE_USERNAME, MEMCACHE_PASSWORD");
-    		}
-    		MemcachedBackupSessionManager manager = new MemcachedBackupSessionManager();
-    		manager.setMemcachedNodes(System.getenv("MEMCACHE_SERVERS") + ":11211");
-    		manager.setMemcachedProtocol("binary");
-    		manager.setUsername(System.getenv("MEMCACHE_USERNAME"));
-    		manager.setPassword(System.getenv("MEMCACHE_PASSWORD"));
-    		manager.setSticky(false);
-    		manager.setSessionBackupAsync(false);
-    		manager.setEnabled(true);
-    		manager.setEnableStatistics(true);
-    		if(argMap.containsKey(Argument.SESSION_MANAGER_OPERATION_TIMEOUT)) {
-    			manager.setOperationTimeout(Integer.valueOf(argMap.get(Argument.SESSION_MANAGER_OPERATION_TIMEOUT)));
-    		} else {
-    			manager.setOperationTimeout(5000);
-    		}
-    		if(argMap.containsKey(Argument.SESSION_MANAGER_LOCKING_MODE)) {
-    			manager.setLockingMode(argMap.get(Argument.SESSION_MANAGER_LOCKING_MODE));
-    		} else {
-    			manager.setLockingMode("all");
-    		}
-    		if(argMap.containsKey(Argument.SESSION_MANAGER_IGNORE_PATTERN)) {
-    			manager.setRequestUriIgnorePattern(argMap.get(Argument.SESSION_MANAGER_IGNORE_PATTERN));
-    		} else {
-    			manager.setRequestUriIgnorePattern(".*\\.(png|gif|jpg|css|js)$");
-    		}
-    		ctx.setManager(manager);		
 	}
 
     public static void main(String[] args) throws Exception {
@@ -116,6 +82,13 @@ public class Main {
         String webPort = 
         		argMap.containsKey(Argument.PORT) ? argMap.get(Argument.PORT) : "8080";
 
+        // initialize the connector
+        Connector nioConnector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
+        nioConnector.setPort(Integer.valueOf(webPort));
+
+        tomcat.setConnector(nioConnector);
+        tomcat.getService().addConnector(tomcat.getConnector());
+
         tomcat.setPort(Integer.valueOf(webPort));
 
         // set directory for temp files
@@ -133,13 +106,7 @@ public class Main {
         
         //set the session manager
         if(argMap.containsKey(Argument.SESSION_MANAGER)) {
-        	if(argMap.get(Argument.SESSION_MANAGER).equals("memcache")) {
-        		System.out.println("Using memcache as a session store");
-        		configureMemcacheSessionManager(argMap, ctx);
-        	} else {
-        		System.out.println("WARNING: invalid session store specified. Ignoring.");
-        		System.out.println("For usage information run `java -jar tomcat-runner.jar help`");
-        	}
+           SessionManager.getInstance(argMap.get(Argument.SESSION_MANAGER)).configureSessionManager(argMap, ctx);
         }
         
         //set the context xml location
