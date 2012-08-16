@@ -39,7 +39,7 @@ import org.apache.catalina.startup.Tomcat;
 
 
 /**
- * This is the main entry point to tomcat-runner. Helpers are called to parse the arguments.
+ * This is the main entry point to webapp-runner. Helpers are called to parse the arguments.
  * Tomcat configuration and launching takes place here.
  * 
  * @author johnsimone
@@ -52,7 +52,7 @@ public class Main {
 	 */
 	public static void printHelp() {
 		System.out.println("Tomcat Runner runs a Java web application that is represented as an exploded war in a Tomcat container");
-		System.out.println("Usage: java -jar tomcat-runner.jar [arguments...] path/to/webapp");
+		System.out.println("Usage: java -jar webapp-runner.jar [arguments...] path/to/webapp");
 		System.out.println("Arguments:");
 		for (Argument argument : Argument.values()) {
 			System.out.format("%-40s%-60s%n", argument.argName(), argument.helpText());
@@ -73,11 +73,11 @@ public class Main {
 			argMap = ArgParser.parseArgs(args);
 		} catch (ArgumentNotFoundException e) {
 			System.out.println("Unexpected Argument: " + e.getArgName());
-			System.out.println("For usage information run `java -jar tomcat-runner.jar help`");
+			System.out.println("For usage information run `java -jar webapp-runner.jar help`");
 			System.exit(1);
 		} catch (MissingAppException e) {
 			System.out.println("Application location not defined");
-			System.out.println("For usage information run `java -jar tomcat-runner.jar help`");
+			System.out.println("For usage information run `java -jar webapp-runner.jar help`");
 			System.exit(1);
 		}
     	
