@@ -1,7 +1,7 @@
 package webapp.runner.launch;
 
 import java.net.URISyntaxException;
-import java.util.Map;
+
 import org.apache.catalina.Context;
 import java.net.URI;
 
@@ -12,11 +12,11 @@ class RedisSessionStore extends SessionStore {
     /**
      * Configures Redis session manager
      *
-     * @param argMap Arguments map
+     * @param commandLineParams Arguments map
      * @param ctx Tomcat context
      */
     @Override
-    public void configureSessionStore(Map<Argument, String> argMap, Context ctx){
+    public void configureSessionStore(CommandLineParams commandLineParams, Context ctx){
         RedisManager redisManager = new RedisManager();
         redisManager.setDisableListeners(true);
 

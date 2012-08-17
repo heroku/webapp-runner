@@ -1,6 +1,5 @@
 package webapp.runner.launch;
 
-import java.util.Map;
 import org.apache.catalina.Context;
 
 public class SessionStore {
@@ -9,7 +8,7 @@ public class SessionStore {
     }
 
     /**
-     * Configures Memcache session store
+     * Configures session store
      *
      * @param sessionStore session store name to instantiate
      * @return instance of session manager if available or itself
@@ -30,12 +29,12 @@ public class SessionStore {
     /**
      * Configures default session manager - NOOP
      *
-     * @param argMap Arguments map
+     * @param commandLineParams Arguments map
      * @param ctx Tomcat context
      */
-    public void configureSessionStore(Map<Argument, String> argMap, Context ctx){
+    public void configureSessionStore(CommandLineParams commandLineParams, Context ctx){
         // do nothing, let tomcat use the default
-        System.out.println("WARNING: session manager " + argMap.get(Argument.SESSION_STORE) + " unsupported using default");
+        System.out.println("WARNING: session manager " + commandLineParams.sessionStore + " unsupported using default");
     }
 }
 
