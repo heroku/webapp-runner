@@ -132,13 +132,13 @@
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.3</version>
                 <configuration>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                     <finalName>webapp-runner</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
-                    <classifier></classifier>
                     <archive>
                         <manifest>
                             <mainClass>webapp.runner.launch.Main</mainClass>
