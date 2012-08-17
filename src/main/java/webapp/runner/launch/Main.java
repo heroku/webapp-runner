@@ -75,36 +75,36 @@ public class Main {
         tomcat.getService().addConnector(tomcat.getConnector());
 
         tomcat.setPort(commandLineParams.port);
-
-        // warn if the contextPath doesn't start with a '/'. This causes issues serving content at the context root.
-        if (commandLineParams.contextPath.length() > 0 && !commandLineParams.contextPath.startsWith("/")) {
-            System.out.println("WARNING: You entered a path: [" + commandLineParams.contextPath + "]. Your path should start with a '/'. Tomcat will update this for you, but you may still experience issues.");
-        }
-
-        // warn if there is more than one path and the contextPath is set
+        
         if (commandLineParams.paths.size() > 1) {
-            System.out.println("WARNING: Since you specified more than one path, the context paths will be automatically set to the name of the path without the extension. A path that resolves to a context path of \"/ROOT\" will be replaced with \"/\"");        }
+            System.out.println("WARNING: Since you specified more than one path, the context paths will be automatically set to the name of the path without the extension. A path that resolves to a context path of \"/ROOT\" will be replaced with \"/\"");
+        }
 
         for (String path : commandLineParams.paths) {
             File war = new File(path);
+            
             if (!war.exists()) {
                 System.err.println("The specified path \"" + path + "\" does not exist.");
                 jCommander.usage();
                 System.exit(1);
             }
-
             
             String ctxName = "";
 
             // Use the commandline context-path (or default) if there is only one war
             if (commandLineParams.paths.size() == 1) {
+                // warn if the contextPath doesn't start with a '/'. This causes issues serving content at the context root.
+                if (commandLineParams.contextPath.length() > 0 && !commandLineParams.contextPath.startsWith("/")) {
+                    System.out.println("WARNING: You entered a path: [" + commandLineParams.contextPath + "]. Your path should start with a '/'. Tomcat will update this for you, but you may still experience issues.");
+                }
+                
                 ctxName = commandLineParams.contextPath;
             }
             else {
                 ctxName = "/" + FilenameUtils.removeExtension(war.getName());
 
                 if (ctxName.equals("/ROOT") || (commandLineParams.paths.size() == 1)) {
-                    ctxName = "/";  // todo: see if Tomcat does this for us
+                    ctxName = "/";
                 }
             }
                 
