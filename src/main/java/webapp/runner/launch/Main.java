@@ -64,6 +64,9 @@ public class Main {
 
         Tomcat tomcat = new Tomcat();
 
+        // set directory for temp files
+        tomcat.setBaseDir(resolveTomcatBaseDir(commandLineParams.port));
+
         // initialize the connector
         Connector nioConnector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
         nioConnector.setPort(commandLineParams.port);
@@ -73,18 +76,14 @@ public class Main {
 
         tomcat.setPort(commandLineParams.port);
 
-        // set directory for temp files
-        tomcat.setBaseDir(resolveTomcatBaseDir(commandLineParams.port));
-
         // warn if the contextPath doesn't start with a '/'. This causes issues serving content at the context root.
         if (commandLineParams.contextPath.length() > 0 && !commandLineParams.contextPath.startsWith("/")) {
             System.out.println("WARNING: You entered a path: [" + commandLineParams.contextPath + "]. Your path should start with a '/'. Tomcat will update this for you, but you may still experience issues.");
         }
 
         // warn if there is more than one path and the contextPath is set
-        if ((commandLineParams.paths.size() > 1) && (commandLineParams.contextPath.length() > 0)) {
-            System.out.println("WARNING: Since you specified more than one path, the contextPath will be ignored.");
-        }
+        if (commandLineParams.paths.size() > 1) {
+            System.out.println("WARNING: Since you specified more than one path, the context paths will be automatically set to the name of the path without the extension. A path that resolves to a context path of \"/ROOT\" will be replaced with \"/\"");        }
 
         for (String path : commandLineParams.paths) {
             File war = new File(path);
