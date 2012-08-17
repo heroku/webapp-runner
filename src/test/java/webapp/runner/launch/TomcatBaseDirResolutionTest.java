@@ -15,7 +15,7 @@ import static org.testng.Assert.*;
  */
 public class TomcatBaseDirResolutionTest {
 
-    private static final String PORT = "PORT";
+    private static final Integer PORT = 1234;
     private static final File BASE_DIR = new File(System.getProperty("user.dir") + "/target/tomcat." + PORT);
 
     @BeforeMethod
