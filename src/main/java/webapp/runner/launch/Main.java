@@ -24,112 +24,114 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 package webapp.runner.launch;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
+import java.util.Arrays;
 
+import com.beust.jcommander.JCommander;
 import org.apache.catalina.Context;
-import org.apache.catalina.authenticator.AuthenticatorBase;
-import org.apache.catalina.authenticator.BasicAuthenticator;
 import org.apache.catalina.connector.Connector;
-import org.apache.catalina.core.StandardContext;
-import org.apache.catalina.deploy.SecurityConstraint;
-import org.apache.catalina.realm.UserDatabaseRealm;
 import org.apache.catalina.startup.Tomcat;
+import org.apache.commons.io.FilenameUtils;
 
 
 /**
- * This is the main entry point to tomcat-runner. Helpers are called to parse the arguments.
+ * This is the main entry point to webapp-runner. Helpers are called to parse the arguments.
  * Tomcat configuration and launching takes place here.
- * 
+ *
  * @author johnsimone
+ * @author jamesward
  *
  */
 public class Main {
-	
-	/**
-	 * Prints help text
-	 */
-	public static void printHelp() {
-		System.out.println("Tomcat Runner runs a Java web application that is represented as an exploded war in a Tomcat container");
-		System.out.println("Usage: java -jar tomcat-runner.jar [arguments...] path/to/webapp");
-		System.out.println("Arguments:");
-		for (Argument argument : Argument.values()) {
-			System.out.format("%-40s%-60s%n", argument.argName(), argument.helpText());
-		}
-	}
 
     public static void main(String[] args) throws Exception {
-    	
-    	//print help text when asked for
-    	if(args.length == 0 || "help".equals(args[0]) || "--help".equals(args[0])) {
-    		printHelp();
-    		System.exit(0);
-    	}
-    	
-    	//parse the arguments
-    	Map<Argument, String> argMap = null;
-		try {
-			argMap = ArgParser.parseArgs(args);
-		} catch (ArgumentNotFoundException e) {
-			System.out.println("Unexpected Argument: " + e.getArgName());
-			System.out.println("For usage information run `java -jar tomcat-runner.jar help`");
-			System.exit(1);
-		} catch (MissingAppException e) {
-			System.out.println("Application location not defined");
-			System.out.println("For usage information run `java -jar tomcat-runner.jar help`");
-			System.exit(1);
-		}
-    	
+
+        CommandLineParams commandLineParams = new CommandLineParams();
+
+        JCommander jCommander = new JCommander(commandLineParams, args);
+
+        if (commandLineParams.help) {
+            jCommander.usage();
+            System.exit(1);
+        }
+        
+        // default to src/main/webapp
+        if (commandLineParams.paths.size() == 0) {
+             commandLineParams.paths.add("src/main/webapp");
+        }
+
         Tomcat tomcat = new Tomcat();
 
-        //set the port
-        String webPort = 
-        		argMap.containsKey(Argument.PORT) ? argMap.get(Argument.PORT) : "8080";
+        // set directory for temp files
+        tomcat.setBaseDir(resolveTomcatBaseDir(commandLineParams.port));
 
         // initialize the connector
         Connector nioConnector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
-        nioConnector.setPort(Integer.valueOf(webPort));
+        nioConnector.setPort(commandLineParams.port);
 
         tomcat.setConnector(nioConnector);
         tomcat.getService().addConnector(tomcat.getConnector());
 
-        tomcat.setPort(Integer.valueOf(webPort));
+        tomcat.setPort(commandLineParams.port);
+        
+        if (commandLineParams.paths.size() > 1) {
+            System.out.println("WARNING: Since you specified more than one path, the context paths will be automatically set to the name of the path without the extension. A path that resolves to a context path of \"/ROOT\" will be replaced with \"/\"");
+        }
 
-        // set directory for temp files
-        tomcat.setBaseDir(resolveTomcatBaseDir(webPort));
+        for (String path : commandLineParams.paths) {
+            File war = new File(path);
+            
+            if (!war.exists()) {
+                System.err.println("The specified path \"" + path + "\" does not exist.");
+                jCommander.usage();
+                System.exit(1);
+            }
+            
+            String ctxName = "";
 
-        //create a context with the webapp
-        String path = argMap.containsKey(Argument.PATH) ? argMap.get(Argument.PATH) : "";
-        
-        //warn if the path doesn't start with a '/'. This causes issues serving content at the context root.
-        if(path.length() > 0 && !path.startsWith("/")) {
-        	System.out.println("WARNING: you entered a path: [" + path + "]. Your path should start with a '/'. Tomcat will update this for you, but you may still experience issues.");
+            // Use the commandline context-path (or default) if there is only one war
+            if (commandLineParams.paths.size() == 1) {
+                // warn if the contextPath doesn't start with a '/'. This causes issues serving content at the context root.
+                if (commandLineParams.contextPath.length() > 0 && !commandLineParams.contextPath.startsWith("/")) {
+                    System.out.println("WARNING: You entered a path: [" + commandLineParams.contextPath + "]. Your path should start with a '/'. Tomcat will update this for you, but you may still experience issues.");
+                }
+                
+                ctxName = commandLineParams.contextPath;
+            }
+            else {
+                ctxName = "/" + FilenameUtils.removeExtension(war.getName());
+
+                if (ctxName.equals("/ROOT") || (commandLineParams.paths.size() == 1)) {
+                    ctxName = "/";
+                }
+            }
+                
+            System.out.println("Adding Context " + ctxName + " for " + war.getPath());
+            Context ctx = tomcat.addWebapp(ctxName, war.getAbsolutePath());
+
+            // set the session manager
+            if (commandLineParams.sessionStore != null) {
+                SessionStore.getInstance(commandLineParams.sessionStore).configureSessionStore(commandLineParams, ctx);
+            }
+
+            // set the context xml location
+            // todo: how do we handle this with multiple wars?
+            //if(argMap.containsKey(Argument.CONTEXT_XML)) {
+            //    System.out.println("Using context config: " + argMap.get(Argument.CONTEXT_XML));
+            //    ctx.setConfigFile(new File(argMap.get(Argument.CONTEXT_XML)).toURI().toURL());
+            //}
+
+            //set the session timeout
+            if(commandLineParams.sessionTimeout != null) {
+                ctx.setSessionTimeout(commandLineParams.sessionTimeout);
+            }
         }
-        
-        Context ctx = tomcat.addWebapp(path, new File(argMap.get(Argument.APPLICATION_DIR)).getAbsolutePath());
-        
-        //set the session manager
-        if(argMap.containsKey(Argument.SESSION_STORE)) {
-           SessionStore.getInstance(argMap.get(Argument.SESSION_STORE)).configureSessionStore(argMap, ctx);
-        }
-        
-        //set the context xml location
-        if(argMap.containsKey(Argument.CONTEXT_XML)) {
-        	System.out.println("Using context config: " + argMap.get(Argument.CONTEXT_XML));
-        	ctx.setConfigFile(new File(argMap.get(Argument.CONTEXT_XML)).toURI().toURL());
-        }
-        
-        //set the session timeout
-        if(argMap.containsKey(Argument.SESSION_TIMEOUT)) {
-        	ctx.setSessionTimeout(Integer.valueOf(argMap.get(Argument.SESSION_TIMEOUT)));
-        }
-        
-        System.out.println("deploying app from: " + new File(argMap.get(Argument.APPLICATION_DIR)).getAbsolutePath());
 
         //start the server
         tomcat.start();
-        tomcat.getServer().await();  
+        tomcat.getServer().await();
     }
 
     /**
@@ -139,7 +141,7 @@ public class Main {
      * @return absolute dir path
      * @throws IOException if dir fails to be created
      */
-    static String resolveTomcatBaseDir(String port) throws IOException {
+    static String resolveTomcatBaseDir(Integer port) throws IOException {
         final File baseDir = new File(System.getProperty("user.dir") + "/target/tomcat." + port);
 
         if (!baseDir.isDirectory() && !baseDir.mkdirs()) {
