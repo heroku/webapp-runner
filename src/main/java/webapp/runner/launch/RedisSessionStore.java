@@ -44,6 +44,7 @@ class RedisSessionStore extends SessionStore {
                 if(redisUri.getUserInfo() != null) {
                     redisManager.setRedisPassword(redisUri.getUserInfo().substring(redisUri.getUserInfo().indexOf(":")+1));
                 }
+                
             } catch (URISyntaxException e){
                 System.out.println("WARNING: redis session store environment variable invalid "+System.getenv("REDIS_URL"));
             }

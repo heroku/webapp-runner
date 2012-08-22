@@ -27,13 +27,13 @@ package webapp.runner.launch;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
-import com.beust.jcommander.JCommander;
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.commons.io.FilenameUtils;
+
+import com.beust.jcommander.JCommander;
 
 
 /**
@@ -77,7 +77,14 @@ public class Main {
         tomcat.setPort(commandLineParams.port);
         
         if (commandLineParams.paths.size() > 1) {
-            System.out.println("WARNING: Since you specified more than one path, the context paths will be automatically set to the name of the path without the extension. A path that resolves to a context path of \"/ROOT\" will be replaced with \"/\"");
+            System.out.println("FYI... Since you specified more than one path, the context paths will be automatically set to the name of the path without the extension. A path that resolves to a context path of \"/ROOT\" will be replaced with \"/\"");
+            
+            if(commandLineParams.contextPath != null) {
+                System.out.println("WARNING: context-path is ignored when more than one path or war file is specified");
+            }
+            if(commandLineParams.contextXml != null) {
+                System.out.println("WARNING: context-xml is ignored when more than one path or war file is specified");
+            }
         }
 
         for (String path : commandLineParams.paths) {
@@ -99,6 +106,7 @@ public class Main {
                 }
                 
                 ctxName = commandLineParams.contextPath;
+                
             }
             else {
                 ctxName = "/" + FilenameUtils.removeExtension(war.getName());
@@ -110,18 +118,17 @@ public class Main {
                 
             System.out.println("Adding Context " + ctxName + " for " + war.getPath());
             Context ctx = tomcat.addWebapp(ctxName, war.getAbsolutePath());
+            
+            // set the context xml location if there is only one war
+            if(commandLineParams.contextXml != null && commandLineParams.paths.size() == 1) {
+                System.out.println("Using context config: " + commandLineParams.contextXml);
+                ctx.setConfigFile(new File(commandLineParams.contextXml).toURI().toURL());
+            }
 
             // set the session manager
             if (commandLineParams.sessionStore != null) {
                 SessionStore.getInstance(commandLineParams.sessionStore).configureSessionStore(commandLineParams, ctx);
             }
-
-            // set the context xml location
-            // todo: how do we handle this with multiple wars?
-            //if(argMap.containsKey(Argument.CONTEXT_XML)) {
-            //    System.out.println("Using context config: " + argMap.get(Argument.CONTEXT_XML));
-            //    ctx.setConfigFile(new File(argMap.get(Argument.CONTEXT_XML)).toURI().toURL());
-            //}
 
             //set the session timeout
             if(commandLineParams.sessionTimeout != null) {

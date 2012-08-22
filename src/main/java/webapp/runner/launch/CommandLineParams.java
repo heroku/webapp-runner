@@ -33,14 +33,14 @@ public class CommandLineParams {
     @Parameter(names = "--session-store", description = "Session store to use (valid options are 'memcache' or 'redis')")
     public String sessionStore;
     
-    @Parameter(names = "--session-manager-operation-timeout", description = "Operation timeout for the memcached session manager. (default is 5000ms)")
-    public Integer sessionManagerOperationTimout = 5000;
+    @Parameter(names = "--session-store-operation-timeout", description = "Operation timeout for the memcache session store. (default is 5000ms)")
+    public Integer sessionStoreOperationTimout = 5000;
     
-    @Parameter(names = "--session-manager-locking-mode", description = "Session locking mode for use with memcache session store. (default is all)")
-    public String sessionManagerLockingMode = "all";
+    @Parameter(names = "--session-store-locking-mode", description = "Session locking mode for use with memcache session store. (default is all)")
+    public String sessionStoreLockingMode = "all";
     
-    @Parameter(names = "--session-manager-ignore-pattern", description = "Request pattern to not track sessions for. Valid only with memcache session store. (default is '.*\\.(png|gif|jpg|css|js)$'")
-    public String sessionManagerIgnorePattern = ".*\\.(png|gif|jpg|css|js)$";
+    @Parameter(names = "--session-store-ignore-pattern", description = "Request pattern to not track sessions for. Valid only with memcache session store. (default is '.*\\.(png|gif|jpg|css|js)$'")
+    public String sessionStoreIgnorePattern = ".*\\.(png|gif|jpg|css|js)$";
 
     @Parameter(names = "--help", help = true)
     public boolean help;
