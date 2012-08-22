@@ -5,3 +5,5 @@ tomcat.8080
 .settings/
 tomcat.*/
 test-output/
+/.idea
+/*.iml

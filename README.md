@@ -19,7 +19,7 @@ or
 
 ### Help
 
-    java -jar target/webapp-runner.jar help
+    java -jar target/webapp-runner.jar --help
 
 Prints out all arguments accepted
 
@@ -69,9 +69,9 @@ Now when you run `maven package` webapp runner will be downloaded for you. You c
 
 In versions 7.0.29.1 and newer support for a [session manager](http://code.google.com/p/memcached-session-manager/) that stores sessions in memcache is built in.
 
-To use it add `--session_manager memcache` to your startup command:
+To use it add `--session-store memcache` to your startup command:
 
-    $ java -jar target/dependency/webapp-runner.jar --session_manager memcache target/<appname>.war
+    $ java -jar target/dependency/webapp-runner.jar --session-store memcache target/<appname>.war
 
 Then make sure that three environment variables are available for configuration: MEMCACHE_SERVERS, MEMCACHE_USERNAME, MEMCACHE_PASSWORD
 
@@ -79,9 +79,9 @@ Then make sure that three environment variables are available for configuration:
 
 In versions 7.0.29.1 and newer support for a [session manager](https://github.com/zinin/tomcat-redis-session) that stores sessions in redis is built in.
 
-To use it add `--session_manager redis` to your startup command:
+To use it add `--session-store redis` to your startup command:
 
-    $ java -jar target/dependency/webapp-runner.jar --session_manager redis target/<appname>.war
+    $ java -jar target/dependency/webapp-runner.jar --session-store redis target/<appname>.war
 
 Then make sure that Redis environment variable is available for configuration: REDIS_URL
 
