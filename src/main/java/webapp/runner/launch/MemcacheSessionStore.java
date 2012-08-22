@@ -29,9 +29,9 @@ class MemcacheSessionStore extends SessionStore {
         manager.setSessionBackupAsync(false);
         manager.setEnabled(true);
         manager.setEnableStatistics(true);
-        manager.setOperationTimeout(commandLineParams.sessionManagerOperationTimout);
-        manager.setLockingMode(commandLineParams.sessionManagerLockingMode);
-        manager.setRequestUriIgnorePattern(commandLineParams.sessionManagerIgnorePattern);
+        manager.setOperationTimeout(commandLineParams.sessionStoreOperationTimout);
+        manager.setLockingMode(commandLineParams.sessionStoreLockingMode);
+        manager.setRequestUriIgnorePattern(commandLineParams.sessionStoreIgnorePattern);
         ctx.setManager(manager);
     }
 }
