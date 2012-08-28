@@ -27,8 +27,10 @@ package webapp.runner.launch;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.Semaphore;
 
-import org.apache.catalina.Context;
+import org.apache.catalina.*;
+import org.apache.catalina.core.StandardServer;
 import org.apache.catalina.startup.Tomcat;
 
 import de.javakaffee.web.msm.MemcachedBackupSessionManager;
@@ -110,7 +112,7 @@ public class Main {
 			System.exit(1);
 		}
     	
-        Tomcat tomcat = new Tomcat();
+        final Tomcat tomcat = new Tomcat();
 
         //set the port
         String webPort = 
@@ -129,8 +131,21 @@ public class Main {
         	System.out.println("WARNING: you entered a path: [" + path + "]. Your path should start with a '/'. Tomcat will update this for you, but you may still experience issues.");
         }
         
-        Context ctx = tomcat.addWebapp(path, new File(argMap.get(Argument.APPLICATION_DIR)).getAbsolutePath());
-        
+        final Context ctx = tomcat.addWebapp(path, new File(argMap.get(Argument.APPLICATION_DIR)).getAbsolutePath());
+
+        // allow Tomcat to shutdown if a context failure is detected
+        ctx.addLifecycleListener(new LifecycleListener() {
+            public void lifecycleEvent(LifecycleEvent event) {
+                if (event.getLifecycle().getState() == LifecycleState.FAILED) {
+                    Server server = tomcat.getServer();
+                    if (server instanceof StandardServer) {
+                        System.err.println("SEVERE: Context [" + ctx.getName() + "] failed in [" + event.getLifecycle().getClass().getName() + "] lifecycle. Allowing Tomcat to shutdown.");
+                        ((StandardServer) server).stopAwait();
+                    }
+                }
+            }
+        });
+
         //set the session manager
         if(argMap.containsKey(Argument.SESSION_MANAGER)) {
         	if(argMap.get(Argument.SESSION_MANAGER).equals("memcache")) {
@@ -152,12 +167,12 @@ public class Main {
         if(argMap.containsKey(Argument.SESSION_TIMEOUT)) {
         	ctx.setSessionTimeout(Integer.valueOf(argMap.get(Argument.SESSION_TIMEOUT)));
         }
-        
+
         System.out.println("deploying app from: " + new File(argMap.get(Argument.APPLICATION_DIR)).getAbsolutePath());
 
         //start the server
         tomcat.start();
-        tomcat.getServer().await();  
+        tomcat.getServer().await();
     }
 
     /**
