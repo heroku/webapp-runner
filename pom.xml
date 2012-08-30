@@ -8,7 +8,7 @@
 
     <groupId>com.github.jsimone</groupId>
     <artifactId>webapp-runner</artifactId>
-    <version>7.0.29.2</version>
+    <version>7.0.29.3-SNAPSHOT</version>
 
 
     <name>webapp-runner</name>
