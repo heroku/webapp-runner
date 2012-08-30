@@ -29,7 +29,12 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.catalina.Context;
+import org.apache.catalina.LifecycleEvent;
+import org.apache.catalina.LifecycleListener;
+import org.apache.catalina.LifecycleState;
+import org.apache.catalina.Server;
 import org.apache.catalina.connector.Connector;
+import org.apache.catalina.core.StandardServer;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.commons.io.FilenameUtils;
 
@@ -62,7 +67,7 @@ public class Main {
              commandLineParams.paths.add("src/main/webapp");
         }
 
-        Tomcat tomcat = new Tomcat();
+        final Tomcat tomcat = new Tomcat();
 
         // set directory for temp files
         tomcat.setBaseDir(resolveTomcatBaseDir(commandLineParams.port));
@@ -117,7 +122,27 @@ public class Main {
             }
                 
             System.out.println("Adding Context " + ctxName + " for " + war.getPath());
-            Context ctx = tomcat.addWebapp(ctxName, war.getAbsolutePath());
+            //Context ctx = tomcat.addWebapp(ctxName, war.getAbsolutePath());
+            
+            
+            final Context ctx = tomcat.addWebapp(ctxName, war.getAbsolutePath());
+            
+            if(!commandLineParams.shutdownOverride) {                
+                // allow Tomcat to shutdown if a context failure is detected
+                ctx.addLifecycleListener(new LifecycleListener() {
+                    public void lifecycleEvent(LifecycleEvent event) {
+                        if (event.getLifecycle().getState() == LifecycleState.FAILED) {
+                            Server server = tomcat.getServer();
+                            if (server instanceof StandardServer) {
+                                System.err.println("SEVERE: Context [" + ctx.getName() + "] failed in [" + event.getLifecycle().getClass().getName() + "] lifecycle. Allowing Tomcat to shutdown.");
+                                ((StandardServer) server).stopAwait();
+                            }
+                        }
+                    }
+                });
+            }
+            
+            
             
             // set the context xml location if there is only one war
             if(commandLineParams.contextXml != null && commandLineParams.paths.size() == 1) {
