@@ -30,6 +30,9 @@ public class CommandLineParams {
     @Parameter(names = "--path", description = "The context path")
     public String contextPath = "/";
     
+    @Parameter(names = "--shutdown-override", description = "Overrides the default behavior and casues Tomcat to ignore lifecycle failure events rather than shutting down when they occur.")
+    public boolean shutdownOverride = false;
+    
     @Parameter(names = "--session-store", description = "Session store to use (valid options are 'memcache' or 'redis')")
     public String sessionStore;
     
