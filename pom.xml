@@ -116,7 +116,7 @@
         <dependency>
             <groupId>de.javakaffee.msm</groupId>
             <artifactId>memcached-session-manager-tc7</artifactId>
-            <version>1.6.1</version>
+            <version>1.6.3</version>
         </dependency>
     </dependencies>
     <build>
