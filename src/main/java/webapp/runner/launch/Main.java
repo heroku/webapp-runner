@@ -92,6 +92,8 @@ public class Main {
             }
         }
 
+        Context ctx = null;
+        
         for (String path : commandLineParams.paths) {
             File war = new File(path);
             
@@ -125,41 +127,44 @@ public class Main {
             //Context ctx = tomcat.addWebapp(ctxName, war.getAbsolutePath());
             
             
-            final Context ctx = tomcat.addWebapp(ctxName, war.getAbsolutePath());
-            
-            if(!commandLineParams.shutdownOverride) {                
-                // allow Tomcat to shutdown if a context failure is detected
-                ctx.addLifecycleListener(new LifecycleListener() {
-                    public void lifecycleEvent(LifecycleEvent event) {
-                        if (event.getLifecycle().getState() == LifecycleState.FAILED) {
-                            Server server = tomcat.getServer();
-                            if (server instanceof StandardServer) {
-                                System.err.println("SEVERE: Context [" + ctx.getName() + "] failed in [" + event.getLifecycle().getClass().getName() + "] lifecycle. Allowing Tomcat to shutdown.");
-                                ((StandardServer) server).stopAwait();
-                            }
+            ctx = tomcat.addWebapp(ctxName, war.getAbsolutePath());
+        }
+          
+        if(!commandLineParams.shutdownOverride) {          
+            final String ctxName = ctx.getName();
+            // allow Tomcat to shutdown if a context failure is detected
+            ctx.addLifecycleListener(new LifecycleListener() {
+                public void lifecycleEvent(LifecycleEvent event) {
+                    if (event.getLifecycle().getState() == LifecycleState.FAILED) {
+                        Server server = tomcat.getServer();
+                        if (server instanceof StandardServer) {
+                            System.err.println("SEVERE: Context [" + ctxName + "] failed in [" + event.getLifecycle().getClass().getName() + "] lifecycle. Allowing Tomcat to shutdown.");
+                            ((StandardServer) server).stopAwait();
                         }
                     }
-                });
-            }
-            
-            
-            
-            // set the context xml location if there is only one war
-            if(commandLineParams.contextXml != null && commandLineParams.paths.size() == 1) {
-                System.out.println("Using context config: " + commandLineParams.contextXml);
-                ctx.setConfigFile(new File(commandLineParams.contextXml).toURI().toURL());
-            }
-
-            // set the session manager
-            if (commandLineParams.sessionStore != null) {
-                SessionStore.getInstance(commandLineParams.sessionStore).configureSessionStore(commandLineParams, ctx);
-            }
-
-            //set the session timeout
-            if(commandLineParams.sessionTimeout != null) {
-                ctx.setSessionTimeout(commandLineParams.sessionTimeout);
-            }
+                }
+            });
         }
+        
+        
+        
+        // set the context xml location if there is only one war
+        if(commandLineParams.contextXml != null && commandLineParams.paths.size() == 1) {
+            System.out.println("Using context config: " + commandLineParams.contextXml);
+            ctx.setConfigFile(new File(commandLineParams.contextXml).toURI().toURL());
+        }
+
+        // set the session manager
+        if (commandLineParams.sessionStore != null) {
+            SessionStore.getInstance(commandLineParams.sessionStore).configureSessionStore(commandLineParams, ctx);
+        }
+
+        //set the session timeout
+        if(commandLineParams.sessionTimeout != null) {
+            ctx.setSessionTimeout(commandLineParams.sessionTimeout);
+        }
+        
+        commandLineParams = null;
 
         //start the server
         tomcat.start();
