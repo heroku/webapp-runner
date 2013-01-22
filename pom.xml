@@ -117,6 +117,14 @@
             <groupId>de.javakaffee.msm</groupId>
             <artifactId>memcached-session-manager-tc7</artifactId>
             <version>1.6.3</version>
+            <exclusions>
+                <!-- JDK 1.6 and above include StAX support by default, including StAX will cause
+                class incompatibility issues in 1.6+ -->
+                <exclusion>
+                    <groupId>stax</groupId>
+                    <artifactId>stax-api</artifactId>
+                </exclusion>
+            </exclusions>            
         </dependency>
     </dependencies>
     <build>
