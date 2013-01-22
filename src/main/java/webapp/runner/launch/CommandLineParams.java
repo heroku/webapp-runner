@@ -28,7 +28,7 @@ public class CommandLineParams {
     public String contextXml;
 
     @Parameter(names = "--path", description = "The context path")
-    public String contextPath = "/";
+    public String contextPath = "";
     
     @Parameter(names = "--shutdown-override", description = "Overrides the default behavior and casues Tomcat to ignore lifecycle failure events rather than shutting down when they occur.")
     public boolean shutdownOverride = false;
