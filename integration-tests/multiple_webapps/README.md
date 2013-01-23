@@ -12,3 +12,5 @@ Manual Tests
 ### Test that all 3 wars start and that webapp1 is on the "/" context
 
     java -jar target/dependency/webapp-runner.jar */target/*.war
+
+    Note: this no longer works as of version 7.0.34.1 support for multiple war files has been removed
