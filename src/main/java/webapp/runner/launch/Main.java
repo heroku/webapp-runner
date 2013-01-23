@@ -82,56 +82,35 @@ public class Main {
         tomcat.setPort(commandLineParams.port);
         
         if (commandLineParams.paths.size() > 1) {
-            System.out.println("FYI... Since you specified more than one path, the context paths will be automatically set to the name of the path without the extension. A path that resolves to a context path of \"/ROOT\" will be replaced with \"/\"");
-            
-            if(commandLineParams.contextPath != null) {
-                System.out.println("WARNING: context-path is ignored when more than one path or war file is specified");
-            }
-            if(commandLineParams.contextXml != null) {
-                System.out.println("WARNING: context-xml is ignored when more than one path or war file is specified");
-            }
+            System.out.println("WARNING: multiple paths are specified, but no longer supported. First path will be used.");
         }
+        
+        // Get the first path
+        String path = commandLineParams.paths.get(0);
 
         Context ctx = null;
         
-        for (String path : commandLineParams.paths) {
-            File war = new File(path);
-            
-            if (!war.exists()) {
-                System.err.println("The specified path \"" + path + "\" does not exist.");
-                jCommander.usage();
-                System.exit(1);
-            }
-            
-            String ctxName = "";
-
-            // Use the commandline context-path (or default) if there is only one war
-            if (commandLineParams.paths.size() == 1) {
-                // warn if the contextPath doesn't start with a '/'. This causes issues serving content at the context root.
-                if (commandLineParams.contextPath.length() > 0 && !commandLineParams.contextPath.startsWith("/")) {
-                    System.out.println("WARNING: You entered a path: [" + commandLineParams.contextPath + "]. Your path should start with a '/'. Tomcat will update this for you, but you may still experience issues.");
-                }
-                
-                ctxName = commandLineParams.contextPath;
-                
-            }
-            else {
-                ctxName = "/" + FilenameUtils.removeExtension(war.getName());
-
-                if (ctxName.equals("/ROOT") || (commandLineParams.paths.size() == 1)) {
-                    ctxName = "/";
-                }
-            }
-                
-            System.out.println("Adding Context " + ctxName + " for " + war.getPath());
-            //Context ctx = tomcat.addWebapp(ctxName, war.getAbsolutePath());
-            
-            
-            ctx = tomcat.addWebapp(ctxName, war.getAbsolutePath());
+        File war = new File(path);
+        
+        if (!war.exists()) {
+            System.err.println("The specified path \"" + path + "\" does not exist.");
+            jCommander.usage();
+            System.exit(1);
         }
+        
+        // Use the commandline context-path (or default)
+        // warn if the contextPath doesn't start with a '/'. This causes issues serving content at the context root.
+        if (commandLineParams.contextPath.length() > 0 && !commandLineParams.contextPath.startsWith("/")) {
+            System.out.println("WARNING: You entered a path: [" + commandLineParams.contextPath + "]. Your path should start with a '/'. Tomcat will update this for you, but you may still experience issues.");
+        }
+        
+        final String ctxName = commandLineParams.contextPath;
+            
+        System.out.println("Adding Context " + ctxName + " for " + war.getPath());
+        
+        ctx = tomcat.addWebapp(ctxName, war.getAbsolutePath());
           
         if(!commandLineParams.shutdownOverride) {          
-            final String ctxName = ctx.getName();
             // allow Tomcat to shutdown if a context failure is detected
             ctx.addLifecycleListener(new LifecycleListener() {
                 public void lifecycleEvent(LifecycleEvent event) {
@@ -149,7 +128,7 @@ public class Main {
         
         
         // set the context xml location if there is only one war
-        if(commandLineParams.contextXml != null && commandLineParams.paths.size() == 1) {
+        if(commandLineParams.contextXml != null) {
             System.out.println("Using context config: " + commandLineParams.contextXml);
             ctx.setConfigFile(new File(commandLineParams.contextXml).toURI().toURL());
         }
