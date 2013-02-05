@@ -47,5 +47,8 @@ public class CommandLineParams {
 
     @Parameter(names = "--help", help = true)
     public boolean help;
+    
+    @Parameter(names = "--enableCompression")
+    public boolean enableCompression;
 
 }
