@@ -37,6 +37,7 @@ import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.StandardServer;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.coyote.http11.Http11NioProtocol;
 
 import com.beust.jcommander.JCommander;
 
@@ -75,6 +76,11 @@ public class Main {
         // initialize the connector
         Connector nioConnector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
         nioConnector.setPort(commandLineParams.port);
+        
+        if(commandLineParams.enableCompression) {
+        	nioConnector.setProperty("compression", "on");
+        	nioConnector.setProperty("compressableMimeType", "text/html,text/xml,text/plain,text/css,application/json,text/javascript,application/javascript");
+        }
 
         tomcat.setConnector(nioConnector);
         tomcat.getService().addConnector(tomcat.getConnector());
