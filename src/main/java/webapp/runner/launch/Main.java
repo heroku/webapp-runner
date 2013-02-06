@@ -36,8 +36,6 @@ import org.apache.catalina.Server;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.StandardServer;
 import org.apache.catalina.startup.Tomcat;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.coyote.http11.Http11NioProtocol;
 
 import com.beust.jcommander.JCommander;
 
