@@ -78,7 +78,7 @@ public class Main {
         
         if(commandLineParams.enableCompression) {
         	nioConnector.setProperty("compression", "on");
-        	nioConnector.setProperty("compressableMimeType", "text/html,text/xml,text/plain,text/css,application/json,text/javascript,application/javascript");
+        	nioConnector.setProperty("compressableMimeType", commandLineParams.compressableMimeTypes);
         }
 
         tomcat.setConnector(nioConnector);
