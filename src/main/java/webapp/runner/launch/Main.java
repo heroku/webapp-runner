@@ -30,6 +30,7 @@ import java.io.IOException;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleEvent;
+import org.apache.catalina.LifecycleException;
 import org.apache.catalina.LifecycleListener;
 import org.apache.catalina.LifecycleState;
 import org.apache.catalina.Server;
@@ -145,6 +146,8 @@ public class Main {
         
         commandLineParams = null;
 
+        addShutdownHook(tomcat);
+        
         //start the server
         tomcat.start();
         tomcat.getServer().await();
@@ -169,5 +172,24 @@ public class Main {
         } catch (IOException e) {
             return baseDir.getAbsolutePath();
         }
+    }
+    
+    /**
+     * Stops the embedded Tomcat server.
+     */
+    static void addShutdownHook(final Tomcat tomcat) {
+        
+        // add shutdown hook to stop server
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+                try {
+                    if (tomcat != null) {
+                        tomcat.getServer().stop();
+                    }
+                } catch (LifecycleException exception) {
+                    throw new RuntimeException("WARNING: Cannot Stop Tomcat " + exception.getMessage(), exception);
+                }
+            }
+        });    
     }
 }
