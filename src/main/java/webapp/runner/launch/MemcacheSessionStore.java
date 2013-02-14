@@ -31,7 +31,17 @@ class MemcacheSessionStore extends SessionStore {
                 printNoConfigError();
                 return;
             }            
-            manager.setMemcachedNodes(System.getenv("MEMCACHIER_SERVERS"));
+            String[] servers = System.getenv("MEMCACHIER_SERVERS").split(",");
+            if (servers.length > 1) {
+              for (int i = 0; i < servers.length; ++i) {
+                servers[i] = "mc" + i + ":" + servers[i];
+              }
+            }
+            String serversStr = servers[0];
+            for (int i = 1; i < servers.length; ++i) {
+              serversStr += "," + servers[i];
+            }
+            manager.setMemcachedNodes(serversStr);
             manager.setUsername(System.getenv("MEMCACHIER_USERNAME"));
             manager.setPassword(System.getenv("MEMCACHIER_PASSWORD"));
         } else {
