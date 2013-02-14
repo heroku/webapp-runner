@@ -48,7 +48,10 @@ public class CommandLineParams {
     @Parameter(names = "--help", help = true)
     public boolean help;
     
-    @Parameter(names = "--enableCompression")
+    @Parameter(names = "--enable-compression", description = "Enable GZIP compression on responses")
     public boolean enableCompression;
+    
+    @Parameter(names = "--compressable-mime-types", description = "Comma delimited list of mime types that will be compressed when using GZIP compression")
+    public String compressableMimeTypes = "text/html,text/xml,text/plain,text/css,application/json,application/xml,text/javascript,application/javascript";
 
 }
