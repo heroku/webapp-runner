@@ -28,6 +28,9 @@ package webapp.runner.launch;
 import java.io.File;
 import java.io.IOException;
 
+import javax.naming.CompositeName;
+import javax.naming.StringRefAddr;
+
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleEvent;
 import org.apache.catalina.LifecycleException;
@@ -37,6 +40,8 @@ import org.apache.catalina.Server;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.StandardServer;
 import org.apache.catalina.startup.Tomcat;
+import org.apache.catalina.users.MemoryUserDatabase;
+import org.apache.catalina.users.MemoryUserDatabaseFactory;
 
 import com.beust.jcommander.JCommander;
 
@@ -75,13 +80,46 @@ public class Main {
         // initialize the connector
         Connector nioConnector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
         nioConnector.setPort(commandLineParams.port);
-        
+
+		if (commandLineParams.enableSSL) {
+			nioConnector.setSecure(true);
+			nioConnector.setProperty("SSLEnabled", "true");
+			String pathToTrustStore = System.getProperty("javax.net.ssl.trustStore");
+			if (pathToTrustStore != null) {
+				nioConnector.setProperty("sslProtocol", "tls");
+				File truststoreFile = new File(pathToTrustStore);
+				nioConnector.setAttribute("truststoreFile", truststoreFile.getAbsolutePath());
+				System.out.println(truststoreFile.getAbsolutePath());
+				nioConnector.setAttribute("trustStorePassword", System.getProperty("javax.net.ssl.trustStorePassword"));
+			}
+			String pathToKeystore = System.getProperty("javax.net.ssl.keyStore");
+			if (pathToKeystore != null) {
+				File keystoreFile = new File(pathToKeystore);
+				nioConnector.setAttribute("keystoreFile", keystoreFile.getAbsolutePath());
+				System.out.println(keystoreFile.getAbsolutePath());
+				nioConnector.setAttribute("keystorePass", System.getProperty("javax.net.ssl.keyStorePassword"));
+			}
+			if (commandLineParams.enableClientAuth) {
+				nioConnector.setAttribute("clientAuth", true);
+			}
+		}
+
+		boolean enableBasicAuth = commandLineParams.enableBasicAuth;
+		if (commandLineParams.enableBasicAuth) {
+			tomcat.enableNaming();
+		}
+
         if(commandLineParams.enableCompression) {
         	nioConnector.setProperty("compression", "on");
         	nioConnector.setProperty("compressableMimeType", commandLineParams.compressableMimeTypes);
         }
 
         tomcat.setConnector(nioConnector);
+        /*if (commandLineParams.enableSSL) {
+			tomcat.getConnector().setSecure(true);
+			tomcat.getConnector().setProperty("SSLEnabled", "true");
+			tomcat.enableNaming();
+        }*/
         tomcat.getService().addConnector(tomcat.getConnector());
 
         tomcat.setPort(commandLineParams.port);
@@ -154,6 +192,44 @@ public class Main {
         
         //start the server
         tomcat.start();
+
+        /*
+         * NamingContextListener.lifecycleEvent(LifecycleEvent event)
+         * cannot initialize GlobalNamingContext for Tomcat until
+         * the Lifecycle.CONFIGURE_START_EVENT occurs, so this block 
+         * must sit after the call to tomcat.start() and it requires
+         * tomcat.enableNaming() to be called much earlier in the code.
+         */
+        if (enableBasicAuth) {
+    		javax.naming.Reference ref = new javax.naming.Reference("org.apache.catalina.UserDatabase");
+    		ref.add(new StringRefAddr("pathname", "../../tomcat-users.xml"));
+    		MemoryUserDatabase memoryUserDatabase = 
+    				(MemoryUserDatabase) new MemoryUserDatabaseFactory().getObjectInstance(
+    				ref,
+    				new CompositeName("UserDatabase"),
+    				null,
+    				null);
+    		// Register memoryUserDatabase with GlobalNamingContext
+    		System.out.println("MemoryUserDatabase: " + memoryUserDatabase);
+    		System.out.println(tomcat.getServer());
+    		System.out.println("GlobalNamingContext: " + tomcat.getServer().getGlobalNamingContext());
+    		tomcat.getServer().getGlobalNamingContext().addToEnvironment("UserDatabase", memoryUserDatabase);
+
+    		org.apache.catalina.deploy.ContextResource ctxRes =
+    				new org.apache.catalina.deploy.ContextResource();
+    		ctxRes.setName("UserDatabase");
+    		ctxRes.setAuth("Container");
+    		ctxRes.setType("org.apache.catalina.UserDatabase");
+    		ctxRes.setDescription("User database that can be updated and saved");
+    		ctxRes.setProperty("factory", "org.apache.catalina.users.MemoryUserDatabaseFactory");
+    		ctxRes.setProperty("pathname", "../../tomcat-users.xml");
+    		System.out.println("ContextResource: " + ctxRes);
+    		System.out.println(tomcat.getServer());
+    		System.out.println("GlobalNamingResources: " + tomcat.getServer().getGlobalNamingResources());
+    		tomcat.getServer().getGlobalNamingResources().addResource(ctxRes);
+    		tomcat.getEngine().setRealm(new org.apache.catalina.realm.UserDatabaseRealm());
+        }
+
         tomcat.getServer().await();
     }
 

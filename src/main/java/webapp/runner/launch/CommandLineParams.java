@@ -54,4 +54,12 @@ public class CommandLineParams {
     @Parameter(names = "--compressable-mime-types", description = "Comma delimited list of mime types that will be compressed when using GZIP compression")
     public String compressableMimeTypes = "text/html,text/xml,text/plain,text/css,application/json,application/xml,text/javascript,application/javascript";
 
+    @Parameter(names = "--enable-ssl", description = "Specify -Djavax.net.ssl.trustStore and -Djavax.net.ssl.trustStorePassword in JAVA_OPTS")
+    public boolean enableSSL;
+
+    @Parameter(names = "--enable-client-auth", description = "Specify -Djavax.net.ssl.keyStore and -Djavax.net.ssl.keyStorePassword in JAVA_OPTS")
+    public boolean enableClientAuth;
+
+    @Parameter(names = "--enable-basic-auth", description = "Specify names & roles in tomcat-users.xml file")
+    public boolean enableBasicAuth;
 }
