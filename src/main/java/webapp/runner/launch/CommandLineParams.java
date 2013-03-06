@@ -51,15 +51,24 @@ public class CommandLineParams {
     @Parameter(names = "--enable-compression", description = "Enable GZIP compression on responses")
     public boolean enableCompression;
     
-    @Parameter(names = "--compressable-mime-types", description = "Comma delimited list of mime types that will be compressed when using GZIP compression")
+    @Parameter(names = "--compressable-mime-types", description = "Comma delimited list of mime types that will be compressed when using GZIP compression.")
     public String compressableMimeTypes = "text/html,text/xml,text/plain,text/css,application/json,application/xml,text/javascript,application/javascript";
 
-    @Parameter(names = "--enable-ssl", description = "Specify -Djavax.net.ssl.trustStore and -Djavax.net.ssl.trustStorePassword in JAVA_OPTS")
+    @Parameter(names = "--enable-ssl", description = "Specify -Djavax.net.ssl.trustStore and -Djavax.net.ssl.trustStorePassword in JAVA_OPTS. Note: should not be used if a reverse proxy is terminating SSL for you (such as on Heroku)")
     public boolean enableSSL;
 
     @Parameter(names = "--enable-client-auth", description = "Specify -Djavax.net.ssl.keyStore and -Djavax.net.ssl.keyStorePassword in JAVA_OPTS")
     public boolean enableClientAuth;
 
-    @Parameter(names = "--enable-basic-auth", description = "Specify names & roles in tomcat-users.xml file")
-    public boolean enableBasicAuth;
+    @Parameter(names = "--enable-basic-auth", description = "Secure the app with basic auth. Use with --basic-auth-user and --basic-auth-pw or --tomcat-users-location")
+    public boolean enableBasicAuth = false;
+    
+    @Parameter(names = "--basic-auth-user", description = "Username to be used with basic auth. Defaults to BASIC_AUTH_USER env variable.")
+    public String basicAuthUser;
+    
+    @Parameter(names = "--basic-auth-pw", description = "Password to be used with basic auth. Defaults to BASIC_AUTH_PW env variable.")
+    public String basicAuthPw;
+    
+    @Parameter(names = "--tomcat-users-location", description = "Location of the tomcat-users.xml file. (relative to the location of the webapp-runner jar file)")
+    public String tomcatUsersLocation;
 }

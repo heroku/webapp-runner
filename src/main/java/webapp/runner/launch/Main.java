@@ -27,18 +27,25 @@ package webapp.runner.launch;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
 
 import javax.naming.CompositeName;
 import javax.naming.StringRefAddr;
+import javax.servlet.annotation.ServletSecurity.TransportGuarantee;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleEvent;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.LifecycleListener;
 import org.apache.catalina.LifecycleState;
+import org.apache.catalina.Role;
 import org.apache.catalina.Server;
+import org.apache.catalina.User;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.StandardServer;
+import org.apache.catalina.deploy.LoginConfig;
+import org.apache.catalina.deploy.SecurityCollection;
+import org.apache.catalina.deploy.SecurityConstraint;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.users.MemoryUserDatabase;
 import org.apache.catalina.users.MemoryUserDatabaseFactory;
@@ -50,11 +57,10 @@ import com.beust.jcommander.JCommander;
  * This is the main entry point to webapp-runner. Helpers are called to parse the arguments.
  * Tomcat configuration and launching takes place here.
  *
- * @author johnsimone
- * @author jamesward
- *
  */
 public class Main {
+    
+    private static final String AUTH_ROLE = "user";
 
     public static void main(String[] args) throws Exception {
 
@@ -104,22 +110,13 @@ public class Main {
 			}
 		}
 
-		boolean enableBasicAuth = commandLineParams.enableBasicAuth;
-		if (commandLineParams.enableBasicAuth) {
-			tomcat.enableNaming();
-		}
-
         if(commandLineParams.enableCompression) {
         	nioConnector.setProperty("compression", "on");
         	nioConnector.setProperty("compressableMimeType", commandLineParams.compressableMimeTypes);
         }
 
         tomcat.setConnector(nioConnector);
-        /*if (commandLineParams.enableSSL) {
-			tomcat.getConnector().setSecure(true);
-			tomcat.getConnector().setProperty("SSLEnabled", "true");
-			tomcat.enableNaming();
-        }*/
+
         tomcat.getService().addConnector(tomcat.getConnector());
 
         tomcat.setPort(commandLineParams.port);
@@ -185,10 +182,16 @@ public class Main {
         if(commandLineParams.sessionTimeout != null) {
             ctx.setSessionTimeout(commandLineParams.sessionTimeout);
         }
-        
-        commandLineParams = null;
 
         addShutdownHook(tomcat);
+        
+        if (commandLineParams.enableBasicAuth || commandLineParams.tomcatUsersLocation != null) {
+            tomcat.enableNaming();
+        }
+        
+        if (commandLineParams.enableBasicAuth) {
+            enableBasicAuth(ctx, commandLineParams.enableSSL);
+        }
         
         //start the server
         tomcat.start();
@@ -200,35 +203,11 @@ public class Main {
          * must sit after the call to tomcat.start() and it requires
          * tomcat.enableNaming() to be called much earlier in the code.
          */
-        if (enableBasicAuth) {
-    		javax.naming.Reference ref = new javax.naming.Reference("org.apache.catalina.UserDatabase");
-    		ref.add(new StringRefAddr("pathname", "../../tomcat-users.xml"));
-    		MemoryUserDatabase memoryUserDatabase = 
-    				(MemoryUserDatabase) new MemoryUserDatabaseFactory().getObjectInstance(
-    				ref,
-    				new CompositeName("UserDatabase"),
-    				null,
-    				null);
-    		// Register memoryUserDatabase with GlobalNamingContext
-    		System.out.println("MemoryUserDatabase: " + memoryUserDatabase);
-    		System.out.println(tomcat.getServer());
-    		System.out.println("GlobalNamingContext: " + tomcat.getServer().getGlobalNamingContext());
-    		tomcat.getServer().getGlobalNamingContext().addToEnvironment("UserDatabase", memoryUserDatabase);
-
-    		org.apache.catalina.deploy.ContextResource ctxRes =
-    				new org.apache.catalina.deploy.ContextResource();
-    		ctxRes.setName("UserDatabase");
-    		ctxRes.setAuth("Container");
-    		ctxRes.setType("org.apache.catalina.UserDatabase");
-    		ctxRes.setDescription("User database that can be updated and saved");
-    		ctxRes.setProperty("factory", "org.apache.catalina.users.MemoryUserDatabaseFactory");
-    		ctxRes.setProperty("pathname", "../../tomcat-users.xml");
-    		System.out.println("ContextResource: " + ctxRes);
-    		System.out.println(tomcat.getServer());
-    		System.out.println("GlobalNamingResources: " + tomcat.getServer().getGlobalNamingResources());
-    		tomcat.getServer().getGlobalNamingResources().addResource(ctxRes);
-    		tomcat.getEngine().setRealm(new org.apache.catalina.realm.UserDatabaseRealm());
+        if (commandLineParams.enableBasicAuth || commandLineParams.tomcatUsersLocation != null) {
+            configureUserStore(tomcat, commandLineParams);
         }
+        
+        commandLineParams = null;
 
         tomcat.getServer().await();
     }
@@ -252,6 +231,76 @@ public class Main {
         } catch (IOException e) {
             return baseDir.getAbsolutePath();
         }
+    }
+    
+    /*
+     * Set up basic auth security on the entire application
+     */
+    static void enableBasicAuth(Context ctx, boolean enableSSL) {
+        LoginConfig loginConfig = new LoginConfig();
+        loginConfig.setAuthMethod("BASIC");
+        ctx.setLoginConfig(loginConfig);
+        ctx.addSecurityRole(AUTH_ROLE);
+        
+        SecurityConstraint securityConstraint = new SecurityConstraint();
+        securityConstraint.addAuthRole(AUTH_ROLE);
+        if(enableSSL) {            
+            securityConstraint.setUserConstraint(TransportGuarantee.CONFIDENTIAL.toString());
+        }
+        SecurityCollection securityCollection = new SecurityCollection();
+        securityCollection.addPattern("/*");
+        securityConstraint.addCollection(securityCollection);
+        ctx.addConstraint(securityConstraint);
+    }
+    
+    static void configureUserStore(final Tomcat tomcat, final CommandLineParams commandLineParams) throws Exception {
+        String tomcatUsersLocation = commandLineParams.tomcatUsersLocation;
+        if(tomcatUsersLocation == null) {
+            tomcatUsersLocation = "../../tomcat-users.xml";
+        }
+        
+        javax.naming.Reference ref = new javax.naming.Reference("org.apache.catalina.UserDatabase");
+        ref.add(new StringRefAddr("pathname", tomcatUsersLocation));
+        MemoryUserDatabase memoryUserDatabase = 
+                (MemoryUserDatabase) new MemoryUserDatabaseFactory().getObjectInstance(
+                ref,
+                new CompositeName("UserDatabase"),
+                null,
+                null);
+
+        // Add basic auth user
+        memoryUserDatabase.setReadonly(false);
+        Role user = memoryUserDatabase.createRole(AUTH_ROLE, AUTH_ROLE);
+        if(commandLineParams.basicAuthUser != null && commandLineParams.basicAuthPw != null) {
+            
+            memoryUserDatabase.createUser(
+                    commandLineParams.basicAuthUser, 
+                    commandLineParams.basicAuthPw, 
+                    commandLineParams.basicAuthUser).addRole(user);
+            
+        } else if (System.getenv("BASIC_AUTH_USER") != null && System.getenv("BASIC_AUTH_PW") != null) {
+            
+            memoryUserDatabase.createUser(
+                    System.getenv("BASIC_AUTH_USER"), 
+                    System.getenv("BASIC_AUTH_PW"), 
+                    System.getenv("BASIC_AUTH_USER")).addRole(user);
+        }
+        memoryUserDatabase.save();
+        
+        // Register memoryUserDatabase with GlobalNamingContext
+        System.out.println("MemoryUserDatabase: " + memoryUserDatabase);
+        tomcat.getServer().getGlobalNamingContext().addToEnvironment("UserDatabase", memoryUserDatabase);
+
+        org.apache.catalina.deploy.ContextResource ctxRes =
+                new org.apache.catalina.deploy.ContextResource();
+        ctxRes.setName("UserDatabase");
+        ctxRes.setAuth("Container");
+        ctxRes.setType("org.apache.catalina.UserDatabase");
+        ctxRes.setDescription("User database that can be updated and saved");
+        ctxRes.setProperty("factory", "org.apache.catalina.users.MemoryUserDatabaseFactory");
+        ctxRes.setProperty("pathname", tomcatUsersLocation);
+        tomcat.getServer().getGlobalNamingResources().addResource(ctxRes);
+        tomcat.getEngine().setRealm(new org.apache.catalina.realm.UserDatabaseRealm());       
     }
     
     /**
