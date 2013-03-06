@@ -270,9 +270,9 @@ public class Main {
 
         // Add basic auth user
         memoryUserDatabase.setReadonly(false);
-        Role user = memoryUserDatabase.createRole(AUTH_ROLE, AUTH_ROLE);
         if(commandLineParams.basicAuthUser != null && commandLineParams.basicAuthPw != null) {
             
+            Role user = memoryUserDatabase.createRole(AUTH_ROLE, AUTH_ROLE);
             memoryUserDatabase.createUser(
                     commandLineParams.basicAuthUser, 
                     commandLineParams.basicAuthPw, 
@@ -280,6 +280,7 @@ public class Main {
             
         } else if (System.getenv("BASIC_AUTH_USER") != null && System.getenv("BASIC_AUTH_PW") != null) {
             
+            Role user = memoryUserDatabase.createRole(AUTH_ROLE, AUTH_ROLE);
             memoryUserDatabase.createUser(
                     System.getenv("BASIC_AUTH_USER"), 
                     System.getenv("BASIC_AUTH_PW"), 
