@@ -269,24 +269,26 @@ public class Main {
                 null);
 
         // Add basic auth user
-        memoryUserDatabase.setReadonly(false);
         if(commandLineParams.basicAuthUser != null && commandLineParams.basicAuthPw != null) {
             
+            memoryUserDatabase.setReadonly(false);
             Role user = memoryUserDatabase.createRole(AUTH_ROLE, AUTH_ROLE);
             memoryUserDatabase.createUser(
                     commandLineParams.basicAuthUser, 
                     commandLineParams.basicAuthPw, 
                     commandLineParams.basicAuthUser).addRole(user);
+            memoryUserDatabase.save();
             
         } else if (System.getenv("BASIC_AUTH_USER") != null && System.getenv("BASIC_AUTH_PW") != null) {
             
+            memoryUserDatabase.setReadonly(false);
             Role user = memoryUserDatabase.createRole(AUTH_ROLE, AUTH_ROLE);
             memoryUserDatabase.createUser(
                     System.getenv("BASIC_AUTH_USER"), 
                     System.getenv("BASIC_AUTH_PW"), 
                     System.getenv("BASIC_AUTH_USER")).addRole(user);
+            memoryUserDatabase.save();
         }
-        memoryUserDatabase.save();
         
         // Register memoryUserDatabase with GlobalNamingContext
         System.out.println("MemoryUserDatabase: " + memoryUserDatabase);
