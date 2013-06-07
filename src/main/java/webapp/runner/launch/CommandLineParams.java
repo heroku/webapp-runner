@@ -74,4 +74,7 @@ public class CommandLineParams {
 
     @Parameter(names = "--proxy-base-url", description = "Set proxy URL if tomcat is running behind reverse proxy")
     public String proxyBaseUrl = "";
+
+    @Parameter(names = "--expand-war", description = "Expand the war file and set it as source")
+    public boolean expandWar = false;
 }
