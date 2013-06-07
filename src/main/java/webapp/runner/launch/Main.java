@@ -27,6 +27,7 @@ package webapp.runner.launch;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.Iterator;
 
 import javax.naming.CompositeName;
@@ -110,6 +111,22 @@ public class Main {
 			}
 		}
 
+        if(commandLineParams.proxyBaseUrl.length() > 0) {
+            URI uri = new URI(commandLineParams.proxyBaseUrl);
+            String scheme = uri.getScheme();
+            nioConnector.setScheme(scheme);
+            if(scheme.equals("https") && !nioConnector.getSecure()) {
+                nioConnector.setSecure(true);
+            }
+            if(uri.getPort() > 0) {
+                nioConnector.setProxyPort(uri.getPort());
+            } else if (scheme.equals("http")) {
+                nioConnector.setProxyPort(80);
+            } else if (scheme.equals("https")) {
+                nioConnector.setProxyPort(443);
+            }
+        }
+
         if(commandLineParams.enableCompression) {
         	nioConnector.setProperty("compression", "on");
         	nioConnector.setProperty("compressableMimeType", commandLineParams.compressableMimeTypes);
@@ -131,7 +148,7 @@ public class Main {
         Context ctx = null;
         
         File war = new File(path);
-        
+
         if (!war.exists()) {
             System.err.println("The specified path \"" + path + "\" does not exist.");
             jCommander.usage();

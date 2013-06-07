@@ -71,4 +71,7 @@ public class CommandLineParams {
     
     @Parameter(names = "--tomcat-users-location", description = "Location of the tomcat-users.xml file. (relative to the location of the webapp-runner jar file)")
     public String tomcatUsersLocation;
+
+    @Parameter(names = "--proxy-base-url", description = "Set proxy URL if tomcat is running behind reverse proxy")
+    public String proxyBaseUrl = "";
 }
