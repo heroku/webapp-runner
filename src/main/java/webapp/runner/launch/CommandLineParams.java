@@ -71,4 +71,7 @@ public class CommandLineParams {
     
     @Parameter(names = "--tomcat-users-location", description = "Location of the tomcat-users.xml file. (relative to the location of the webapp-runner jar file)")
     public String tomcatUsersLocation;
+    
+    @Parameter(names = "--expand-war", description = "Expand the war file and set it as source")
+    public boolean expandWar = false;
 }

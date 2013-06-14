@@ -27,25 +27,26 @@ package webapp.runner.launch;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
+import java.net.URL;
 
 import javax.naming.CompositeName;
 import javax.naming.StringRefAddr;
 import javax.servlet.annotation.ServletSecurity.TransportGuarantee;
 
 import org.apache.catalina.Context;
+import org.apache.catalina.Globals;
 import org.apache.catalina.LifecycleEvent;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.LifecycleListener;
 import org.apache.catalina.LifecycleState;
 import org.apache.catalina.Role;
 import org.apache.catalina.Server;
-import org.apache.catalina.User;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.StandardServer;
 import org.apache.catalina.deploy.LoginConfig;
 import org.apache.catalina.deploy.SecurityCollection;
 import org.apache.catalina.deploy.SecurityConstraint;
+import org.apache.catalina.startup.ExpandWar;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.users.MemoryUserDatabase;
 import org.apache.catalina.users.MemoryUserDatabaseFactory;
@@ -146,9 +147,22 @@ public class Main {
         
         final String ctxName = commandLineParams.contextPath;
             
-        System.out.println("Adding Context " + ctxName + " for " + war.getPath());
-        
-        ctx = tomcat.addWebapp(ctxName, war.getAbsolutePath());
+        if (commandLineParams.expandWar && war.isFile()){
+            File appBase = new File(System.getProperty(Globals.CATALINA_BASE_PROP), tomcat.getHost().getAppBase());
+            if (appBase.exists()){
+                appBase.delete();
+            }
+            appBase.mkdir();
+            URL fileUrl = new URL("jar:" + war.toURI().toURL() + "!/");
+            String expandedDir = ExpandWar.expand(tomcat.getHost(), fileUrl, "/expanded");
+            System.out.println("Expanding " + war.getName() + " into " + expandedDir);
+
+            System.out.println("Adding Context " + ctxName + " for " + expandedDir);
+            ctx = tomcat.addWebapp(ctxName, expandedDir);
+        } else {
+            System.out.println("Adding Context " + ctxName + " for " + war.getPath());
+            ctx = tomcat.addWebapp(ctxName, war.getAbsolutePath());
+        }
           
         if(!commandLineParams.shutdownOverride) {          
             // allow Tomcat to shutdown if a context failure is detected
