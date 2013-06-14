@@ -174,12 +174,12 @@ public class Main {
             appBase.mkdir();
             URL fileUrl = new URL("jar:" + war.toURI().toURL() + "!/");
             String expandedDir = ExpandWar.expand(tomcat.getHost(), fileUrl, "/expanded");
-            System.err.println("Expanding " + war.getName() + " into " + expandedDir);
+            System.out.println("Expanding " + war.getName() + " into " + expandedDir);
 
-            System.err.println("Adding Context " + ctxName + " for " + expandedDir);
+            System.out.println("Adding Context " + ctxName + " for " + expandedDir);
             ctx = tomcat.addWebapp(ctxName, expandedDir);
         } else {
-            System.err.println("Adding Context " + ctxName + " for " + war.getPath());
+            System.out.println("Adding Context " + ctxName + " for " + war.getPath());
             ctx = tomcat.addWebapp(ctxName, war.getAbsolutePath());
         }
 
