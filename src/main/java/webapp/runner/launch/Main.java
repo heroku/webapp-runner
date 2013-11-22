@@ -116,6 +116,10 @@ public class Main {
         	nioConnector.setProperty("compressableMimeType", commandLineParams.compressableMimeTypes);
         }
 
+        if(commandLineParams.uriEncoding != null) {
+            nioConnector.setURIEncoding(commandLineParams.uriEncoding);
+        }
+
         tomcat.setConnector(nioConnector);
 
         tomcat.getService().addConnector(tomcat.getConnector());
