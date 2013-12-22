@@ -82,7 +82,7 @@ public class Main {
         final Tomcat tomcat = new Tomcat();
 
         // set directory for temp files
-        tomcat.setBaseDir(resolveTomcatBaseDir(commandLineParams.port));
+        tomcat.setBaseDir(resolveTomcatBaseDir(commandLineParams.port,  commandLineParams.tempDirectory));
 
         // initialize the connector
         Connector nioConnector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
@@ -230,11 +230,17 @@ public class Main {
      * Gets or creates temporary Tomcat base directory within target dir
      *
      * @param port port of web process
+     * @param tempDirectory suggested temporary directory
      * @return absolute dir path
      * @throws IOException if dir fails to be created
      */
-    static String resolveTomcatBaseDir(Integer port) throws IOException {
-        final File baseDir = new File(System.getProperty("user.dir") + "/target/tomcat." + port);
+    static String resolveTomcatBaseDir(Integer port, String tempDirectory) throws IOException {
+    	
+        File baseDir = new File(System.getProperty("user.dir") + "/target/tomcat." + port);
+        
+		if (tempDirectory != null) {
+			baseDir = new File(tempDirectory + port);
+		}
 
         if (!baseDir.isDirectory() && !baseDir.mkdirs()) {
             throw new IOException("Could not create temp dir: " + baseDir);
