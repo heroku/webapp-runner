@@ -16,7 +16,7 @@ import static org.testng.Assert.*;
 public class TomcatBaseDirResolutionTest {
 
     private static final Integer PORT = 1234;
-    private static final File BASE_DIR = new File(System.getProperty("user.dir") + "/target/tomcat." + PORT);
+    private static final File BASE_DIR = new File(System.getProperty("user.dir"), "/target/tomcat." + PORT);
 
     @BeforeMethod
     @AfterTest
@@ -42,7 +42,9 @@ public class TomcatBaseDirResolutionTest {
     @Test
     public void testBaseDirAlreadyExistsAsFile() throws Exception {
         BASE_DIR.getParentFile().mkdirs();
-        new PrintWriter(BASE_DIR).append("");
+        PrintWriter printWriter = new PrintWriter(BASE_DIR);
+        printWriter.append("");
+        printWriter.close();
         assertTrue(BASE_DIR.isFile());
 
         try {
