@@ -239,6 +239,7 @@ public class Main {
      */
     static String resolveTomcatBaseDir(Integer port) throws IOException {
         final File baseDir = new File(System.getProperty("user.dir") + "/target/tomcat." + port);
+        new File(baseDir, "webapps").mkdirs();
 
         if (!baseDir.isDirectory() && !baseDir.mkdirs()) {
             throw new IOException("Could not create temp dir: " + baseDir);
