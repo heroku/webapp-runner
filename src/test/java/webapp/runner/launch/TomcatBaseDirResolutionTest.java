@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import org.apache.commons.io.FileUtils;
+
 import static org.testng.Assert.*;
 
 /**
@@ -20,9 +22,13 @@ public class TomcatBaseDirResolutionTest {
 
     @BeforeMethod
     @AfterTest
-    public void clean() {
+    public void clean() throws IOException {
         if (BASE_DIR.exists()) {
-            assertTrue(BASE_DIR.delete());
+            if(BASE_DIR.isDirectory()) {
+              FileUtils.deleteDirectory(BASE_DIR);
+            } else {
+              BASE_DIR.delete();
+            }
         }
     }
 
