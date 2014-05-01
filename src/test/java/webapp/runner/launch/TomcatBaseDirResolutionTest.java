@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import org.apache.commons.io.FileUtils;
+
 import static org.testng.Assert.*;
 
 /**
@@ -16,13 +18,17 @@ import static org.testng.Assert.*;
 public class TomcatBaseDirResolutionTest {
 
     private static final Integer PORT = 1234;
-    private static final File BASE_DIR = new File(System.getProperty("user.dir") + "/target/tomcat." + PORT);
+    private static final File BASE_DIR = new File(System.getProperty("user.dir"), "/target/tomcat." + PORT);
 
     @BeforeMethod
     @AfterTest
-    public void clean() {
+    public void clean() throws IOException {
         if (BASE_DIR.exists()) {
-            assertTrue(BASE_DIR.delete());
+            if(BASE_DIR.isDirectory()) {
+              FileUtils.deleteDirectory(BASE_DIR);
+            } else {
+              BASE_DIR.delete();
+            }
         }
     }
 
@@ -42,7 +48,9 @@ public class TomcatBaseDirResolutionTest {
     @Test
     public void testBaseDirAlreadyExistsAsFile() throws Exception {
         BASE_DIR.getParentFile().mkdirs();
-        new PrintWriter(BASE_DIR).append("");
+        PrintWriter printWriter = new PrintWriter(BASE_DIR);
+        printWriter.append("");
+        printWriter.close();
         assertTrue(BASE_DIR.isFile());
 
         try {
