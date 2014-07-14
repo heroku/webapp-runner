@@ -47,7 +47,7 @@ Add the following to your pom.xml:
                               <artifactItem>
                                   <groupId>com.github.jsimone</groupId>
                                   <artifactId>webapp-runner</artifactId>
-                                  <version>7.0.34.1</version>
+                                  <version>7.0.54.0</version>
                                   <destFileName>webapp-runner.jar</destFileName>
                               </artifactItem>
                           </artifactItems>
