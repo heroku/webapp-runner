@@ -111,6 +111,11 @@ public class Main {
 			}
 		}
 
+        if (null != commandLineParams.uriEncoding) {
+          nioConnector.setURIEncoding(commandLineParams.uriEncoding);
+        }
+        nioConnector.setUseBodyEncodingForURI(commandLineParams.useBodyEncodingForURI);
+        
         if(commandLineParams.enableCompression) {
         	nioConnector.setProperty("compression", "on");
         	nioConnector.setProperty("compressableMimeType", commandLineParams.compressableMimeTypes);

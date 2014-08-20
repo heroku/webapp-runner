@@ -74,4 +74,11 @@ public class CommandLineParams {
     
     @Parameter(names = "--expand-war", description = "Expand the war file and set it as source")
     public boolean expandWar = false;
+
+    @Parameter(names = "--uri-encoding", description = "Set the URI encoding to be used for the Connector.")
+    public String uriEncoding;
+
+    @Parameter(names = "--use-body-encoding-for-uri", description = "Set if the entity body encoding should be used for the URI.")
+    public boolean useBodyEncodingForURI = false;
+
 }
