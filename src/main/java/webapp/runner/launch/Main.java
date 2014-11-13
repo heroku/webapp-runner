@@ -51,6 +51,8 @@ import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.users.MemoryUserDatabase;
 import org.apache.catalina.users.MemoryUserDatabaseFactory;
 
+import org.apache.coyote.http11.AbstractHttp11Protocol;
+
 import com.beust.jcommander.JCommander;
 
 
@@ -88,7 +90,15 @@ public class Main {
         Connector nioConnector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
         nioConnector.setPort(commandLineParams.port);
 
-		if (commandLineParams.enableSSL) {
+		if (commandLineParams.maxPostSize != null) {
+            nioConnector.setMaxPostSize(commandLineParams.maxPostSize.intValue());
+        } 
+
+        if (commandLineParams.maxHttpHeaderSize != null) {
+            ((AbstractHttp11Protocol) nioConnector.getProtocolHandler()).setMaxHttpHeaderSize(commandLineParams.maxHttpHeaderSize.intValue());
+        }
+
+        if (commandLineParams.enableSSL) {
 			nioConnector.setSecure(true);
 			nioConnector.setProperty("SSLEnabled", "true");
 			String pathToTrustStore = System.getProperty("javax.net.ssl.trustStore");

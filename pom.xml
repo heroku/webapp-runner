@@ -10,7 +10,7 @@
     <artifactId>webapp-runner</artifactId>
     <version>7.0.40.2</version>
 
-    <name>webapp-runner</name>mvn 
+    <name>webapp-runner</name>
     <description>Lightweight Application Launcher. Launch your webapp in the most popular open source web container available with a single command.</description>
     <url>http://jsimone.github.com/webapp-runner</url>
     <licenses>

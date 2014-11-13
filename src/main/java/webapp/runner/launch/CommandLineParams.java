@@ -81,4 +81,13 @@ public class CommandLineParams {
     @Parameter(names = "--use-body-encoding-for-uri", description = "Set if the entity body encoding should be used for the URI.")
     public boolean useBodyEncodingForURI = false;
 
+    //===================================================
+    // additional parameters added in the forked version
+    //===================================================
+    
+    @Parameter(names = "--max-post-size", description = "Maximum HTTP POST request size in bytes. (default is 2MB, 0 is unlimited)")
+    public Integer maxPostSize;
+
+    @Parameter(names = "--max-http-header-size", description = "Maximum HTTP header size in bytes. (default is 8KB)")
+    public Integer maxHttpHeaderSize;  
 }
