@@ -92,10 +92,12 @@ public class Main {
 
 		if (commandLineParams.maxPostSize != null) {
             nioConnector.setMaxPostSize(commandLineParams.maxPostSize.intValue());
+            System.out.println("Setting maxPostSize to " + commandLineParams.maxPostSize + " bytes");
         } 
 
         if (commandLineParams.maxHttpHeaderSize != null) {
             ((AbstractHttp11Protocol) nioConnector.getProtocolHandler()).setMaxHttpHeaderSize(commandLineParams.maxHttpHeaderSize.intValue());
+            System.out.println("Setting maxHttpHeaderSize to " + commandLineParams.maxHttpHeaderSize + " bytes");
         }
 
         if (commandLineParams.enableSSL) {
