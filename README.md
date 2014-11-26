@@ -120,6 +120,20 @@ You can stop the application from the red square in the console pane or from the
 ### Maven Central
 Note: webapp runner is now available in Maven Central. The version scheme has also chanaged to match the version of Tomcat that it relies on. The format is <tomcat version>.<minor webapp runner version>. The latest version is now 7.0.30.x. Versions 0.0.1 to 0.0.7 are still available at http://jsimone.github.com/webapp-runner/repository.
      
+### Development
+
+To run the entire suite of integration tests, use the following command:
+
+```
+$ mvn clean install -Pintegration-test
+```
+
+To run an individual integration test, use a command like this:
+
+```
+$ mvn clean install -Pintegration-test -Dinvoker.test=single_webapp
+```
+     
 ### License
 
  Copyright (c) 2012, John Simone
