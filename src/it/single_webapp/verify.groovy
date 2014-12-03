@@ -19,19 +19,19 @@ def testProcess = { String command, String expectedText, String errorMessage ->
 
 testProcess(
         "java -cp target/classes -jar ${basedir}/target/dependency/webapp-runner.jar ${basedir}/src/main/webapp",
-        "Starting ProtocolHandler",
+        "Starting Servlet Engine: Apache Tomcat",
         "The web process did not start (filesystem)"
 )
 
 testProcess(
         "java -jar ${basedir}/target/dependency/webapp-runner.jar ${basedir}/target/single_webapp",
-        "Starting ProtocolHandler",
+        "Starting Servlet Engine: Apache Tomcat",
         "The web process did not start (target dir)"
 )
 
 testProcess(
         "java -jar ${basedir}/target/dependency/webapp-runner.jar ${basedir}/target/single_webapp.war",
-        "Starting ProtocolHandler",
+        "Starting Servlet Engine: Apache Tomcat",
         "The web process did not start (war file)"
 )
 
