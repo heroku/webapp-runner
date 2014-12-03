@@ -1,4 +1,5 @@
 language: java
+before_install: "./etc/travis-setup.sh"
 script: mvn clean install -Pintegration-test
 env:
   global:
