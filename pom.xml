@@ -8,7 +8,7 @@
 
     <groupId>com.github.jsimone</groupId>
     <artifactId>webapp-runner</artifactId>
-    <version>7.0.40.2</version>
+    <version>7.0.40.3-SNAPSHOT</version>
 
 
     <name>webapp-runner</name>
@@ -31,7 +31,7 @@
         <url>https://github.com/jsimone/webapp-runner</url>
         <connection>scm:git:git@github.com:jsimone/webapp-runner.git</connection>
         <developerConnection>scm:git:git@github.com:jsimone/webapp-runner.git</developerConnection>
-        <tag>webapp-runner-7.0.40.2</tag>
+        <tag>HEAD</tag>
     </scm>
     <developers>
         <developer>
