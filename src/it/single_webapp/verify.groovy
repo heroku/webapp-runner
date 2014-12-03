@@ -37,6 +37,6 @@ testProcess(
 
 testProcess(
         "java -jar ${basedir}/target/dependency/webapp-runner.jar --port 5000 ${basedir}/target/single_webapp.war",
-        "Starting ProtocolHandler [\"http-nio-5000\"]",
+        "ProtocolHandler [\"http-nio-5000\"]",
         "The web process did not start (with port)"
 )
