@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # Releasing to Maven Central can be confusing. So this will partially automate
 # the process.
 # http://central.sonatype.org/pages/apache-maven.html
