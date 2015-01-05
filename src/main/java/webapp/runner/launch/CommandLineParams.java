@@ -81,4 +81,7 @@ public class CommandLineParams {
     @Parameter(names = "--use-body-encoding-for-uri", description = "Set if the entity body encoding should be used for the URI.")
     public boolean useBodyEncodingForURI = false;
 
+    @Parameter(names = "--scanBootstrapClassPath", description = "Set jar scanner scan bootstrap classpath.")
+    public boolean scanBootstrapClassPath = false;
+
 }
