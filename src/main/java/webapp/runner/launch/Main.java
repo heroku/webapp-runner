@@ -33,25 +33,21 @@ import javax.naming.CompositeName;
 import javax.naming.StringRefAddr;
 import javax.servlet.annotation.ServletSecurity.TransportGuarantee;
 
-import org.apache.catalina.Context;
-import org.apache.catalina.Globals;
-import org.apache.catalina.LifecycleEvent;
-import org.apache.catalina.LifecycleException;
-import org.apache.catalina.LifecycleListener;
-import org.apache.catalina.LifecycleState;
-import org.apache.catalina.Role;
-import org.apache.catalina.Server;
+import org.apache.catalina.*;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.StandardServer;
-import org.apache.catalina.deploy.LoginConfig;
-import org.apache.catalina.deploy.SecurityCollection;
-import org.apache.catalina.deploy.SecurityConstraint;
 import org.apache.catalina.startup.ExpandWar;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.users.MemoryUserDatabase;
 import org.apache.catalina.users.MemoryUserDatabaseFactory;
 
 import com.beust.jcommander.JCommander;
+import org.apache.catalina.webresources.DirResourceSet;
+import org.apache.catalina.webresources.StandardRoot;
+import org.apache.tomcat.util.descriptor.web.LoginConfig;
+import org.apache.tomcat.util.descriptor.web.SecurityCollection;
+import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
+import org.apache.tomcat.util.scan.StandardJarScanner;
 
 
 /**
@@ -183,6 +179,26 @@ public class Main {
       });
     }
 
+    if (commandLineParams.enableReload) {
+      ctx.setReloadable(true);
+    }
+
+    if (commandLineParams.scanBootstrapClassPath) {
+      StandardJarScanner scanner = new StandardJarScanner();
+      scanner.setScanBootstrapClassPath(true);
+      ctx.setJarScanner(scanner);
+    }
+
+    if (commandLineParams.externalResources.size() > 0) {
+        WebResourceRoot resources = new StandardRoot(ctx);
+        for (String resource : commandLineParams.externalResources) {
+            System.out.println("add external resources: " + resource);
+            DirResourceSet post = new DirResourceSet(resources, "/WEB-INF/classes", resource, "/");
+            resources.addPostResources(post);
+        }
+        ctx.setResources(resources);
+
+    }
 
     // set the context xml location if there is only one war
     if (commandLineParams.contextXml != null) {
@@ -311,8 +327,8 @@ public class Main {
     System.out.println("MemoryUserDatabase: " + memoryUserDatabase);
     tomcat.getServer().getGlobalNamingContext().addToEnvironment("UserDatabase", memoryUserDatabase);
 
-    org.apache.catalina.deploy.ContextResource ctxRes =
-        new org.apache.catalina.deploy.ContextResource();
+    org.apache.tomcat.util.descriptor.web.ContextResource ctxRes =
+        new org.apache.tomcat.util.descriptor.web.ContextResource();
     ctxRes.setName("UserDatabase");
     ctxRes.setAuth("Container");
     ctxRes.setType("org.apache.catalina.UserDatabase");

@@ -81,4 +81,12 @@ public class CommandLineParams {
     @Parameter(names = "--use-body-encoding-for-uri", description = "Set if the entity body encoding should be used for the URI.")
     public boolean useBodyEncodingForURI = false;
 
+    @Parameter(names = "--scanBootstrapClassPath", description = "Set jar scanner scan bootstrap classpath.")
+    public boolean scanBootstrapClassPath = false;
+
+    @Parameter(names = "--enable-reload", description = "reload context.")
+    public boolean enableReload = false;
+
+    @Parameter(names = "--external-resources", description = "Set tomcat watch resources.")
+    public List<String> externalResources = new ArrayList<String>();
 }
