@@ -84,4 +84,9 @@ public class CommandLineParams {
     @Parameter(names = "--scanBootstrapClassPath", description = "Set jar scanner scan bootstrap classpath.")
     public boolean scanBootstrapClassPath = false;
 
+    @Parameter(names = "--enable-reload", description = "reload context.")
+    public boolean enableReload = false;
+
+    @Parameter(names = "--external-resources", description = "Set tomcat watch resources.")
+    public List<String> externalResources = new ArrayList<String>();
 }
