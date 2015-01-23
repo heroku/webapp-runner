@@ -81,7 +81,7 @@ public class Main {
     final Tomcat tomcat = new Tomcat();
 
     // set directory for temp files
-    tomcat.setBaseDir(resolveTomcatBaseDir(commandLineParams.port));
+    tomcat.setBaseDir(resolveTomcatBaseDir(commandLineParams.port, commandLineParams.tempDirectory));
 
     // initialize the connector
     Connector nioConnector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
@@ -216,7 +216,7 @@ public class Main {
         /*
          * NamingContextListener.lifecycleEvent(LifecycleEvent event)
          * cannot initialize GlobalNamingContext for Tomcat until
-         * the Lifecycle.CONFIGURE_START_EVENT occurs, so this block 
+         * the Lifecycle.CONFIGURE_START_EVENT occurs, so this block
          * must sit after the call to tomcat.start() and it requires
          * tomcat.enableNaming() to be called much earlier in the code.
          */
@@ -236,8 +236,10 @@ public class Main {
    * @return absolute dir path
    * @throws IOException if dir fails to be created
    */
-  static String resolveTomcatBaseDir(Integer port) throws IOException {
-    final File baseDir = new File(System.getProperty("user.dir") + "/target/tomcat." + port);
+  static String resolveTomcatBaseDir(Integer port, String tempDirectory) throws IOException {
+    final File baseDir = tempDirectory != null ?
+      new File(tempDirectory) :
+      new File(System.getProperty("user.dir") + "/target/tomcat." + port);
 
     if (!baseDir.isDirectory() && !baseDir.mkdirs()) {
       throw new IOException("Could not create temp dir: " + baseDir);

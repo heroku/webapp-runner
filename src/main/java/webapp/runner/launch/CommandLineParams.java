@@ -1,10 +1,9 @@
 package webapp.runner.launch;
 
-import com.beust.jcommander.Parameter;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import com.beust.jcommander.Parameter;
 
 /**
  * Holds the command line parameters
@@ -81,4 +80,6 @@ public class CommandLineParams {
     @Parameter(names = "--use-body-encoding-for-uri", description = "Set if the entity body encoding should be used for the URI.")
     public boolean useBodyEncodingForURI = false;
 
+    @Parameter(names = "--temp-directory", description = "Define the temp directory, default value: ./target/tomcat.PORT")
+    public String tempDirectory = null;
 }
