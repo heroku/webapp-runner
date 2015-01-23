@@ -1,6 +1,6 @@
 language: java
-before_install: "./etc/travis-setup.sh"
+before_install: ./etc/travis-setup.sh
 script: mvn clean install -Pintegration-test
 env:
   global:
-    secure: RQc/vZC9iSK3L9kWFEZT5lM/2NGIwDY9h8iv5KRzbrG6x4B7bJDpQ5H2hRehybLcuoKsQePNid1rHD41wuFzlG7jGLg7BJuxQUa5uppE0BbTDyuCcEueTbw6jIjH40jndvYsnkGp93W0V0L3pauZPlKsIshFrhz2ewRuv1qHIJ0=
+  - secure: JLxhvEIZ1nPV1Rs05nF4h2R8e+NCecK0gMUNTiUJqaox3eeut2KHdiGLo+8s7Hk1KL2AdAwvF7QaiqAk6EMEdBui2mLmldBQr3YmxSsPTub1Is72IzCdA/nVPlJ9oRzn4uGRBHvUqN7C9oKA4x4gtz+BlViddsaMaRPIKgPo+jA=
