@@ -42,6 +42,7 @@ import org.apache.catalina.LifecycleState;
 import org.apache.catalina.Role;
 import org.apache.catalina.Server;
 import org.apache.catalina.connector.Connector;
+import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.core.StandardServer;
 import org.apache.catalina.startup.ExpandWar;
 import org.apache.catalina.startup.Tomcat;
@@ -168,6 +169,9 @@ public class Main {
       System.out.println("Adding Context " + ctxName + " for " + war.getPath());
       ctx = tomcat.addWebapp(ctxName, war.getAbsolutePath());
     }
+
+    // we'll do it live!
+    ((StandardContext) ctx).setUnpackWAR(false);
 
     if (!commandLineParams.shutdownOverride) {
       // allow Tomcat to shutdown if a context failure is detected

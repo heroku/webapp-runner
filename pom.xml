@@ -8,7 +8,7 @@
 
     <groupId>com.github.jsimone</groupId>
     <artifactId>webapp-runner</artifactId>
-    <version>7.0.57.2-SNAPSHOT</version>
+    <version>8.0.15.0-SNAPSHOT</version>
 
     <name>webapp-runner</name>
     <description>Lightweight Application Launcher. Launch your webapp in the most popular open source web container available with a single command.</description>
@@ -94,7 +94,7 @@
         <dependency>
             <groupId>ru.zinin</groupId>
             <artifactId>tomcat-redis-session</artifactId>
-            <version>0.5</version>
+            <version>0.7</version>
         </dependency>
         <dependency>
             <groupId>com.beust</groupId>
