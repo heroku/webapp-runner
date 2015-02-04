@@ -120,6 +120,78 @@ You can stop the application from the red square in the console pane or from the
 ### Maven Central
 Note: webapp runner is now available in Maven Central. The version scheme has also chanaged to match the version of Tomcat that it relies on. The format is <tomcat version>.<minor webapp runner version>. The latest version is now 7.0.30.x. Versions 0.0.1 to 0.0.7 are still available at http://jsimone.github.com/webapp-runner/repository.
 
+### Options
+
+```
+$ java -jar webapp-runner.jar --help
+Usage: <main class> [options] 
+  Options:
+        --basic-auth-pw                     Password to be used with basic auth.
+                                            Defaults to BASIC_AUTH_PW env variable.
+        --basic-auth-user                   Username to be used with basic auth.
+                                            Defaults to BASIC_AUTH_USER env variable.
+        --compressable-mime-types           Comma delimited list of mime types
+                                            that will be compressed when using GZIP
+                                            compression.
+                                            Default: text/html,text/xml,text/plain,text/css,application/json,application/xml,text/javascript,application/javascript
+        --context-xml                       The path to the context xml to use.
+        --enable-basic-auth                 Secure the app with basic auth. Use
+                                            with --basic-auth-user and
+                                            --basic-auth-pw or --tomcat-users-location
+                                            Default: false
+        --enable-client-auth                Specify -Djavax.net.ssl.keyStore and
+                                            -Djavax.net.ssl.keyStorePassword in JAVA_OPTS
+                                            Default: false
+        --enable-compression                Enable GZIP compression on responses
+                                            Default: false
+        --enable-ssl                        Specify -Djavax.net.ssl.trustStore
+                                            and -Djavax.net.ssl.trustStorePassword
+                                            in JAVA_OPTS. Note: should not be used
+                                            if a reverse proxy is terminating SSL
+                                            for you (such as on Heroku)
+                                            Default: false
+        --expand-war                        Expand the war file and set it as
+                                            source
+                                            Default: false
+        --help                              
+                                            Default: false
+        --path                              The context path
+        --port                              The port that the server will accept
+                                            http requests on.
+                                            Default: 8080
+        --scanBootstrapClassPath            Set jar scanner scan bootstrap
+                                            classpath.
+                                            Default: false
+        --session-store                     Session store to use (valid options
+                                            are 'memcache' or 'redis')
+        --session-store-ignore-pattern      Request pattern to not track
+                                            sessions for. Valid only with memcache
+                                            session store. (default is
+                                            '.*\.(png|gif|jpg|css|js)$'
+                                            Default: .*\.(png|gif|jpg|css|js)$
+        --session-store-locking-mode        Session locking mode for use with
+                                            memcache session store. (default is all)
+                                            Default: all
+        --session-store-operation-timeout   Operation timeout for the memcache
+                                            session store. (default is 5000ms)
+                                            Default: 5000
+        --session-timeout                   The number of minutes of inactivity
+                                            before a user's session is timed out.
+        --shutdown-override                 Overrides the default behavior and
+                                            casues Tomcat to ignore lifecycle failure
+                                            events rather than shutting down when they
+                                            occur.
+                                            Default: false
+        --tomcat-users-location             Location of the tomcat-users.xml
+                                            file. (relative to the location of the
+                                            webapp-runner jar file)
+        --uri-encoding                      Set the URI encoding to be used for
+                                            the Connector.
+        --use-body-encoding-for-uri         Set if the entity body encoding
+                                            should be used for the URI.
+                                            Default: false
+```
+
 ### Development
 
 To run the entire suite of integration tests, use the following command:
