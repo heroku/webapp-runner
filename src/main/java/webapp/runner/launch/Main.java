@@ -92,6 +92,7 @@ public class Main {
     if (commandLineParams.enableSSL) {
       nioConnector.setSecure(true);
       nioConnector.setProperty("SSLEnabled", "true");
+      nioConnector.setProperty("allowUnsafeLegacyRenegotiation", "false");
       String pathToTrustStore = System.getProperty("javax.net.ssl.trustStore");
       if (pathToTrustStore != null) {
         nioConnector.setProperty("sslProtocol", "tls");
@@ -110,6 +111,7 @@ public class Main {
       if (commandLineParams.enableClientAuth) {
         nioConnector.setAttribute("clientAuth", true);
       }
+
     }
 
     if (null != commandLineParams.uriEncoding) {
