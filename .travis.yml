@@ -4,3 +4,4 @@ script: mvn clean install -Pintegration-test
 env:
   global:
   - secure: BVAWWqMYIJul8fSmuSRyOCaHMexmEeZF3eSZ9cwYxhj8tq2c3EDuiz0jMbKmyi7Y0uUKiWjwKXVI2xPCQKXE9uYi3jo7IDav7t3w4PmNFn02gntkXdoStWmH0Kym+SbgfxekcX/NlatWJIyPDoTuujQL8bb5VK7xytqMqpuNBOg=
+  - secure: U2X6HXbNuGbqFOyzP21w2WKjmhRKqMLjjdy/4vcVF6JfPHuFMD2pIaj70x0RrnWA76rJ/6MidHd+Tm4K8u2I2P6IHq0xC5BPtriNjNH9YeUY+7zQg4nhLpmbB7RmCuVlZBxA4sKTN1fsfi7HUnGfN4tuqsESydNBmIf5cJRtF/s=
