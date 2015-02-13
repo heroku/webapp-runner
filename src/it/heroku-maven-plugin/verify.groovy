@@ -18,7 +18,7 @@ try {
     output = process.text
     assert output.contains("REDISTOGO_URL"), "The Redis add-on was not added: ${output}"
 
-    Thread.sleep(10000)
+    Thread.sleep(15000)
 
     process = "heroku logs -a${appName}".execute()
     process.waitFor()
