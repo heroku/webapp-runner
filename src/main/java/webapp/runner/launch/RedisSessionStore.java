@@ -40,9 +40,6 @@ class RedisSessionStore extends SessionStore {
                 if(redisUri.getPort() != -1) {
                     redisManager.setRedisPort(redisUri.getPort());
                 }
-//                if(redisUri.getPath() != null && redisUri.getPath().length() > 1) {
-//                    redisManager.setDbIndex(Integer.parseInt(redisUri.getPath().split("/")[1]));
-//                }
                 if(redisUri.getUserInfo() != null) {
                     redisManager.setRedisPassword(redisUri.getUserInfo().substring(redisUri.getUserInfo().indexOf(":")+1));
                 }
