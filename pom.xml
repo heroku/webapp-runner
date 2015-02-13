@@ -53,6 +53,17 @@
         <url>https://github.com/jsimone/webapp-runner/issues/new</url>
     </issueManagement>
 
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray</id>
+            <name>bintray</name>
+            <url>http://dl.bintray.com/codefinger/maven</url>
+        </repository>
+    </repositories>
+
     <properties>
         <source.plugin.version>2.1.2</source.plugin.version>
         <gpg.plugin.version>1.2</gpg.plugin.version>
@@ -92,9 +103,9 @@
             <version>${tomcat.version}</version>
         </dependency>
         <dependency>
-            <groupId>ru.zinin</groupId>
+            <groupId>com.github.jkutner</groupId>
             <artifactId>tomcat-redis-session</artifactId>
-            <version>0.8-SNAPSHOT</version>
+            <version>8.0.18.0</version>
         </dependency>
         <dependency>
             <groupId>com.beust</groupId>
