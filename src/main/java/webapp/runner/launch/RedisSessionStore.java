@@ -20,16 +20,18 @@ class RedisSessionStore extends SessionStore {
         RedisManager redisManager = new RedisManager();
         redisManager.setDisableListeners(true);
 
-        if(System.getenv("REDIS_URL") == null && System.getenv("REDISTOGO_URL") == null){
+        if(System.getenv("REDIS_URL") == null && System.getenv("REDISTOGO_URL") == null && System.getenv("REDISCLOUD_URL") == null){
             System.out.println("WARNING: redis session store being used, but the required environment variable isn't set.");
-            System.out.println("Redis session store is configured with REDIS_URL or REDISTOGO_URL");
+            System.out.println("Redis session store is configured with REDIS_URL, REDISTOGO_URL or REDISCLOUD_URL");
         } else {
             try {
-                URI redisUri = null;
+                URI redisUri;
                 if(System.getenv("REDIS_URL") != null) {                    
                     redisUri = new URI(System.getenv("REDIS_URL"));                    
+                } else if(System.getenv("REDISTOGO_URL") != null)  {
+                  redisUri = new URI(System.getenv("REDISTOGO_URL"));
                 } else {
-                    redisUri = new URI(System.getenv("REDISTOGO_URL"));                    
+                    redisUri = new URI(System.getenv("REDISCLOUD_URL"));
                 }
 
                 if(redisUri.getHost() != null) {
