@@ -1,6 +1,9 @@
 # Webapp Runner [![Build Status](https://travis-ci.org/jsimone/webapp-runner.svg?branch=master)](https://travis-ci.org/jsimone/webapp-runner)
 
-Webapp runner is designed to allow you to launch an exploded or compressed war that is on your filesystem into a tomcat container with a simple `java -jar` command.
+Webapp runner is designed to allow you to launch an exploded or compressed war that is on your filesystem into a tomcat container with a simple `java -jar` command. It supports the following version of Tomcat:
+
++  Tomcat 7: [master](https://github.com/jsimone/webapp-runner/tree/master) branch
++  Tomcat 8 (Beta): [tomcat8](https://github.com/jsimone/webapp-runner/tree/tomcat8) branch
 
 ## Usage
 
@@ -118,15 +121,15 @@ Your application should start and you should see the log output in the Eclipse c
 You can stop the application from the red square in the console pane or from the debug perspective. It can be restarted by right-clicking on the project and choosing your new launch configuration from the 'Debug As' menu or from the debug menu in the Eclipse toolbar (the icon with the little bug).
 
 ### Maven Central
-Note: webapp runner is now available in Maven Central. The version scheme has also chanaged to match the version of 
-Tomcat that it relies on. The format is `<tomcat version>.<minor webapp runner version>`. 
+Note: webapp runner is now available in Maven Central. The version scheme has also chanaged to match the version of
+Tomcat that it relies on. The format is `<tomcat version>.<minor webapp runner version>`.
 Versions 0.0.1 to 0.0.7 are still available at http://jsimone.github.com/webapp-runner/repository.
 
 ### Options
 
 ```
 $ java -jar webapp-runner.jar --help
-Usage: <main class> [options] 
+Usage: <main class> [options]
   Options:
         --basic-auth-pw                     Password to be used with basic auth.
                                             Defaults to BASIC_AUTH_PW env variable.
@@ -155,7 +158,7 @@ Usage: <main class> [options]
         --expand-war                        Expand the war file and set it as
                                             source
                                             Default: false
-        --help                              
+        --help
                                             Default: false
         --path                              The context path
         --port                              The port that the server will accept
