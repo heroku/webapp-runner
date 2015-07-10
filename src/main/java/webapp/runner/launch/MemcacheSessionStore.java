@@ -13,15 +13,15 @@ class MemcacheSessionStore extends SessionStore {
      * @param ctx Tomcat context
      */
     @Override
-    public void configureSessionStore(CommandLineParams commandLineParams, Context ctx){        
+    public void configureSessionStore(CommandLineParams commandLineParams, Context ctx){
         MemcachedBackupSessionManager manager = new MemcachedBackupSessionManager();
-        
+
         if(System.getenv("MEMCACHE_SERVERS") != null) { //Using Memcache
             if(System.getenv("MEMCACHE_USERNAME") == null
                     || System.getenv("MEMCACHE_PASSWORD") == null) {
                 printNoConfigError();
                 return;
-            }             
+            }
             manager.setMemcachedNodes(System.getenv("MEMCACHE_SERVERS") + ":11211");
             manager.setUsername(System.getenv("MEMCACHE_USERNAME"));
             manager.setPassword(System.getenv("MEMCACHE_PASSWORD"));
@@ -30,7 +30,7 @@ class MemcacheSessionStore extends SessionStore {
                     || System.getenv("MEMCACHIER_PASSWORD") == null) {
                 printNoConfigError();
                 return;
-            }            
+            }
             String[] servers = System.getenv("MEMCACHIER_SERVERS").split(",");
             if (servers.length > 1) {
               for (int i = 0; i < servers.length; ++i) {
@@ -46,9 +46,9 @@ class MemcacheSessionStore extends SessionStore {
             manager.setPassword(System.getenv("MEMCACHIER_PASSWORD"));
         } else {
             printNoConfigError();
-            return;            
+            return;
         }
-        
+
         manager.setMemcachedProtocol("binary");
         manager.setSticky(false);
         manager.setSessionBackupAsync(false);
@@ -59,10 +59,10 @@ class MemcacheSessionStore extends SessionStore {
         manager.setRequestUriIgnorePattern(commandLineParams.sessionStoreIgnorePattern);
         ctx.setManager(manager);
     }
-    
+
     private void printNoConfigError() {
         System.out.println("WARNING: memcache session store being used, but the required environment variables aren't set.");
         System.out.println("Memcache session store is configured with MEMCACHE_SERVERS, MEMCACHE_USERNAME, MEMCACHE_PASSWORD");
-        System.out.println("or MEMCACHIER_SERVERS, MEMCACHIER_USERNAME, MEMCACHIER_PASSWORD");        
+        System.out.println("or MEMCACHIER_SERVERS, MEMCACHIER_USERNAME, MEMCACHIER_PASSWORD");
     }
 }

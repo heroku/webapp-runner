@@ -11,6 +11,8 @@ try {
     def log = FileUtils.fileRead(new File(basedir, "build.log"));
     assert log.contains("BUILD SUCCESS"), "the build was not successful"
 
+    process = "curl https://${appName}.herokuapp.com/hello".execute()
+    process.waitFor()
     process = "heroku ps:restart -a${appName}".execute();
     process.waitFor();
     println(process.text)
@@ -18,7 +20,7 @@ try {
     process = "heroku config -a${appName}".execute()
     process.waitFor()
     output = process.text
-    assert output.contains("REDISTOGO_URL"), "The Redis add-on was not added: ${output}"
+    assert output.contains("MEMCACHIER_SERVERS"), "The Memcache add-on was not added: ${output}"
 
     Thread.sleep(10000)
 
@@ -26,7 +28,9 @@ try {
     process.waitFor()
     output = process.text
     assert output.contains("--expand-war"), "Did not pick up WEBAPP_RUNNER_OPTS: ${output}"
-    assert output.contains("--session-store redis"), "Did not pick up WEBAPP_RUNNER_OPTS: ${output}"
+    assert output.contains("--session-store memcache"), "Did not pick up WEBAPP_RUNNER_OPTS: ${output}"
+    assert output.contains("de.javakaffee.web.msm.MemcachedSessionService startInternal"), "Did not use Memcache for session cache: ${output}"
+    assert output.contains("INFO net.spy.memcached.auth.AuthThread:  Authenticated to"), "Did not use Memcache for session cache: ${output}"
 
     process = "curl https://${appName}.herokuapp.com".execute()
     process.waitFor()
@@ -37,7 +41,7 @@ try {
     process.waitFor()
     output = process.text
     assert output.contains("hello, world"), "Could not load /hello page!"
-    assert output.contains("class ru.zinin.redis.session.RedisHttpSession"), "Did not use Redis for session cache: ${output}"
+    assert output.contains("class org.apache.catalina.session.StandardSessionFacade"), "Did not use Memcache for session cache: ${output}"
 } finally {
     ("heroku destroy " + appName + " --confirm " + appName).execute().waitFor();
 }

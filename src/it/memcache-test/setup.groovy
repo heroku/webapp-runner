@@ -8,6 +8,6 @@ String appName = "mvn-" + UUID.randomUUID().toString().substring(0,16);
 
 FileUtils.fileWrite(new File(basedir, "test.properties").getAbsolutePath(), "heroku.appName=" + appName );
 
-def process = "heroku addons:add redistogo -a${appName}".execute();
+def process = "heroku addons:create memcachier -a${appName}".execute();
 process.waitFor();
 println(process.text)
