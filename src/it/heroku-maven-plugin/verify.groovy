@@ -9,9 +9,7 @@ String appName = props["heroku.appName"]
 
 try {
     def log = FileUtils.fileRead(new File(basedir, "build.log"));
-    if (!log.contains("BUILD SUCCESS")) {
-        throw new RuntimeException("the build was not successful")
-    }
+    assert log.contains("BUILD SUCCESS"), "the build was not successful"
 
     process = "heroku config -a${appName}".execute()
     process.waitFor()
@@ -25,21 +23,18 @@ try {
     output = process.text
     assert output.contains("--expand-war"), "Did not pick up WEBAPP_RUNNER_OPTS: ${output}"
     assert output.contains("--session-store redis"), "Did not pick up WEBAPP_RUNNER_OPTS: ${output}"
-    assert output.contains("WARNING: JedisPool not found in JNDI"), "Did not use Redis for session cache: ${output}"
 
     process = "curl https://${appName}.herokuapp.com".execute()
     process.waitFor()
     output = process.text
-    if (!output.contains("hello, JSP")) {
-        throw new RuntimeException("app is not running: ${output}")
-    }
+    assert output.contains("hello, JSP"), "app is not running: ${output}"
 
     process = "curl https://${appName}.herokuapp.com/hello".execute()
     process.waitFor()
     output = process.text
-    if (!output.contains("hello, world")) {
-        throw new RuntimeException("servlet is not serving: ${output}")
-    }
+    assert output.contains("hello, world"), "Could not load /hello page!"
+    assert output.contains("class ru.zinin.redis.session.RedisHttpSession"), "Did not use Redis for session cache: ${output}"
 } finally {
-    ("heroku destroy " + appName + " --confirm " + appName).execute().waitFor();
+    println("APPNAME: " + appName)
+    //("heroku destroy " + appName + " --confirm " + appName).execute().waitFor();
 }

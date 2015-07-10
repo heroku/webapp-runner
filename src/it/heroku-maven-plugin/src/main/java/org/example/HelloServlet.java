@@ -19,8 +19,9 @@ public class HelloServlet extends HttpServlet {
             count = (Integer) req.getSession().getAttribute("count");
         }
         count++;
-        out.write("hello, world".getBytes());
-        out.write(("count: " + count).getBytes());
+        out.write("hello, world: ".getBytes());
+        out.write(req.getSession().getClass().toString().getBytes());
+        out.write((" (count: " + count +")").getBytes());
         req.getSession().setAttribute("count", count);
         out.flush();
         out.close();

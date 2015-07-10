@@ -11,3 +11,7 @@ FileUtils.fileWrite(new File(basedir, "test.properties").getAbsolutePath(), "her
 def process = "heroku addons:add redistogo -a${appName}".execute();
 process.waitFor();
 println(process.text)
+
+process = "heroku ps:restart -a${appName}".execute();
+process.waitFor();
+println(process.text)
