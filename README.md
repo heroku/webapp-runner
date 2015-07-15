@@ -2,8 +2,8 @@
 
 Webapp runner is designed to allow you to launch an exploded or compressed war that is on your filesystem into a tomcat container with a simple `java -jar` command. It supports the following version of Tomcat:
 
-+  Tomcat 7: [master](https://github.com/jsimone/webapp-runner/tree/master) branch
-+  Tomcat 8 (Beta): [tomcat8](https://github.com/jsimone/webapp-runner/tree/tomcat8) branch
++  Tomcat 7: [tomcat7](https://github.com/jsimone/webapp-runner/tree/tomcat7) branch
++  Tomcat 8: [master](https://github.com/jsimone/webapp-runner/tree/master) branch
 
 ## Usage
 
@@ -50,7 +50,7 @@ Add the following to your pom.xml:
                               <artifactItem>
                                   <groupId>com.github.jsimone</groupId>
                                   <artifactId>webapp-runner</artifactId>
-                                  <version>7.0.40.1</version>
+                                  <version>8.0.23.0</version>
                                   <destFileName>webapp-runner.jar</destFileName>
                               </artifactItem>
                           </artifactItems>
