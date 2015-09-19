@@ -74,6 +74,9 @@ public class CommandLineParams {
     @Parameter(names = "--expand-war", description = "Expand the war file and set it as source")
     public boolean expandWar = false;
 
+    @Parameter(names = "--expanded-dir-name", description = "The name of the directory the WAR file will be expanded into if --expand-war is set.")
+    public String expandedDirName = "expanded";
+
     @Parameter(names = "--uri-encoding", description = "Set the URI encoding to be used for the Connector.")
     public String uriEncoding;
 

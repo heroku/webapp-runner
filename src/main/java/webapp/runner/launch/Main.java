@@ -166,7 +166,8 @@ public class Main {
       }
       appBase.mkdir();
       URL fileUrl = new URL("jar:" + war.toURI().toURL() + "!/");
-      String expandedDir = ExpandWar.expand(tomcat.getHost(), fileUrl, "/expanded");
+      String expandedDirName = commandLineParams.expandedDirName;
+      String expandedDir = ExpandWar.expand(tomcat.getHost(), fileUrl, "/" + expandedDirName);
       System.out.println("Expanding " + war.getName() + " into " + expandedDir);
 
       System.out.println("Adding Context " + ctxName + " for " + expandedDir);
