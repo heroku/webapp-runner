@@ -8,7 +8,7 @@
 
     <groupId>com.github.jsimone</groupId>
     <artifactId>webapp-runner</artifactId>
-    <version>8.0.24.1-SNAPSHOT</version>
+    <version>8.0.24.1</version>
 
     <name>webapp-runner</name>
     <description>Lightweight Application Launcher. Launch your webapp in the most popular open source web container available with a single command.</description>
@@ -30,7 +30,7 @@
         <url>https://github.com/jsimone/webapp-runner</url>
         <connection>scm:git:git@github.com:jsimone/webapp-runner.git</connection>
         <developerConnection>scm:git:git@github.com:jsimone/webapp-runner.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>webapp-runner-8.0.24.1</tag>
     </scm>
     <developers>
         <developer>
