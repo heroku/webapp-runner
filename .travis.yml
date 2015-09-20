@@ -3,4 +3,4 @@ before_install: "./etc/travis-setup.sh"
 script: mvn clean install -Pintegration-test
 env:
   global:
-  - secure: GpsP0zXN+7hl4a+tDxy5mAHcV/E24fxWDVTAEfzoOrV51YlR9Ur8dwfWujYAdrHLoTaf7AD3LBJyDDbgpyctk/P3ZD4bZ1rtj8fmUc7cTCAY3u4aCeNNA9HXUkFWeRoykeqAIFL/kXU2IpncP1w8CJwyXqXdNWfi7Ar5erZ63FU=
+  - secure: gLN0KwUl7zXSvlLsHfnFpX0jjnwCenSOESjibZrJHBKBwvbx+RN6b7RfDfhgcaNz1Qm0Ey0Vg8QKiNXOXYlnohFnUBA4JZP5tkRjtRR1oS4DO3Yg8YZF7cza4zUxR9QvF3xJWEVPLCUgBAL0Mr4O+FbPhpxW4EGEbznHPaOc8zg=
