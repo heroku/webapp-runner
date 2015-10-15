@@ -1,5 +1,5 @@
 language: java
-sudo: false
+sudo: true
 before_install: "./etc/travis-setup.sh"
 script: mvn clean install -Pintegration-test -X
 env:
