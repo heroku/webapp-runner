@@ -308,6 +308,7 @@
                   <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
                   <preBuildHookScript>setup.groovy</preBuildHookScript>
                   <postBuildHookScript>verify.groovy</postBuildHookScript>
+                  <streamLogs>true</streamLogs>
                 </configuration>
                 <executions>
                   <execution>
