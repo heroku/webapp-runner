@@ -72,7 +72,7 @@ public class CommandLineParams {
     public String tomcatUsersLocation;
     
     @Parameter(names = "--expand-war", description = "Expand the war file and set it as source")
-    public boolean expandWar = false;
+    public boolean expandWar = true;
 
     @Parameter(names = "--expanded-dir-name", description = "The name of the directory the WAR file will be expanded into if --expand-war is set.")
     public String expandedDirName = "expanded";
