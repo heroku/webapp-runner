@@ -88,6 +88,15 @@ To use it add `--session-store redis` to your startup command:
 
 Then make sure that Redis environment variable is available for configuration: REDIS_URL
 
+## Using Tomcat behind a reverse proxy server
+
+If you are using webapp-runner behind a proxy server, you can set the proxy base url within tomcat:
+
+    $ java -jar target/dependency/webapp-runner.jar --proxy-base-url http://example.com  target/<appname>.war
+
+If you pass an HTTPS base url, e.g. https://example.com, secure flag will be automatically added to session cookies. This indicates to the browser that cookies should only be sent over a secure protocol.
+
+
 ## Running your application in Eclipse
 
 Since your application will just be a standard webapp you can still use WTP and the traditional Tomcat integration points to run your application within Eclipse. However the containerless nature of webapp runner allows you to run from within Eclipse in a simpler way.
