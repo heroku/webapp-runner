@@ -40,3 +40,9 @@ testProcess(
         "ProtocolHandler [\"http-nio-5000\"]",
         "The web process did not start (with port)"
 )
+
+testProcess(
+        "java -jar ${basedir}/target/dependency/webapp-runner.jar --max-threads 42 ${basedir}/target/single_webapp.war",
+        "Starting Servlet Engine: Apache Tomcat",
+        "The web process did not set maxThreads"
+)

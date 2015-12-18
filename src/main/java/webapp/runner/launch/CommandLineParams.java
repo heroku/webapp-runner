@@ -94,4 +94,7 @@ public class CommandLineParams {
 
     @Parameter(names = "--proxy-base-url", description = "Set proxy URL if tomcat is running behind reverse proxy")
     public String proxyBaseUrl = "";
+
+    @Parameter(names = "--max-threads", description = "Set the maximum number of worker threads")
+    public Integer maxThreads = 0;
 }

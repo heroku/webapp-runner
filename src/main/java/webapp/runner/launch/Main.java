@@ -51,6 +51,8 @@ import org.apache.catalina.users.MemoryUserDatabase;
 import org.apache.catalina.users.MemoryUserDatabaseFactory;
 
 import com.beust.jcommander.JCommander;
+import org.apache.coyote.AbstractProtocol;
+import org.apache.coyote.ProtocolHandler;
 import org.apache.tomcat.util.descriptor.web.LoginConfig;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
@@ -144,6 +146,16 @@ public class Main {
 
     if (!commandLineParams.bindOnInit) {
       nioConnector.setProperty("bindOnInit", "false");
+    }
+
+    if (commandLineParams.maxThreads > 0) {
+      ProtocolHandler handler = nioConnector.getProtocolHandler();
+      if (handler instanceof AbstractProtocol) {
+        AbstractProtocol protocol = (AbstractProtocol) handler;
+        protocol.setMaxThreads(commandLineParams.maxThreads);
+      } else {
+        System.out.println("WARNING: Could not set maxThreads!");
+      }
     }
 
     tomcat.setConnector(nioConnector);
