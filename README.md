@@ -50,7 +50,7 @@ Add the following to your pom.xml:
                               <artifactItem>
                                   <groupId>com.github.jsimone</groupId>
                                   <artifactId>webapp-runner</artifactId>
-                                  <version>8.0.23.0</version>
+                                  <version>8.0.30.1</version>
                                   <destFileName>webapp-runner.jar</destFileName>
                               </artifactItem>
                           </artifactItems>
@@ -110,7 +110,7 @@ Add the following dependency to your pom.xml:
     <dependency>
       <groupId>com.github.jsimone</groupId>
       <artifactId>webapp-runner</artifactId>
-      <version>7.0.34.1</version>
+      <version>8.0.30.1</version>
       <scope>provided</scope>
     </dependency>
 
