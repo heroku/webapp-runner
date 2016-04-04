@@ -42,4 +42,5 @@ mvn release:perform
 echo "Now make sure you update these articles and projects:
 
     https://devcenter.heroku.com/articles/java-webapp-runner
+    https://github.com/heroku/devcenter-webapp-runner
 "
