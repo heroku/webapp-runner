@@ -50,7 +50,7 @@ Add the following to your pom.xml:
                               <artifactItem>
                                   <groupId>com.github.jsimone</groupId>
                                   <artifactId>webapp-runner</artifactId>
-                                  <version>8.0.30.1</version>
+                                  <version>8.0.33.0</version>
                                   <destFileName>webapp-runner.jar</destFileName>
                               </artifactItem>
                           </artifactItems>
@@ -217,7 +217,7 @@ $ mvn clean install -Pintegration-test
 To run an individual integration test, use a command like this:
 
 ```
-$ mvn clean install -Pintegration-test -Dinvoker.test=single_webapp
+$ mvn clean install -Pintegration-test
 ```
 
 ### License
