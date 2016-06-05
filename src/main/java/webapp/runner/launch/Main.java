@@ -51,6 +51,7 @@ import org.apache.catalina.users.MemoryUserDatabase;
 import org.apache.catalina.users.MemoryUserDatabaseFactory;
 
 import com.beust.jcommander.JCommander;
+import java.util.Map;
 import org.apache.coyote.AbstractProtocol;
 import org.apache.coyote.ProtocolHandler;
 import org.apache.tomcat.util.descriptor.web.LoginConfig;
@@ -58,10 +59,9 @@ import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.apache.tomcat.util.scan.StandardJarScanner;
 
-
 /**
- * This is the main entry point to webapp-runner. Helpers are called to parse the arguments.
- * Tomcat configuration and launching takes place here.
+ * This is the main entry point to webapp-runner. Helpers are called to parse the arguments. Tomcat configuration and
+ * launching takes place here.
  */
 public class Main {
 
@@ -91,6 +91,17 @@ public class Main {
     // initialize the connector
     Connector nioConnector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
     nioConnector.setPort(commandLineParams.port);
+
+    // Set connector attributes
+    if (!commandLineParams.attributes.isEmpty()) {
+      System.out.println("Connector attributes");
+      for (final Map.Entry<String, String> entry : commandLineParams.attributes.entrySet()) {
+        final String key = entry.getKey();
+        final String value = entry.getValue();
+        System.out.println("property: " + key + " - " + value);
+        nioConnector.setProperty(entry.getKey(), entry.getValue());
+      }
+    }
 
     if (commandLineParams.enableSSL) {
       nioConnector.setSecure(true);
@@ -132,7 +143,6 @@ public class Main {
         nioConnector.setProxyPort(443);
       }
     }
-
 
     if (null != commandLineParams.uriEncoding) {
       nioConnector.setURIEncoding(commandLineParams.uriEncoding);
@@ -260,13 +270,13 @@ public class Main {
     //start the server
     tomcat.start();
 
-        /*
+    /*
          * NamingContextListener.lifecycleEvent(LifecycleEvent event)
          * cannot initialize GlobalNamingContext for Tomcat until
          * the Lifecycle.CONFIGURE_START_EVENT occurs, so this block
          * must sit after the call to tomcat.start() and it requires
          * tomcat.enableNaming() to be called much earlier in the code.
-         */
+     */
     if (commandLineParams.enableBasicAuth || commandLineParams.tomcatUsersLocation != null) {
       configureUserStore(tomcat, commandLineParams);
     }
@@ -284,9 +294,9 @@ public class Main {
    * @throws IOException if dir fails to be created
    */
   static String resolveTomcatBaseDir(Integer port, String tempDirectory) throws IOException {
-    final File baseDir = tempDirectory != null ?
-      new File(tempDirectory) :
-      new File(System.getProperty("user.dir") + "/target/tomcat." + port);
+    final File baseDir = tempDirectory != null
+            ? new File(tempDirectory)
+            : new File(System.getProperty("user.dir") + "/target/tomcat." + port);
 
     if (!baseDir.isDirectory() && !baseDir.mkdirs()) {
       throw new IOException("Could not create temp dir: " + baseDir);
@@ -327,12 +337,12 @@ public class Main {
 
     javax.naming.Reference ref = new javax.naming.Reference("org.apache.catalina.UserDatabase");
     ref.add(new StringRefAddr("pathname", tomcatUsersLocation));
-    MemoryUserDatabase memoryUserDatabase =
-        (MemoryUserDatabase) new MemoryUserDatabaseFactory().getObjectInstance(
-            ref,
-            new CompositeName("UserDatabase"),
-            null,
-            null);
+    MemoryUserDatabase memoryUserDatabase
+            = (MemoryUserDatabase) new MemoryUserDatabaseFactory().getObjectInstance(
+                    ref,
+                    new CompositeName("UserDatabase"),
+                    null,
+                    null);
 
     // Add basic auth user
     if (commandLineParams.basicAuthUser != null && commandLineParams.basicAuthPw != null) {
@@ -340,9 +350,9 @@ public class Main {
       memoryUserDatabase.setReadonly(false);
       Role user = memoryUserDatabase.createRole(AUTH_ROLE, AUTH_ROLE);
       memoryUserDatabase.createUser(
-          commandLineParams.basicAuthUser,
-          commandLineParams.basicAuthPw,
-          commandLineParams.basicAuthUser).addRole(user);
+              commandLineParams.basicAuthUser,
+              commandLineParams.basicAuthPw,
+              commandLineParams.basicAuthUser).addRole(user);
       memoryUserDatabase.save();
 
     } else if (System.getenv("BASIC_AUTH_USER") != null && System.getenv("BASIC_AUTH_PW") != null) {
@@ -350,9 +360,9 @@ public class Main {
       memoryUserDatabase.setReadonly(false);
       Role user = memoryUserDatabase.createRole(AUTH_ROLE, AUTH_ROLE);
       memoryUserDatabase.createUser(
-          System.getenv("BASIC_AUTH_USER"),
-          System.getenv("BASIC_AUTH_PW"),
-          System.getenv("BASIC_AUTH_USER")).addRole(user);
+              System.getenv("BASIC_AUTH_USER"),
+              System.getenv("BASIC_AUTH_PW"),
+              System.getenv("BASIC_AUTH_USER")).addRole(user);
       memoryUserDatabase.save();
     }
 
@@ -360,8 +370,8 @@ public class Main {
     System.out.println("MemoryUserDatabase: " + memoryUserDatabase);
     tomcat.getServer().getGlobalNamingContext().addToEnvironment("UserDatabase", memoryUserDatabase);
 
-    org.apache.tomcat.util.descriptor.web.ContextResource ctxRes =
-        new org.apache.tomcat.util.descriptor.web.ContextResource();
+    org.apache.tomcat.util.descriptor.web.ContextResource ctxRes
+            = new org.apache.tomcat.util.descriptor.web.ContextResource();
     ctxRes.setName("UserDatabase");
     ctxRes.setAuth("Container");
     ctxRes.setType("org.apache.catalina.UserDatabase");
