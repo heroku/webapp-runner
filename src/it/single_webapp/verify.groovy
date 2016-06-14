@@ -46,3 +46,9 @@ testProcess(
         "Starting Servlet Engine: Apache Tomcat",
         "The web process did not set maxThreads"
 )
+
+testProcess(
+        "java -jar ${basedir}/target/dependency/webapp-runner.jar -Aport=5000 -Acompression=on -AcompressionMinSize=1024 ${basedir}/target/single_webapp.war",
+        "ProtocolHandler [\"http-nio-5000\"]",
+        "Did not set custom Tomcat HTTP Connector Attributes"
+)
