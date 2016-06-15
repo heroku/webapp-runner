@@ -212,6 +212,8 @@ Usage: <main class> [options]
 
 ```
 
+See the Tomcat documentation for a [complete list of HTTP connector attributes](https://tomcat.apache.org/tomcat-8.0-doc/config/http.html).
+
 ### Development
 
 To run the entire suite of integration tests, use the following command:
