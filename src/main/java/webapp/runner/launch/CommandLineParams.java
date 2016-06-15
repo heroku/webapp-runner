@@ -102,7 +102,7 @@ public class CommandLineParams {
 
   @DynamicParameter(
           names = "-A",
-          description = "Allows to set HTTP Connector Attributes (https://tomcat.apache.org/tomcat-8.0-doc/config/http.html). Eg -Acompression=on -AcompressionMinSize=1024"
+          description = "Allows setting HTTP connector attributes. For example: -Acompression=on"
   )
   public Map<String, String> attributes = new HashMap<String, String>();
 

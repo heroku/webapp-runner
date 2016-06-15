@@ -204,6 +204,12 @@ Usage: <main class> [options]
         --use-body-encoding-for-uri         Set if the entity body encoding
                                             should be used for the URI.
                                             Default: false
+    -A                                      Allows setting HTTP connector
+                                            attributes. For example: -Acompression=on
+                                            Syntax: -Akey=value
+                                            Default: {}
+
+
 ```
 
 ### Development
