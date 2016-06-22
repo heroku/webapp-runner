@@ -158,6 +158,8 @@ Usage: <main class> [options]
                                             Default: false
         --enable-compression                Enable GZIP compression on responses
                                             Default: false
+        --enable-naming                     Enables JNDI naming
+                                            Default: false
         --enable-ssl                        Specify -Djavax.net.ssl.trustStore
                                             and -Djavax.net.ssl.trustStorePassword
                                             in JAVA_OPTS. Note: should not be used
