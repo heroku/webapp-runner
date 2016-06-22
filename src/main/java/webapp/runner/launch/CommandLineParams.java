@@ -106,4 +106,7 @@ public class CommandLineParams {
   )
   public Map<String, String> attributes = new HashMap<String, String>();
 
+  @Parameter(names = "--enable-naming", description = "Enables JNDI naming")
+  public boolean enableNaming = false;
+
 }

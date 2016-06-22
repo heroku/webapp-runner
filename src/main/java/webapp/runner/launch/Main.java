@@ -259,7 +259,9 @@ public class Main {
 
     addShutdownHook(tomcat);
 
-    if (commandLineParams.enableBasicAuth || commandLineParams.tomcatUsersLocation != null) {
+    if (commandLineParams.enableNaming ||
+        commandLineParams.enableBasicAuth ||
+        commandLineParams.tomcatUsersLocation != null) {
       tomcat.enableNaming();
     }
 
