@@ -227,7 +227,7 @@ $ mvn clean install -Pintegration-test
 To run an individual integration test, use a command like this:
 
 ```
-$ mvn clean install -Pintegration-test
+$ mvn clean install -Pintegration-test -Dinvoker.test=memcache-test
 ```
 
 ### License
