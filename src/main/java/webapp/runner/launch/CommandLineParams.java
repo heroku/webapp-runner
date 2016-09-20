@@ -1,11 +1,11 @@
 package webapp.runner.launch;
 
 import com.beust.jcommander.DynamicParameter;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.beust.jcommander.Parameter;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -78,9 +78,6 @@ public class CommandLineParams {
 
   @Parameter(names = "--expanded-dir-name", description = "The name of the directory the WAR file will be expanded into if --expand-war is set.")
   public String expandedDirName = "expanded";
-
-  @Parameter(names = "--expanded-absolute-dir-name", description = "The full path of the directory the WAR file will be expanded into if --expand-war is set.")
-  public String expandedAbsoluteDirName = null;
 
   @Parameter(names = "--uri-encoding", description = "Set the URI encoding to be used for the Connector.")
   public String uriEncoding;

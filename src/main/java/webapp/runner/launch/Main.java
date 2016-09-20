@@ -25,24 +25,8 @@
  */
 package webapp.runner.launch;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URL;
-
-import javax.naming.CompositeName;
-import javax.naming.StringRefAddr;
-import javax.servlet.annotation.ServletSecurity.TransportGuarantee;
-
-import org.apache.catalina.Context;
-import org.apache.catalina.Globals;
-import org.apache.catalina.LifecycleEvent;
-import org.apache.catalina.LifecycleException;
-import org.apache.catalina.LifecycleListener;
-import org.apache.catalina.LifecycleState;
-import org.apache.catalina.Role;
-import org.apache.catalina.Server;
-import org.apache.catalina.Host;
+import com.beust.jcommander.JCommander;
+import org.apache.catalina.*;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.core.StandardServer;
@@ -50,15 +34,23 @@ import org.apache.catalina.startup.ExpandWar;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.users.MemoryUserDatabase;
 import org.apache.catalina.users.MemoryUserDatabaseFactory;
-
-import com.beust.jcommander.JCommander;
-import java.util.Map;
 import org.apache.coyote.AbstractProtocol;
 import org.apache.coyote.ProtocolHandler;
 import org.apache.tomcat.util.descriptor.web.LoginConfig;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.apache.tomcat.util.scan.StandardJarScanner;
+
+import javax.naming.CompositeName;
+import javax.naming.StringRefAddr;
+import javax.servlet.annotation.ServletSecurity.TransportGuarantee;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Map;
 
 /**
  * This is the main entry point to webapp-runner. Helpers are called to parse the arguments. Tomcat configuration and
@@ -209,11 +201,11 @@ public class Main {
       URL fileUrl = new URL("jar:" + war.toURI().toURL() + "!/");
       String expandedDir = null;
       String expandedDirName = commandLineParams.expandedDirName;
-      String expandedAbsoluteDirName = commandLineParams.expandedAbsoluteDirName;
+      Path expandedDirPath = Paths.get(expandedDirName);
 
-      if(expandedAbsoluteDirName != null){
+      if(expandedDirPath.isAbsolute()) {
         Host tempHost = tomcat.getHost();
-        tempHost.setAppBase(new File(expandedAbsoluteDirName).getAbsolutePath()); // override defaults to use Host object within ExpandWar
+        tempHost.setAppBase(new File(expandedDirName).getAbsolutePath()); // override defaults to use Host object within ExpandWar
         expandedDir = ExpandWar.expand(tempHost, fileUrl, "");
       } else {
         expandedDir = ExpandWar.expand(tomcat.getHost(), fileUrl, "/" + expandedDirName);
