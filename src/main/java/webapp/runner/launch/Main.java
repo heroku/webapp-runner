@@ -34,14 +34,7 @@ import javax.naming.CompositeName;
 import javax.naming.StringRefAddr;
 import javax.servlet.annotation.ServletSecurity.TransportGuarantee;
 
-import org.apache.catalina.Context;
-import org.apache.catalina.Globals;
-import org.apache.catalina.LifecycleEvent;
-import org.apache.catalina.LifecycleException;
-import org.apache.catalina.LifecycleListener;
-import org.apache.catalina.LifecycleState;
-import org.apache.catalina.Role;
-import org.apache.catalina.Server;
+import org.apache.catalina.*;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.core.StandardServer;
@@ -206,8 +199,17 @@ public class Main {
       }
       appBase.mkdir();
       URL fileUrl = new URL("jar:" + war.toURI().toURL() + "!/");
+      String expandedDir = null;
       String expandedDirName = commandLineParams.expandedDirName;
-      String expandedDir = ExpandWar.expand(tomcat.getHost(), fileUrl, "/" + expandedDirName);
+      String expandedAbsoluteDirName = commandLineParams.expandedAbsoluteDirName;
+
+      if(expandedAbsoluteDirName != null){
+        Host tempHost = tomcat.getHost();
+        tempHost.setAppBase(new File(expandedAbsoluteDirName).getAbsolutePath()); // override defaults to use Host object within ExpandWar
+        expandedDir = ExpandWar.expand(tempHost, fileUrl, "");
+      } else {
+        expandedDir = ExpandWar.expand(tomcat.getHost(), fileUrl, "/" + expandedDirName);
+      }
       System.out.println("Expanding " + war.getName() + " into " + expandedDir);
 
       System.out.println("Adding Context " + ctxName + " for " + expandedDir);
