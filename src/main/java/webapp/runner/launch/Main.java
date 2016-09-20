@@ -34,7 +34,7 @@ import javax.naming.CompositeName;
 import javax.naming.StringRefAddr;
 import javax.servlet.annotation.ServletSecurity.TransportGuarantee;
 
-import org.apache.catalina.*;
+import org.apache.catalina.Host;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.core.StandardServer;
