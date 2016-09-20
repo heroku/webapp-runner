@@ -1,7 +1,7 @@
 language: java
 sudo: true
 before_install: "./etc/travis-setup.sh"
-script: ./mvnw clean install -Pintegration-test -X
+script: ./mvnw clean install -Pintegration-test
 env:
   global:
   - secure: a0it/yX1EKFxPICdDq3t4x/J6h+JMnquxtSLLZz1h4t2DHB9uDru2JFlRvI/pE+w5LcR4V04tyhi7n1XENsTGCFMPLv+v0eiro1Ys6U5W29vcdz7N5ABijFOpif1QzM1y5q4lnpFqHIAisjDks3W18IBT0J1+QdKqC/9TMmvU8k=
