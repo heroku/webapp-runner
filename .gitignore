@@ -6,4 +6,4 @@ tomcat.8080
 tomcat.*/
 test-output/
 /.idea
-/*.iml
+*.iml

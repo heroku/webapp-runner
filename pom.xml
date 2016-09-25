@@ -8,7 +8,7 @@
 
     <groupId>com.github.jsimone</groupId>
     <artifactId>webapp-runner</artifactId>
-    <version>8.0.33.3-SNAPSHOT</version>
+    <version>8.5.5.0-SNAPSHOT</version>
 
     <name>webapp-runner</name>
     <description>Lightweight Application Launcher. Launch your webapp in the most popular open source web container available with a single command.</description>
@@ -54,10 +54,22 @@
     </issueManagement>
 
     <properties>
-        <source.plugin.version>2.1.2</source.plugin.version>
-        <gpg.plugin.version>1.2</gpg.plugin.version>
-        <javadoc.plugin.version>2.7</javadoc.plugin.version>
-        <tomcat.version>8.0.33</tomcat.version>
+        <assembly.plugin.version>2.6</assembly.plugin.version>
+        <commons-io.version>2.5</commons-io.version>
+        <compiler.plugin.version>3.5.1</compiler.plugin.version>
+        <gpg.plugin.version>1.6</gpg.plugin.version>
+        <invoker.plugin.version>2.0.0</invoker.plugin.version>
+        <javadoc.plugin.version>2.10.4</javadoc.plugin.version>
+        <jcommander.version>1.48</jcommander.version>
+        <memcached-session-manager-tc8.version>2.0.0</memcached-session-manager-tc8.version>
+        <nexus-staging.plugin.version>1.6.7</nexus-staging.plugin.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <release.plugin.version>2.5.3</release.plugin.version>
+        <source.plugin.version>3.0.1</source.plugin.version>
+        <testng.version>6.9.13.6</testng.version>
+        <tomcat-embed-logging-juli.version>8.5.2</tomcat-embed-logging-juli.version>
+        <tomcat-redis-session.version>8.0.18.1</tomcat-redis-session.version>
+        <tomcat.version>8.5.5</tomcat.version>
     </properties>
 
     <dependencies>
@@ -69,7 +81,7 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-logging-juli</artifactId>
-            <version>${tomcat.version}</version>
+            <version>${tomcat-embed-logging-juli.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
@@ -94,28 +106,28 @@
         <dependency>
             <groupId>com.github.jkutner</groupId>
             <artifactId>tomcat-redis-session</artifactId>
-            <version>8.0.18.1</version>
+            <version>${tomcat-redis-session.version}</version>
         </dependency>
         <dependency>
             <groupId>com.beust</groupId>
             <artifactId>jcommander</artifactId>
-            <version>1.27</version>
+            <version>${jcommander.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.3</version>
+            <version>${commons-io.version}</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.1.1</version>
+            <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>de.javakaffee.msm</groupId>
             <artifactId>memcached-session-manager-tc8</artifactId>
-            <version>1.8.3</version>
+            <version>${memcached-session-manager-tc8.version}</version>
         </dependency>
     </dependencies>
     <build>
@@ -124,15 +136,15 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2</version>
+                <version>${compiler.plugin.version}</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.3</version>
+                <version>${assembly.plugin.version}</version>
                 <configuration>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -158,7 +170,7 @@
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.3</version>
+                <version>${nexus-staging.plugin.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>
@@ -169,7 +181,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5</version>
+                <version>${release.plugin.version}</version>
                 <configuration>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <useReleaseProfile>false</useReleaseProfile>
@@ -291,7 +303,7 @@
             <plugins>
               <plugin>
                 <artifactId>maven-invoker-plugin</artifactId>
-                <version>1.5</version>
+                <version>${invoker.plugin.version}</version>
                 <configuration>
                   <projectsDirectory>src/it</projectsDirectory>
                   <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>

@@ -50,7 +50,7 @@ Add the following to your pom.xml:
                               <artifactItem>
                                   <groupId>com.github.jsimone</groupId>
                                   <artifactId>webapp-runner</artifactId>
-                                  <version>8.0.33.0</version>
+                                  <version>8.5.5.0</version>
                                   <destFileName>webapp-runner.jar</destFileName>
                               </artifactItem>
                           </artifactItems>
@@ -110,7 +110,7 @@ Add the following dependency to your pom.xml:
     <dependency>
       <groupId>com.github.jsimone</groupId>
       <artifactId>webapp-runner</artifactId>
-      <version>8.0.30.1</version>
+      <version>8.5.5.0</version>
       <scope>provided</scope>
     </dependency>
 
@@ -214,7 +214,7 @@ Usage: <main class> [options]
 
 ```
 
-See the Tomcat documentation for a [complete list of HTTP connector attributes](https://tomcat.apache.org/tomcat-8.0-doc/config/http.html).
+See the Tomcat documentation for a [complete list of HTTP connector attributes](https://tomcat.apache.org/tomcat-8.5-doc/config/http.html).
 
 ### Development
 
