@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -66,9 +67,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <release.plugin.version>2.5.3</release.plugin.version>
         <source.plugin.version>3.0.1</source.plugin.version>
-        <testng.version>6.9.13.6</testng.version>
+        <testng.version>6.9.10</testng.version>
         <tomcat-embed-logging-juli.version>8.5.2</tomcat-embed-logging-juli.version>
-        <tomcat-redis-session.version>8.0.18.1</tomcat-redis-session.version>
+        <tomcat-redis-session.version>8.5.5.0</tomcat-redis-session.version>
         <tomcat.version>8.5.5</tomcat.version>
     </properties>
 
