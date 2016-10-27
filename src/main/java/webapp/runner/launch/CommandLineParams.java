@@ -73,7 +73,7 @@ public class CommandLineParams {
   @Parameter(names = "--tomcat-users-location", description = "Location of the tomcat-users.xml file. (relative to the location of the webapp-runner jar file)")
   public String tomcatUsersLocation;
 
-  @Parameter(names = "--expand-war", description = "Expand the war file and set it as source")
+  @Parameter(names = "--expand-war", description = "Expand the war file and set it as source", arity = 1)
   public boolean expandWar = true;
 
   @Parameter(names = "--expanded-dir-name", description = "The name of the directory the WAR file will be expanded into if --expand-war is set.")
@@ -91,7 +91,7 @@ public class CommandLineParams {
   @Parameter(names = "--temp-directory", description = "Define the temp directory, default value: ./target/tomcat.PORT")
   public String tempDirectory = null;
 
-  @Parameter(names = "--bind-on-init", description = "Controls when the socket used by the connector is bound. By default it is bound when the connector is initiated and unbound when the connector is destroyed., default value: true")
+  @Parameter(names = "--bind-on-init", description = "Controls when the socket used by the connector is bound. By default it is bound when the connector is initiated and unbound when the connector is destroyed., default value: true", arity = 1)
   public boolean bindOnInit = true;
 
   @Parameter(names = "--proxy-base-url", description = "Set proxy URL if tomcat is running behind reverse proxy")
