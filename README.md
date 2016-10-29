@@ -3,7 +3,8 @@
 Webapp runner is designed to allow you to launch an exploded or compressed war that is on your filesystem into a tomcat container with a simple `java -jar` command. It supports the following version of Tomcat:
 
 +  Tomcat 7: [tomcat7](https://github.com/jsimone/webapp-runner/tree/tomcat7) branch
-+  Tomcat 8: [master](https://github.com/jsimone/webapp-runner/tree/master) branch
++  Tomcat 8.0: [tomcat8.0](https://github.com/jsimone/webapp-runner/tree/tomcat8.0) branch
++  Tomcat 8.5: [master](https://github.com/jsimone/webapp-runner/tree/master) branch
 
 ## Usage
 
@@ -232,7 +233,7 @@ $ mvn clean install -Pintegration-test -Dinvoker.test=memcache-test
 
 ### License
 
- Copyright (c) 2012, John Simone
+ Copyright (c) 2016, John Simone
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification, are permitted provided
