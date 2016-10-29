@@ -27,7 +27,6 @@ try {
     process = "heroku logs -a${appName}".execute()
     process.waitFor()
     output = process.text
-    assert output.contains("--expand-war"), "Did not pick up WEBAPP_RUNNER_OPTS: ${output}"
     assert output.contains("--session-store memcache"), "Did not pick up WEBAPP_RUNNER_OPTS: ${output}"
     assert output.contains("de.javakaffee.web.msm.MemcachedSessionService startInternal"), "Did not use Memcache for session cache: ${output}"
     assert output.contains("INFO net.spy.memcached.auth.AuthThread:  Authenticated to"), "Did not use Memcache for session cache: ${output}"
