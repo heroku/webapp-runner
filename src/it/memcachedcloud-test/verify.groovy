@@ -24,6 +24,14 @@ try {
     assert !output.contains("MEMCACHIER_USERNAME"), "The wrong Memcache add-on was not added: ${output}"
     assert !output.contains("MEMCACHE_SERVERS"), "The wrong Memcache add-on was not added: ${output}"
 
+    // Wait for provisioning
+    def passwordLine="MEMCACHEDCLOUD_PASSWORD=password"
+    while (passwordLine.contains("MEMCACHEDCLOUD_PASSWORD=password")) {
+        process = "heroku config:get MEMCACHEDCLOUD_PASSWORD -s -a${appName}".execute()
+        process.waitFor()
+        passwordLine = process.text
+    }
+
     Thread.sleep(10000)
 
     process = "heroku logs -a${appName}".execute()
