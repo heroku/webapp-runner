@@ -73,8 +73,12 @@ public class CommandLineParams {
   @Parameter(names = "--tomcat-users-location", description = "Location of the tomcat-users.xml file. (relative to the location of the webapp-runner jar file)")
   public String tomcatUsersLocation;
 
-  @Parameter(names = "--expand-war", description = "Expand the war file and set it as source", arity = 1)
+  // Not actually useful because it can only be set to true. We're keeping it here for backward compatibility.
+  @Parameter(names = "--expand-war", hidden = true)
   public boolean expandWar = true;
+
+  @Parameter(names = "--expand-war-file", description = "Expand the war file and set it as source", arity = 1)
+  public boolean expandWarFile = true;
 
   @Parameter(names = "--expanded-dir-name", description = "The name of the directory the WAR file will be expanded into if --expand-war is set.")
   public String expandedDirName = "expanded";

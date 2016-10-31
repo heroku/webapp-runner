@@ -199,7 +199,7 @@ public class Main {
 
     final String ctxName = commandLineParams.contextPath;
 
-    if (commandLineParams.expandWar && war.isFile()) {
+    if (commandLineParams.expandWar && commandLineParams.expandWarFile && war.isFile()) {
       File appBase = new File(System.getProperty(Globals.CATALINA_BASE_PROP), tomcat.getHost().getAppBase());
       if (appBase.exists()) {
         appBase.delete();
