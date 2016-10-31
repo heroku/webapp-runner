@@ -139,80 +139,102 @@ Versions 0.0.1 to 0.0.7 are still available at http://jsimone.github.com/webapp-
 
 ```
 $ java -jar webapp-runner.jar --help
+The specified path "src/main/webapp" does not exist.
 Usage: <main class> [options]
   Options:
-        --basic-auth-pw                     Password to be used with basic auth.
-                                            Defaults to BASIC_AUTH_PW env variable.
-        --basic-auth-user                   Username to be used with basic auth.
-                                            Defaults to BASIC_AUTH_USER env variable.
-        --compressable-mime-types           Comma delimited list of mime types
-                                            that will be compressed when using GZIP
-                                            compression.
-                                            Default: text/html,text/xml,text/plain,text/css,application/json,application/xml,text/javascript,application/javascript
-        --context-xml                       The path to the context xml to use.
-        --enable-basic-auth                 Secure the app with basic auth. Use
-                                            with --basic-auth-user and
-                                            --basic-auth-pw or --tomcat-users-location
-                                            Default: false
-        --enable-client-auth                Specify -Djavax.net.ssl.keyStore and
-                                            -Djavax.net.ssl.keyStorePassword in JAVA_OPTS
-                                            Default: false
-        --enable-compression                Enable GZIP compression on responses
-                                            Default: false
-        --enable-naming                     Enables JNDI naming
-                                            Default: false
-        --enable-ssl                        Specify -Djavax.net.ssl.trustStore
-                                            and -Djavax.net.ssl.trustStorePassword
-                                            in JAVA_OPTS. Note: should not be used
-                                            if a reverse proxy is terminating SSL
-                                            for you (such as on Heroku)
-                                            Default: false
-        --expand-war                        Expand the war file and set it as
-                                            source
-                                            Default: false
-        --help
-                                            Default: false
-        --path                              The context path
-        --port                              The port that the server will accept
-                                            http requests on.
-                                            Default: 8080
-        --scanBootstrapClassPath            Set jar scanner scan bootstrap
-                                            classpath.
-                                            Default: false
-        --session-store                     Session store to use (valid options
-                                            are 'memcache' or 'redis')
-        --session-store-ignore-pattern      Request pattern to not track
-                                            sessions for. Valid only with memcache
-                                            session store. (default is
-                                            '.*\.(png|gif|jpg|css|js)$'
-                                            Default: .*\.(png|gif|jpg|css|js)$
-        --session-store-locking-mode        Session locking mode for use with
-                                            memcache session store. (default is all)
-                                            Default: all
-        --session-store-operation-timeout   Operation timeout for the memcache
-                                            session store. (default is 5000ms)
-                                            Default: 5000
-        --session-timeout                   The number of minutes of inactivity
-                                            before a user's session is timed out.
-        --shutdown-override                 Overrides the default behavior and
-                                            casues Tomcat to ignore lifecycle failure
-                                            events rather than shutting down when they
-                                            occur.
-                                            Default: false
-        --tomcat-users-location             Location of the tomcat-users.xml
-                                            file. (relative to the location of the
-                                            webapp-runner jar file)
-        --uri-encoding                      Set the URI encoding to be used for
-                                            the Connector.
-        --use-body-encoding-for-uri         Set if the entity body encoding
-                                            should be used for the URI.
-                                            Default: false
-    -A                                      Allows setting HTTP connector
-                                            attributes. For example: -Acompression=on
-                                            Syntax: -Akey=value
-                                            Default: {}
+    --basic-auth-pw
+       Password to be used with basic auth. Defaults to BASIC_AUTH_PW env
+       variable.
+    --basic-auth-user
+       Username to be used with basic auth. Defaults to BASIC_AUTH_USER env
+       variable.
+    --bind-on-init
+       Controls when the socket used by the connector is bound. By default it is
+       bound when the connector is initiated and unbound when the connector is
+       destroyed., default value: true
+       Default: true
+    --compressable-mime-types
+       Comma delimited list of mime types that will be compressed when using
+       GZIP compression.
+       Default: text/html,text/xml,text/plain,text/css,application/json,application/xml,text/javascript,application/javascript
+    --context-xml
+       The path to the context xml to use.
+    --enable-basic-auth
+       Secure the app with basic auth. Use with --basic-auth-user and
+       --basic-auth-pw or --tomcat-users-location
+       Default: false
+    --enable-client-auth
+       Specify -Djavax.net.ssl.keyStore and -Djavax.net.ssl.keyStorePassword in
+       JAVA_OPTS
+       Default: false
+    --enable-compression
+       Enable GZIP compression on responses
+       Default: false
+    --enable-naming
+       Enables JNDI naming
+       Default: false
+    --enable-ssl
+       Specify -Djavax.net.ssl.trustStore and -Djavax.net.ssl.trustStorePassword
+       in JAVA_OPTS. Note: should not be used if a reverse proxy is terminating SSL
+       for you (such as on Heroku)
+       Default: false
+    --expand-war-file
+       Expand the war file and set it as source
+       Default: true
+    --expanded-dir-name
+       The name of the directory the WAR file will be expanded into.
+       Default: expanded
+    --help
 
-
+       Default: false
+    --max-threads
+       Set the maximum number of worker threads
+       Default: 0
+    --path
+       The context path
+       Default: <empty string>
+    --port
+       The port that the server will accept http requests on.
+       Default: 8080
+    --proxy-base-url
+       Set proxy URL if tomcat is running behind reverse proxy
+       Default: <empty string>
+    --scanBootstrapClassPath
+       Set jar scanner scan bootstrap classpath.
+       Default: false
+    --session-store
+       Session store to use (valid options are 'memcache' or 'redis')
+    --session-store-ignore-pattern
+       Request pattern to not track sessions for. Valid only with memcache
+       session store. (default is '.*\.(png|gif|jpg|css|js)$'
+       Default: .*\.(png|gif|jpg|css|js)$
+    --session-store-locking-mode
+       Session locking mode for use with memcache session store. (default is
+       all)
+       Default: all
+    --session-store-operation-timeout
+       Operation timeout for the memcache session store. (default is 5000ms)
+       Default: 5000
+    --session-timeout
+       The number of minutes of inactivity before a user's session is timed out.
+    --shutdown-override
+       Overrides the default behavior and casues Tomcat to ignore lifecycle
+       failure events rather than shutting down when they occur.
+       Default: false
+    --temp-directory
+       Define the temp directory, default value: ./target/tomcat.PORT
+    --tomcat-users-location
+       Location of the tomcat-users.xml file. (relative to the location of the
+       webapp-runner jar file)
+    --uri-encoding
+       Set the URI encoding to be used for the Connector.
+    --use-body-encoding-for-uri
+       Set if the entity body encoding should be used for the URI.
+       Default: false
+    -A
+       Allows setting HTTP connector attributes. For example: -Acompression=on
+       Syntax: -Akey=value
+       Default: {}
 ```
 
 See the Tomcat documentation for a [complete list of HTTP connector attributes](https://tomcat.apache.org/tomcat-8.5-doc/config/http.html).
