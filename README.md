@@ -255,7 +255,7 @@ $ mvn clean install -Pintegration-test -Dinvoker.test=memcache-test
 
 ### License
 
- Copyright (c) 2016, John Simone
+ Copyright (c) 2017, John Simone
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification, are permitted provided
