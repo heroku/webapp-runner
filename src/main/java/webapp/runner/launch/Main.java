@@ -163,8 +163,6 @@ public class Main {
 
     tomcat.setConnector(nioConnector);
 
-    tomcat.getService().addConnector(tomcat.getConnector());
-
     tomcat.setPort(commandLineParams.port);
 
     if (commandLineParams.paths.size() > 1) {
