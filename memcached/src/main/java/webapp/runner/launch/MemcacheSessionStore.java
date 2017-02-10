@@ -3,7 +3,7 @@ package webapp.runner.launch;
 import de.javakaffee.web.msm.MemcachedBackupSessionManager;
 import org.apache.catalina.Context;
 
-class MemcacheSessionStore extends SessionStore {
+public class MemcacheSessionStore extends SessionStore {
 
     /**
      * Configures Memcache session manager

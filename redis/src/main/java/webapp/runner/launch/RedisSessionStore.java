@@ -6,7 +6,7 @@ import ru.zinin.redis.session.RedisManager;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-class RedisSessionStore extends SessionStore {
+public class RedisSessionStore extends SessionStore {
 
     /**
      * Configures Redis session manager
