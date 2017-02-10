@@ -222,7 +222,7 @@
             </build>
         </profile>
         <profile>
-            <id>webapp.runner.launch.license-check</id>
+            <id>license-check</id>
             <activation>
                 <property>
                     <name>staticAnalysis</name>
@@ -232,8 +232,8 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>com.mycila.maven-webapp.runner.launch.license-plugin</groupId>
-                        <artifactId>maven-webapp.runner.launch.license-plugin</artifactId>
+                        <groupId>com.mycila.maven-license-plugin</groupId>
+                        <artifactId>maven-license-plugin</artifactId>
                         <configuration>
                             <aggregate>true</aggregate>
                             <header>webapp.runner.launch.license/header.txt</header>
