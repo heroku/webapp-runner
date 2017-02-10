@@ -190,6 +190,30 @@
                     <goals>deploy</goals>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>webapp-runner-no-deps</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>com.github.jsimone</groupId>
+                            <artifactId>webapp-runner-no-deps</artifactId>
+                            <packaging>jar</packaging>
+                            <version>${project.version}</version>
+                            <file>
+                                ${basedir}/target/webapp-runner-no-deps.jar
+                            </file>
+                            <pomFile>
+                                ${basedir}/pom.xml
+                            </pomFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
