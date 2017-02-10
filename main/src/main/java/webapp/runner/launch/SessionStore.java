@@ -18,9 +18,9 @@ public class SessionStore {
             return null;
         }
         if("memcache".equals(sessionStore)){
-            return (SessionStore) Class.forName("MemcacheSessionStore").newInstance();
+            return (SessionStore) Class.forName("webapp.runner.launch.MemcacheSessionStore").newInstance();
         } else if ("redis".equals(sessionStore)){
-            return (SessionStore) Class.forName("RedisSessionStore").newInstance();
+            return (SessionStore) Class.forName("webapp.runner.launch.RedisSessionStore").newInstance();
         } else {
             return new SessionStore();
         }
