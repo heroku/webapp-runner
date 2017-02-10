@@ -1,11 +1,10 @@
 package webapp.runner.launch;
 
-import java.net.URISyntaxException;
-
 import org.apache.catalina.Context;
-import java.net.URI;
-
 import ru.zinin.redis.session.RedisManager;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 class RedisSessionStore extends SessionStore {
 

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <modules>
+        <module>main</module>
+        <module>memcached</module>
+        <module>redis</module>
+        <module>assembly</module>
+    </modules>
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
@@ -8,10 +15,10 @@
     </parent>
 
     <groupId>com.github.jsimone</groupId>
-    <artifactId>webapp-runner</artifactId>
+    <artifactId>webapp-runner-parent</artifactId>
     <version>8.5.11.1-SNAPSHOT</version>
 
-    <name>webapp-runner</name>
+    <name>webapp-runner-parent</name>
     <description>Lightweight Application Launcher. Launch your webapp in the most popular open source web container available with a single command.</description>
     <url>http://jsimone.github.com/webapp-runner</url>
     <licenses>
@@ -105,11 +112,6 @@
             <version>${tomcat.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.jkutner</groupId>
-            <artifactId>tomcat-redis-session</artifactId>
-            <version>${tomcat-redis-session.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.beust</groupId>
             <artifactId>jcommander</artifactId>
             <version>${jcommander.version}</version>
@@ -125,14 +127,8 @@
             <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>de.javakaffee.msm</groupId>
-            <artifactId>memcached-session-manager-tc8</artifactId>
-            <version>${memcached-session-manager-tc8.version}</version>
-        </dependency>
     </dependencies>
     <build>
-        <finalName>webapp-runner-no-dep</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -142,31 +138,6 @@
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>${assembly.plugin.version}</version>
-                <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <finalName>webapp-runner</finalName>
-                    <appendAssemblyId>false</appendAssemblyId>
-                    <archive>
-                        <manifest>
-                            <mainClass>webapp.runner.launch.Main</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>build-jar-with-dependencies</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
@@ -189,30 +160,6 @@
                     <releaseProfiles>release</releaseProfiles>
                     <goals>deploy</goals>
                 </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>webapp-runner-no-deps</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>deploy-file</goal>
-                        </goals>
-                        <configuration>
-                            <groupId>com.github.jsimone</groupId>
-                            <artifactId>webapp-runner-no-deps</artifactId>
-                            <packaging>jar</packaging>
-                            <version>${project.version}</version>
-                            <file>
-                                ${basedir}/target/webapp-runner-no-deps.jar
-                            </file>
-                            <pomFile>
-                                ${basedir}/pom.xml
-                            </pomFile>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
@@ -275,7 +222,7 @@
             </build>
         </profile>
         <profile>
-            <id>license-check</id>
+            <id>webapp.runner.launch.license-check</id>
             <activation>
                 <property>
                     <name>staticAnalysis</name>
@@ -285,20 +232,20 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>com.mycila.maven-license-plugin</groupId>
-                        <artifactId>maven-license-plugin</artifactId>
+                        <groupId>com.mycila.maven-webapp.runner.launch.license-plugin</groupId>
+                        <artifactId>maven-webapp.runner.launch.license-plugin</artifactId>
                         <configuration>
                             <aggregate>true</aggregate>
-                            <header>license/header.txt</header>
+                            <header>webapp.runner.launch.license/header.txt</header>
                             <excludes>
                                 <exclude>target/**</exclude>
-                                <exclude>**/license/header.txt</exclude>
+                                <exclude>**/webapp.runner.launch.license/header.txt</exclude>
                                 <exclude>**/*.md</exclude>
                                 <exclude>**/.gitignore</exclude>
                             </excludes>
                             <failIfMissing>${staticAnalysis.failOnError}</failIfMissing>
                             <headerDefinitions>
-                                <headerDefinition>license/stringtemplatedefinition.xml</headerDefinition>
+                                <headerDefinition>webapp.runner.launch.license/stringtemplatedefinition.xml</headerDefinition>
                             </headerDefinitions>
                             <mapping>
                                 <policy>DOUBLESLASH_STYLE</policy>
@@ -317,42 +264,6 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
-        <profile>
-          <id>integration-test</id>
-          <properties>
-            <invoker.skip>false</invoker.skip>
-          </properties>
-          <build>
-            <defaultGoal>install</defaultGoal>
-            <plugins>
-              <plugin>
-                <artifactId>maven-invoker-plugin</artifactId>
-                <version>${invoker.plugin.version}</version>
-                <configuration>
-                  <projectsDirectory>src/it</projectsDirectory>
-                  <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
-                  <preBuildHookScript>setup.groovy</preBuildHookScript>
-                  <postBuildHookScript>verify.groovy</postBuildHookScript>
-                  <streamLogs>true</streamLogs>
-                </configuration>
-                <executions>
-                  <execution>
-                    <id>integration-test</id>
-                    <goals>
-                      <goal>install</goal>
-                      <goal>run</goal>
-                    </goals>
-                    <configuration>
-                      <pomIncludes>
-                        <pomInclude>*/pom.xml</pomInclude>
-                      </pomIncludes>
-                    </configuration>
-                  </execution>
-                </executions>
-              </plugin>
-            </plugins>
-          </build>
         </profile>
     </profiles>
 
