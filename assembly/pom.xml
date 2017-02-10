@@ -28,7 +28,7 @@
   </dependencies>
 
   <build>
-    <finalName>webapp-runner</finalName>
+    <finalName>webapp-runner-assembly</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -63,11 +63,11 @@
             <id>attach-javadoc</id>
             <phase>package</phase>
             <goals>
-              <goal>aggregate-jar</goal>
+              <goal>jar</goal>
             </goals>
             <configuration>
               <additionalparam>-Xdoclint:none</additionalparam>
-              <sourcepath>${basedir}/main/src/main/java:${basedir}/memcached/src/main/java:${basedir}/redis/src/main/java</sourcepath>
+              <sourcepath>${project.parent.basedir}/main/src/main/java:${project.parent.basedir}/memcached/src/main/java:${project.parent.basedir}/redis/src/main/java</sourcepath>
             </configuration>
           </execution>
         </executions>
