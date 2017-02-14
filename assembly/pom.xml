@@ -9,24 +9,6 @@
 
   <artifactId>webapp-runner</artifactId>
 
-  <dependencies>
-    <dependency>
-      <groupId>com.github.jsimone</groupId>
-      <artifactId>webapp-runner-main</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.github.jsimone</groupId>
-      <artifactId>webapp-runner-memcached</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.github.jsimone</groupId>
-      <artifactId>webapp-runner-redis</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-  </dependencies>
-
   <build>
     <finalName>webapp-runner</finalName>
     <plugins>
@@ -68,6 +50,26 @@
           <value>true</value>
         </property>
       </activation>
+      <dependencies>
+        <dependency>
+          <groupId>com.github.jsimone</groupId>
+          <artifactId>webapp-runner-main</artifactId>
+          <version>${project.version}</version>
+          <scope>compile</scope>
+        </dependency>
+        <dependency>
+          <groupId>com.github.jsimone</groupId>
+          <artifactId>webapp-runner-memcached</artifactId>
+          <version>${project.version}</version>
+          <scope>compile</scope>
+        </dependency>
+        <dependency>
+          <groupId>com.github.jsimone</groupId>
+          <artifactId>webapp-runner-redis</artifactId>
+          <version>${project.version}</version>
+          <scope>compile</scope>
+        </dependency>
+      </dependencies>
       <build>
         <plugins>
           <plugin>
