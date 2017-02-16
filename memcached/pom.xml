@@ -18,6 +18,12 @@
       <groupId>de.javakaffee.msm</groupId>
       <artifactId>memcached-session-manager-tc8</artifactId>
       <version>${memcached-session-manager-tc8.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.couchbase.client</groupId>
+          <artifactId>couchbase-client</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
   </dependencies>
 </project>
