@@ -51,7 +51,7 @@ Add the following to your pom.xml:
                               <artifactItem>
                                   <groupId>com.github.jsimone</groupId>
                                   <artifactId>webapp-runner</artifactId>
-                                  <version>8.5.5.0</version>
+                                  <version>8.5.11.2</version>
                                   <destFileName>webapp-runner.jar</destFileName>
                               </artifactItem>
                           </artifactItems>
@@ -63,7 +63,23 @@ Add the following to your pom.xml:
     ...
     </build>
 
-### launching
+### Excluding Memcached and Redis libraries
+
+Webapp-runner bundles Memcached and Redis client libraries into it's fat-jar package.
+These libraries can cause conflicts with similar libraries in your application.
+This frequently manifests itself as a `java.lang.NoSuchMethodError`.
+
+If you do not require these client libraries (because you are storing session data in some other way),
+You can exclude them by using `webapp-runner-main`:
+
+```xml
+<groupId>com.github.jsimone</groupId>
+<artifactId>webapp-runner-main</artifactId>
+```
+
+In most cases, this `groupId` and `artifactId` can be substituted for `com.github.jsimone:webapp-runner`.
+
+### Launching
 
 Now when you run `maven package` webapp runner will be downloaded for you. You can then launch your application with:
 
@@ -104,14 +120,14 @@ Since your application will just be a standard webapp you can still use WTP and 
 
 Start by importing your project into Eclipse. It is best to import it as an existing Maven project using the [m2eclipse plugin](http://eclipse.org/m2e/).
 
-### Make your application dependant on webapp runner
+### Make your application dependent on webapp runner
 
 Add the following dependency to your pom.xml:
 
     <dependency>
       <groupId>com.github.jsimone</groupId>
       <artifactId>webapp-runner</artifactId>
-      <version>8.5.5.0</version>
+      <version>8.5.11.2</version>
       <scope>provided</scope>
     </dependency>
 
@@ -131,7 +147,7 @@ Your application should start and you should see the log output in the Eclipse c
 You can stop the application from the red square in the console pane or from the debug perspective. It can be restarted by right-clicking on the project and choosing your new launch configuration from the 'Debug As' menu or from the debug menu in the Eclipse toolbar (the icon with the little bug).
 
 ### Maven Central
-Note: webapp runner is now available in Maven Central. The version scheme has also chanaged to match the version of
+Note: webapp runner is now available in Maven Central. The version scheme has also changed to match the version of
 Tomcat that it relies on. The format is `<tomcat version>.<minor webapp runner version>`.
 Versions 0.0.1 to 0.0.7 are still available at http://jsimone.github.com/webapp-runner/repository.
 
