@@ -46,6 +46,11 @@
             <name>John Simone</name>
             <email>john@heroku.com</email>
         </developer>
+        <developer>
+            <id>codefinger</id>
+            <name>Joe Kutner</name>
+            <email>jpkutner@gmail.com</email>
+        </developer>
     </developers>
     <mailingLists>
         <mailingList>
