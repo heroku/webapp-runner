@@ -23,6 +23,10 @@
           <groupId>com.couchbase.client</groupId>
           <artifactId>couchbase-client</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>redis.clients</groupId>
+          <artifactId>jedis</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
   </dependencies>
