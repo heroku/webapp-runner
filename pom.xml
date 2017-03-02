@@ -1,275 +1,117 @@
-<?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
-    <modules>
-        <module>main</module>
-        <module>memcached</module>
-        <module>redis</module>
-        <module>assembly</module>
-    </modules>
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>7</version>
-    </parent>
 
-    <groupId>com.github.jsimone</groupId>
-    <artifactId>webapp-runner-parent</artifactId>
-    <version>8.5.11.3-SNAPSHOT</version>
+    <groupId>com.expedia</groupId>
+    <artifactId>ExpediaSearch</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
 
-    <name>webapp-runner-parent</name>
-    <description>Lightweight Application Launcher. Launch your webapp in the most popular open source web container available with a single command.</description>
-    <url>http://jsimone.github.com/webapp-runner</url>
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>https://github.com/jsimone/webapp-runner/blob/master/src/main/resources/license/header.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-    <distributionManagement>
-      <snapshotRepository>
-        <id>ossrh</id>
-        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-      </snapshotRepository>
-    </distributionManagement>
-    <scm>
-        <url>https://github.com/jsimone/webapp-runner</url>
-        <connection>scm:git:git@github.com:jsimone/webapp-runner.git</connection>
-        <developerConnection>scm:git:git@github.com:jsimone/webapp-runner.git</developerConnection>
-        <tag>HEAD</tag>
-    </scm>
-    <developers>
-        <developer>
-            <id>jsimone</id>
-            <name>John Simone</name>
-            <email>john@heroku.com</email>
-        </developer>
-        <developer>
-            <id>codefinger</id>
-            <name>Joe Kutner</name>
-            <email>jpkutner@gmail.com</email>
-        </developer>
-    </developers>
-    <mailingLists>
-        <mailingList>
-            <name>Webapp runner issues</name>
-            <archive>https://github.com/jsimone/webapp-runner/issues?state=closed</archive>
-            <subscribe>https://github.com/jsimone/webapp-runner/toggle_watch</subscribe>
-            <unsubscribe>https://github.com/jsimone/webapp-runner/toggle_watch</unsubscribe>
-            <post>https://github.com/jsimone/webapp-runner/issues/new</post>
-        </mailingList>
-    </mailingLists>
-    <issueManagement>
-        <system>GitHub</system>
-        <url>https://github.com/jsimone/webapp-runner/issues/new</url>
-    </issueManagement>
-
-    <properties>
-        <assembly.plugin.version>2.6</assembly.plugin.version>
-        <commons-io.version>2.5</commons-io.version>
-        <compiler.plugin.version>3.5.1</compiler.plugin.version>
-        <gpg.plugin.version>1.6</gpg.plugin.version>
-        <invoker.plugin.version>2.0.0</invoker.plugin.version>
-        <javadoc.plugin.version>2.10.4</javadoc.plugin.version>
-        <jcommander.version>1.48</jcommander.version>
-        <memcached-session-manager-tc8.version>2.0.0</memcached-session-manager-tc8.version>
-        <nexus-staging.plugin.version>1.6.7</nexus-staging.plugin.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <release.plugin.version>2.5.3</release.plugin.version>
-        <source.plugin.version>3.0.1</source.plugin.version>
-        <testng.version>6.9.10</testng.version>
-        <tomcat-embed-logging-juli.version>8.5.2</tomcat-embed-logging-juli.version>
-        <tomcat-redis-session.version>8.5.5.0</tomcat-redis-session.version>
-        <tomcat.version>8.5.11</tomcat.version>
-    </properties>
+    <name>ExpediaSearch</name>
+    <url>http://maven.apache.org</url>
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-core</artifactId>
-            <version>${tomcat.version}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.8.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.0.2</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-logging-juli</artifactId>
-            <version>${tomcat-embed-logging-juli.version}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-jasper</artifactId>
-            <version>${tomcat.version}</version>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.1</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-jasper</artifactId>
-            <version>${tomcat.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-jasper-el</artifactId>
-            <version>${tomcat.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-jsp-api</artifactId>
-            <version>${tomcat.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.beust</groupId>
-            <artifactId>jcommander</artifactId>
-            <version>${jcommander.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commons-io.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>${testng.version}</version>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>1.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${compiler.plugin.version}</version>
+                <version>2.0.2</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.5</source>
+                    <target>1.5</target>
                 </configuration>
             </plugin>
+            
             <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>${nexus-staging.plugin.version}</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>${release.plugin.version}</version>
-                <configuration>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <useReleaseProfile>false</useReleaseProfile>
-                    <releaseProfiles>release</releaseProfiles>
-                    <goals>deploy</goals>
-                </configuration>
-            </plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-war-plugin</artifactId>
+      <version>2.4</version>
+      <configuration>
+        <webResources>
+          <resource>
+            <directory>src/main/resources/configuration</directory>
+            <includes>
+              <include>*.properties</include>
+            </includes>
+            <targetPath>WEB-INF/classes/configuration</targetPath>
+          </resource>
+        </webResources>
+      </configuration>
+    </plugin>
+	
+	<plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>2.3</version>
+          <executions>
+              <execution>
+                  <phase>package</phase>
+                  <goals><goal>copy</goal></goals>
+                  <configuration>
+                      <artifactItems>
+                          <artifactItem>
+                              <groupId>com.github.jsimone</groupId>
+                              <artifactId>webapp-runner</artifactId>
+                              <version>8.5.11.2</version>
+                              <destFileName>webapp-runner.jar</destFileName>
+                          </artifactItem>
+                      </artifactItems>
+                  </configuration>
+              </execution>
+          </executions>
+      </plugin>
         </plugins>
+        
+        <resources>
+            <resource>
+                <directory>src/resources</directory>
+            </resource>
+        </resources>
     </build>
-
-    <profiles>
-        <profile>
-            <id>release</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-                <property>
-                    <name>prepareForCentral</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>${source.plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>attach-source</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>${javadoc.plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>attach-javadoc</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                                <configuration>
-                                    <additionalparam>-Xdoclint:none</additionalparam>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>${gpg.plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>license-check</id>
-            <activation>
-                <property>
-                    <name>staticAnalysis</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.mycila.maven-license-plugin</groupId>
-                        <artifactId>maven-license-plugin</artifactId>
-                        <configuration>
-                            <aggregate>true</aggregate>
-                            <header>webapp.runner.launch.license/header.txt</header>
-                            <excludes>
-                                <exclude>target/**</exclude>
-                                <exclude>**/webapp.runner.launch.license/header.txt</exclude>
-                                <exclude>**/*.md</exclude>
-                                <exclude>**/.gitignore</exclude>
-                            </excludes>
-                            <failIfMissing>${staticAnalysis.failOnError}</failIfMissing>
-                            <headerDefinitions>
-                                <headerDefinition>webapp.runner.launch.license/stringtemplatedefinition.xml</headerDefinition>
-                            </headerDefinitions>
-                            <mapping>
-                                <policy>DOUBLESLASH_STYLE</policy>
-                                <props>SCRIPT_STYLE</props>
-                            </mapping>
-                            <strictCheck>true</strictCheck>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>test</phase>
-                                <goals>
-                                    <goal>check</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
+    
+   
 </project>
