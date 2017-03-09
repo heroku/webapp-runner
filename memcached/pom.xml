@@ -3,7 +3,7 @@
   <parent>
     <artifactId>webapp-runner-parent</artifactId>
     <groupId>com.github.jsimone</groupId>
-    <version>8.5.11.3-SNAPSHOT</version>
+    <version>8.5.11.3</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
@@ -12,7 +12,7 @@
     <dependency>
       <groupId>com.github.jsimone</groupId>
       <artifactId>webapp-runner-main</artifactId>
-      <version>8.5.11.3-SNAPSHOT</version>
+      <version>8.5.11.3</version>
     </dependency>
     <dependency>
       <groupId>de.javakaffee.msm</groupId>
