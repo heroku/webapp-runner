@@ -35,33 +35,35 @@ You can use the Maven dependency plugin to download webapp-runner as part of you
 
 Add the following to your pom.xml:
 
-    <build>
-    ...
-      <plugins>
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-dependency-plugin</artifactId>
-              <version>2.3</version>
-              <executions>
-                  <execution>
-                      <phase>package</phase>
-                      <goals><goal>copy</goal></goals>
-                      <configuration>
-                          <artifactItems>
-                              <artifactItem>
-                                  <groupId>com.github.jsimone</groupId>
-                                  <artifactId>webapp-runner</artifactId>
-                                  <version>8.5.11.3</version>
-                                  <destFileName>webapp-runner.jar</destFileName>
-                              </artifactItem>
-                          </artifactItems>
-                      </configuration>
-                  </execution>
-              </executions>
-          </plugin>
-      </plugins>
-    ...
-    </build>
+```xml
+<build>
+...
+  <plugins>
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>2.3</version>
+          <executions>
+              <execution>
+                  <phase>package</phase>
+                  <goals><goal>copy</goal></goals>
+                  <configuration>
+                      <artifactItems>
+                          <artifactItem>
+                              <groupId>com.github.jsimone</groupId>
+                              <artifactId>webapp-runner</artifactId>
+                              <version>8.5.11.3</version>
+                              <destFileName>webapp-runner.jar</destFileName>
+                          </artifactItem>
+                      </artifactItems>
+                  </configuration>
+              </execution>
+          </executions>
+      </plugin>
+  </plugins>
+...
+</build>
+```
 
 ### Excluding Memcached and Redis libraries
 
@@ -124,12 +126,14 @@ Start by importing your project into Eclipse. It is best to import it as an exis
 
 Add the following dependency to your pom.xml:
 
-    <dependency>
-      <groupId>com.github.jsimone</groupId>
-      <artifactId>webapp-runner</artifactId>
-      <version>8.5.11.2</version>
-      <scope>provided</scope>
-    </dependency>
+```xml
+<dependency>
+  <groupId>com.github.jsimone</groupId>
+  <artifactId>webapp-runner</artifactId>
+  <version>8.5.11.3</version>
+  <scope>provided</scope>
+</dependency>
+```
 
 This will cause Eclipse to include webapp-runner on the classpath of your project so that it can be used for launching. It won't affect the final artifact built for your application.
 
