@@ -255,6 +255,21 @@ Usage: <main class> [options]
 
 See the Tomcat documentation for a [complete list of HTTP connector attributes](https://tomcat.apache.org/tomcat-8.5-doc/config/http.html).
 
+### Using without Memcached or Redis
+
+The default packaging of Webapp Runner (`com.github.jsimone:webapp-runner`) includes
+client libraries for Memcached and Redis so they can easily be used for session storage.
+If you do not require these dependencies, you can alternative use the
+`webapp-runner-main` packaging thusly:
+
+```xml
+<groupId>com.github.jsimone</groupId>
+<artifactId>webapp-runner-main</artifactId>
+```
+
+If you are encountering `NoClassDefFoundError` or other conflicts in dependency
+versions, this may resolve your problem.
+
 ### Development
 
 To run the entire suite of integration tests, use the following command:
