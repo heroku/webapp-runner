@@ -10,7 +10,7 @@ Webapp runner is designed to allow you to launch an exploded or compressed war t
 
 ### Clone and Build
 
-    git clone git@github.com:jsimone/webapp-runner.git
+    git clone https://github.com/jsimone/webapp-runner.git
     mvn package
 
 ### Execute
