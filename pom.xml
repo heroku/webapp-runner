@@ -82,7 +82,7 @@
         <testng.version>6.9.10</testng.version>
         <tomcat-embed-logging-juli.version>8.5.2</tomcat-embed-logging-juli.version>
         <tomcat-redis-session.version>8.5.5.0</tomcat-redis-session.version>
-        <tomcat.version>8.5.11</tomcat.version>
+        <tomcat.version>8.5.15</tomcat.version>
     </properties>
 
     <dependencies>
