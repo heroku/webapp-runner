@@ -131,6 +131,7 @@ public class Main {
     if (commandLineParams.proxyBaseUrl.length() > 0) {
       URI uri = new URI(commandLineParams.proxyBaseUrl);
       String scheme = uri.getScheme();
+      nioConnector.setProxyName(uri.getHost());
       nioConnector.setScheme(scheme);
       if (scheme.equals("https") && !nioConnector.getSecure()) {
         nioConnector.setSecure(true);
