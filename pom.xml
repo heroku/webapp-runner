@@ -16,7 +16,7 @@
 
     <groupId>com.github.jsimone</groupId>
     <artifactId>webapp-runner-parent</artifactId>
-    <version>8.5.15.2-SNAPSHOT</version>
+    <version>8.5.16.0-SNAPSHOT</version>
 
     <name>webapp-runner-parent</name>
     <description>Lightweight Application Launcher. Launch your webapp in the most popular open source web container available with a single command.</description>
@@ -82,7 +82,7 @@
         <testng.version>6.9.10</testng.version>
         <tomcat-embed-logging-juli.version>8.5.2</tomcat-embed-logging-juli.version>
         <tomcat-redis-session.version>8.5.5.0</tomcat-redis-session.version>
-        <tomcat.version>8.5.15</tomcat.version>
+        <tomcat.version>8.5.16</tomcat.version>
     </properties>
 
     <dependencies>
