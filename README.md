@@ -52,7 +52,7 @@ Add the following to your pom.xml:
                           <artifactItem>
                               <groupId>com.github.jsimone</groupId>
                               <artifactId>webapp-runner</artifactId>
-                              <version>8.5.20.0</version>
+                              <version>8.5.20.1</version>
                               <destFileName>webapp-runner.jar</destFileName>
                           </artifactItem>
                       </artifactItems>
