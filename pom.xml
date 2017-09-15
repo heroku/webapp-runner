@@ -74,7 +74,7 @@
         <invoker.plugin.version>2.0.0</invoker.plugin.version>
         <javadoc.plugin.version>2.10.4</javadoc.plugin.version>
         <jcommander.version>1.48</jcommander.version>
-        <memcached-session-manager-tc8.version>2.0.0</memcached-session-manager-tc8.version>
+        <memcached-session-manager-tc8.version>2.1.1</memcached-session-manager-tc8.version>
         <nexus-staging.plugin.version>1.6.7</nexus-staging.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <release.plugin.version>2.5.3</release.plugin.version>
