@@ -16,7 +16,7 @@
 
     <groupId>com.github.jsimone</groupId>
     <artifactId>webapp-runner-parent</artifactId>
-    <version>8.5.20.2-SNAPSHOT</version>
+    <version>8.5.23.0-SNAPSHOT</version>
 
     <name>webapp-runner-parent</name>
     <description>Lightweight Application Launcher. Launch your webapp in the most popular open source web container available with a single command.</description>
@@ -74,7 +74,7 @@
         <invoker.plugin.version>2.0.0</invoker.plugin.version>
         <javadoc.plugin.version>2.10.4</javadoc.plugin.version>
         <jcommander.version>1.48</jcommander.version>
-        <memcached-session-manager-tc8.version>2.1.1</memcached-session-manager-tc8.version>
+        <memcached-session-manager-tc8.version>2.0.0</memcached-session-manager-tc8.version>
         <nexus-staging.plugin.version>1.6.7</nexus-staging.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <release.plugin.version>2.5.3</release.plugin.version>
@@ -82,7 +82,7 @@
         <testng.version>6.9.10</testng.version>
         <tomcat-embed-logging-juli.version>8.5.2</tomcat-embed-logging-juli.version>
         <tomcat-redis-session.version>8.5.5.0</tomcat-redis-session.version>
-        <tomcat.version>8.5.20</tomcat.version>
+        <tomcat.version>8.5.23</tomcat.version>
     </properties>
 
     <dependencies>
