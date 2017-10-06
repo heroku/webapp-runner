@@ -3,7 +3,7 @@
   <parent>
     <artifactId>webapp-runner-parent</artifactId>
     <groupId>com.github.jsimone</groupId>
-    <version>8.5.23.0-SNAPSHOT</version>
+    <version>8.5.23.0</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
