@@ -104,6 +104,11 @@ public class CommandLineParams {
   @Parameter(names = "--max-threads", description = "Set the maximum number of worker threads")
   public Integer maxThreads = 0;
 
+  @Parameter(names = "--transcoder-factory-class", description = "The class name of the factory that creates the transcoder to use for serializing/deserializing sessions to/from memcached. Defaults to de.javakaffee.web.msm.JavaSerializationTranscoderFactory")
+  public String transcoderFactoryClass = "de.javakaffee.web.msm.JavaSerializationTranscoderFactory";
+
+
+
   @DynamicParameter(
           names = "-A",
           description = "Allows setting HTTP connector attributes. For example: -Acompression=on"
