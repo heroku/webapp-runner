@@ -67,7 +67,9 @@ public class MemcacheSessionStore extends SessionStore {
         manager.setLockingMode(commandLineParams.sessionStoreLockingMode);
         manager.setRequestUriIgnorePattern(commandLineParams.sessionStoreIgnorePattern);
 
-        manager.setTranscoderFactoryClass(commandLineParams.transcoderFactoryClass);
+        if (commandLineParams.memcachedTranscoderFactoryClass != null) {
+            manager.setTranscoderFactoryClass(commandLineParams.memcachedTranscoderFactoryClass);
+        }
 
         ctx.setManager(manager);
     }

@@ -251,8 +251,8 @@ Usage: <main class> [options]
     --use-body-encoding-for-uri
        Set if the entity body encoding should be used for the URI.
        Default: false
-    --transcoder-factory-class
-       The class name of the factory that creates the transcoder to use for serializing/deserializing sessions to/from memcached. Defaults to de.javakaffee.web.msm.JavaSerializationTranscoderFactory
+    --memcached-transcoder-factory-class
+       The class name of the factory that creates the transcoder to use for serializing/deserializing sessions to/from memcached.
     -A
        Allows setting HTTP connector attributes. For example: -Acompression=on
        Syntax: -Akey=value
