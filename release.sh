@@ -31,11 +31,17 @@ set -e
 #   </profile>
 # </profiles>
 
-# Now we can prepare for release (it's not really that permanent, but there's no harm in overreacting at this point)
-read -p "Are you sure you want to release? It's permanent! (press any key to continue)"
-mvn release:clean release:prepare
+stty -echo
+printf "GPG passphrase: "
+read gpgPwd
+printf '\n'
+stty echo
 
-mvn release:perform
+./mvnw release:clean release:prepare -DdryRun
+
+./mvnw release:prepare
+
+./mvnw release:perform -Darguments="-Dgpg.passphrase=$gpgPwd"
 
 echo "Now make sure you update these articles and projects:
 
