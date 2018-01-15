@@ -26,4 +26,6 @@ curl --fail --retry 3 --retry-delay 1 --connect-timeout 3 --max-time 30 https://
 
 if [ -n "$HEROKU_API_KEY" ]; then
   yes | heroku keys:add
+
+  export MAVEN_PROFILE="integration-test"
 fi

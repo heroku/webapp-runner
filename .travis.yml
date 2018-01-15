@@ -1,4 +1,4 @@
 language: java
 sudo: true
 before_install: "./etc/travis-setup.sh"
-script: "./mvnw clean install -Pintegration-test"
+script: "./mvnw clean install -P ${MAVEN_PROFILE:-default}"
