@@ -39,7 +39,7 @@
           <appName>${heroku.appName}</appName>
           <webappRunnerVersion>@project.version@</webappRunnerVersion>
           <configVars>
-            <WEBAPP_RUNNER_OPTS>--expand-war --session-store redis</WEBAPP_RUNNER_OPTS>
+            <WEBAPP_RUNNER_OPTS>--expand-war</WEBAPP_RUNNER_OPTS>
           </configVars>
         </configuration>
       </plugin>

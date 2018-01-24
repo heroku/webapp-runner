@@ -31,10 +31,8 @@ set -e
 #   </profile>
 # </profiles>
 
-# Now we can prepare for release (it's not really permantent, but there's no harm in overreacting at this point)
-read -p "Are you sure you want to release? It's permanent! (press any key to continue)"
+./mvnw release:clean release:prepare -DdryRun
+
 mvn release:clean release:prepare
 
-# Now we can actually release (it's slightly more permantent now)
-read -p "Are you still sure you want to release? It's permanent! (press any key to continue)"
 mvn release:perform
