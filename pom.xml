@@ -9,7 +9,7 @@
   </parent>
   <groupId>com.github.jsimone</groupId>
   <artifactId>webapp-runner</artifactId>
-  <version>7.0.82.1-SNAPSHOT</version>
+  <version>7.0.84.0-SNAPSHOT</version>
   <name>webapp-runner</name>
   <description>Lightweight Application Launcher. Launch your webapp in the most popular open source web container available with a single command.</description>
   <url>http://jsimone.github.com/webapp-runner</url>
