@@ -194,7 +194,7 @@ Usage: <main class> [options]
        Enables JNDI naming
        Default: false
     --enable-ssl
-       Specify -Djavax.net.ssl.keyStore, -Djavax.net.ssl.keystoreStorePassword,
+       Specify -Djavax.net.ssl.keyStore, -Djavax.net.ssl.keyStorePassword,
        -Djavax.net.ssl.trustStore and -Djavax.net.ssl.trustStorePassword in JAVA_OPTS. Note: should not be
        used if a reverse proxy is terminating SSL for you (such as on Heroku)
        Default: false
