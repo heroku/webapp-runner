@@ -8,7 +8,7 @@
   </parent>
   <groupId>com.github.jsimone</groupId>
   <artifactId>webapp-runner</artifactId>
-  <version>7.0.86.0</version>
+  <version>7.0.86.1-SNAPSHOT</version>
   <name>webapp-runner</name>
   <description>Lightweight Application Launcher. Launch your webapp in the most popular open source web container available with a single command.</description>
   <url>http://jsimone.github.com/webapp-runner</url>
@@ -39,7 +39,7 @@
     <connection>scm:git:git@github.com:jsimone/webapp-runner.git</connection>
     <developerConnection>scm:git:git@github.com:jsimone/webapp-runner.git</developerConnection>
     <url>https://github.com/jsimone/webapp-runner</url>
-    <tag>webapp-runner-7.0.86.0</tag>
+    <tag>HEAD</tag>
   </scm>
   <issueManagement>
     <system>GitHub</system>
