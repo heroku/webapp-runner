@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.sonatype.oss</groupId>
@@ -39,7 +40,6 @@
     <connection>scm:git:git@github.com:jsimone/webapp-runner.git</connection>
     <developerConnection>scm:git:git@github.com:jsimone/webapp-runner.git</developerConnection>
     <url>https://github.com/jsimone/webapp-runner</url>
-    <tag>HEAD</tag>
   </scm>
   <issueManagement>
     <system>GitHub</system>
@@ -53,9 +53,9 @@
   </distributionManagement>
   <properties>
     <gpg.plugin.version>1.2</gpg.plugin.version>
-    <tomcat.version>8.0.51</tomcat.version>
-    <source.plugin.version>2.1.2</source.plugin.version>
+    <tomcat.version>8.0.52</tomcat.version>
     <javadoc.plugin.version>2.7</javadoc.plugin.version>
+    <source.plugin.version>2.1.2</source.plugin.version>
   </properties>
   <dependencies>
     <dependency>
