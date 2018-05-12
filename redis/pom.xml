@@ -15,9 +15,14 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.github.jkutner</groupId>
-      <artifactId>tomcat-redis-session</artifactId>
-      <version>${tomcat-redis-session.version}</version>
+      <groupId>org.redisson</groupId>
+      <artifactId>redisson</artifactId>
+      <version>${redisson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.redisson</groupId>
+      <artifactId>redisson-tomcat-8</artifactId>
+      <version>${redisson.version}</version>
     </dependency>
   </dependencies>
 </project>

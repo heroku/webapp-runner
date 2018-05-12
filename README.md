@@ -2,9 +2,10 @@
 
 Webapp runner is designed to allow you to launch an exploded or compressed war that is on your filesystem into a tomcat container with a simple `java -jar` command. It supports the following version of Tomcat:
 
-+  Tomcat 7: [tomcat7](https://github.com/jsimone/webapp-runner/tree/tomcat7) branch
++  Tomcat 7.x: [tomcat7](https://github.com/jsimone/webapp-runner/tree/tomcat7) branch
 +  Tomcat 8.0: [tomcat8.0](https://github.com/jsimone/webapp-runner/tree/tomcat8.0) branch
 +  Tomcat 8.5: [master](https://github.com/jsimone/webapp-runner/tree/master) branch
++  Tomcat 9.x: [tomcat9](https://github.com/jsimone/webapp-runner/tree/tomcat9) branch
 
 ## Usage
 
@@ -52,7 +53,7 @@ Add the following to your pom.xml:
                           <artifactItem>
                               <groupId>com.github.jsimone</groupId>
                               <artifactId>webapp-runner</artifactId>
-                              <version>8.5.23.0</version>
+                              <version>${webapp-runner.version</version>
                               <destFileName>webapp-runner.jar</destFileName>
                           </artifactItem>
                       </artifactItems>
@@ -75,8 +76,11 @@ If you do not require these client libraries (because you are storing session da
 You can exclude them by using `webapp-runner-main`:
 
 ```xml
-<groupId>com.github.jsimone</groupId>
-<artifactId>webapp-runner-main</artifactId>
+<dependency>
+  <groupId>com.github.jsimone</groupId>
+  <artifactId>webapp-runner-main</artifactId>
+  <version>${webapp-runner.version</version>
+</dependency>
 ```
 
 In most cases, this `groupId` and `artifactId` can be substituted for `com.github.jsimone:webapp-runner`.
@@ -89,7 +93,7 @@ Now when you run `maven package` webapp runner will be downloaded for you. You c
 
 ## Store your sessions in memcache
 
-In versions 7.0.29.1 and newer support for a [session manager](http://code.google.com/p/memcached-session-manager/) that stores sessions in memcache is built in.
+In versions 7.0.29.1 and newer support for a [session manager that stores sessions in memcache](https://github.com/magro/memcached-session-manager) is built in.
 
 To use it add `--session-store memcache` to your startup command:
 
@@ -99,7 +103,7 @@ Then make sure that three environment variables are available for configuration:
 
 ## Store your sessions in redis
 
-In versions 7.0.29.1 and newer support for a [session manager](https://github.com/zinin/tomcat-redis-session) that stores sessions in redis is built in.
+In versions 7.0.29.1 and newer support for a [session manager that stores sessions in redis](https://github.com/redisson/redisson) is built in.
 
 To use it add `--session-store redis` to your startup command:
 
@@ -223,40 +227,44 @@ Usage: <main class> [options]
        Set jar scanner scan bootstrap classpath.
        Default: false
     --session-store
-       Session store to use (valid options are 'memcache' or 'redis')
+      Session store to use (valid options are 'memcache' or 'redis')
     --session-store-ignore-pattern
-       Request pattern to not track sessions for. Valid only with memcache
-       session store. (default is '.*\.(png|gif|jpg|css|js)$'
-       Default: .*\.(png|gif|jpg|css|js)$
+      Request pattern to not track sessions for. Valid only with memcache
+      session store. (default is '.*\.(png|gif|jpg|css|js)$'. Has no effect
+      for 'redis')
+      Default: .*\.(png|gif|jpg|css|js)$
     --session-store-locking-mode
-       Session locking mode for use with memcache session store. (default is
-       all)
-       Default: all
+      Session locking mode for use with memcache session store. (default is
+      all. Has no effect for 'redis')
+      Default: all
     --session-store-operation-timeout
-       Operation timeout for the memcache session store. (default is 5000ms)
-       Default: 5000
+      Operation timeout for the memcache session store. (default is 5000ms)
+      Default: 5000
+    --session-store-pool-size
+      Pool size of the session store connections (default is 10. Has no effect
+      for 'memcache')
+      Default: 10
     --session-timeout
-       The number of minutes of inactivity before a user's session is timed out.
+      The number of minutes of inactivity before a user's session is timed
+      out.
     --shutdown-override
-       Overrides the default behavior and casues Tomcat to ignore lifecycle
-       failure events rather than shutting down when they occur.
-       Default: false
+      Overrides the default behavior and casues Tomcat to ignore lifecycle
+      failure events rather than shutting down when they occur.
+      Default: false
     --temp-directory
-       Define the temp directory, default value: ./target/tomcat.PORT
+      Define the temp directory, default value: ./target/tomcat.PORT
     --tomcat-users-location
-       Location of the tomcat-users.xml file. (relative to the location of the
-       webapp-runner jar file)
+      Location of the tomcat-users.xml file. (relative to the location of the
+      webapp-runner jar file)
     --uri-encoding
-       Set the URI encoding to be used for the Connector.
+      Set the URI encoding to be used for the Connector.
     --use-body-encoding-for-uri
-       Set if the entity body encoding should be used for the URI.
-       Default: false
-    --memcached-transcoder-factory-class
-       The class name of the factory that creates the transcoder to use for serializing/deserializing sessions to/from memcached.
+      Set if the entity body encoding should be used for the URI.
+      Default: false
     -A
-       Allows setting HTTP connector attributes. For example: -Acompression=on
-       Syntax: -Akey=value
-       Default: {}
+      Allows setting HTTP connector attributes. For example: -Acompression=on
+      Syntax: -Akey=value
+      Default: {}
 ```
 
 See the Tomcat documentation for a [complete list of HTTP connector attributes](https://tomcat.apache.org/tomcat-8.5-doc/config/http.html).
@@ -269,8 +277,11 @@ If you do not require these dependencies, you can alternative use the
 `webapp-runner-main` packaging thusly:
 
 ```xml
-<groupId>com.github.jsimone</groupId>
-<artifactId>webapp-runner-main</artifactId>
+<dependency>
+  <groupId>com.github.jsimone</groupId>
+  <artifactId>webapp-runner-main</artifactId>
+  <version>${webapp-runner.version</version>
+</dependency>
 ```
 
 If you are encountering `NoClassDefFoundError` or other conflicts in dependency
@@ -292,7 +303,7 @@ $ mvn clean install -Pintegration-test -Dinvoker.test=memcache-test
 
 ### License
 
- Copyright (c) 2017, John Simone
+ Copyright (c) 2018, John Simone
  All rights reserved.
 
  Redistribution and use in source and binary forms, with or without modification, are permitted provided

@@ -79,7 +79,7 @@
     <javadoc.plugin.version>2.10.4</javadoc.plugin.version>
     <nexus-staging.plugin.version>1.6.7</nexus-staging.plugin.version>
     <testng.version>6.9.10</testng.version>
-    <tomcat-redis-session.version>8.5.5.0</tomcat-redis-session.version>
+    <redisson.version>3.6.5</redisson.version>
   </properties>
   <dependencies>
     <dependency>
