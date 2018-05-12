@@ -2,6 +2,7 @@ package webapp.runner.launch;
 
 import org.apache.catalina.Context;
 import org.redisson.config.Config;
+import org.redisson.config.SingleServerConfig;
 import org.redisson.tomcat.RedissonSessionManager;
 
 import java.io.BufferedWriter;
@@ -20,6 +21,7 @@ public class RedisSessionStore extends SessionStore {
    */
   @Override
   public void configureSessionStore(CommandLineParams commandLineParams, Context ctx) {
+    System.out.println("Using redis session store: org.redisson.tomcat.RedissonSessionManager");
 
     String redisUriString;
     if (System.getenv("REDIS_URL") == null && System.getenv("REDISTOGO_URL") == null && System.getenv("REDISCLOUD_URL") == null) {
@@ -37,12 +39,15 @@ public class RedisSessionStore extends SessionStore {
       URI redisUri = URI.create(redisUriString);
 
       Config config = new Config();
-      config.useSingleServer()
+      SingleServerConfig serverConfig = config.useSingleServer()
           .setAddress(redisUriString)
-          .setPassword(redisUri.getUserInfo().substring(redisUri.getUserInfo().indexOf(":")+1))
           .setConnectionPoolSize(commandLineParams.sessionStorePoolSize)
           .setConnectionMinimumIdleSize(commandLineParams.sessionStorePoolSize)
-          .setTimeout(commandLineParams.sessionTimeout);
+          .setTimeout(commandLineParams.sessionStoreOperationTimout);
+
+      if (redisUri.getUserInfo() != null) {
+        serverConfig.setPassword(redisUri.getUserInfo().substring(redisUri.getUserInfo().indexOf(":")+1));
+      }
 
       try {
         File configFile = File.createTempFile("redisson", ".json");

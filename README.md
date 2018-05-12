@@ -53,7 +53,7 @@ Add the following to your pom.xml:
                           <artifactItem>
                               <groupId>com.github.jsimone</groupId>
                               <artifactId>webapp-runner</artifactId>
-                              <version>8.5.23.0</version>
+                              <version>${webapp-runner.version</version>
                               <destFileName>webapp-runner.jar</destFileName>
                           </artifactItem>
                       </artifactItems>
@@ -90,7 +90,7 @@ Now when you run `maven package` webapp runner will be downloaded for you. You c
 
 ## Store your sessions in memcache
 
-In versions 7.0.29.1 and newer support for a [session manager](http://code.google.com/p/memcached-session-manager/) that stores sessions in memcache is built in.
+In versions 7.0.29.1 and newer support for a [session manager that stores sessions in memcache](https://github.com/magro/memcached-session-manager) is built in.
 
 To use it add `--session-store memcache` to your startup command:
 
@@ -100,7 +100,7 @@ Then make sure that three environment variables are available for configuration:
 
 ## Store your sessions in redis
 
-In versions 7.0.29.1 and newer support for a [session manager](https://github.com/zinin/tomcat-redis-session) that stores sessions in redis is built in.
+In versions 7.0.29.1 and newer support for a [session manager that stores sessions in redis](https://github.com/redisson/redisson) is built in.
 
 To use it add `--session-store redis` to your startup command:
 
@@ -131,7 +131,7 @@ Add the following dependency to your pom.xml:
 <dependency>
   <groupId>com.github.jsimone</groupId>
   <artifactId>webapp-runner</artifactId>
-  <version>8.5.11.3</version>
+  <version>${webapp-runner.version</version>
   <scope>provided</scope>
 </dependency>
 ```
@@ -270,8 +270,11 @@ If you do not require these dependencies, you can alternative use the
 `webapp-runner-main` packaging thusly:
 
 ```xml
-<groupId>com.github.jsimone</groupId>
-<artifactId>webapp-runner-main</artifactId>
+<dependency>
+  <groupId>com.github.jsimone</groupId>
+  <artifactId>webapp-runner-main</artifactId>
+  <version>${webapp-runner.version</version>
+</dependency>
 ```
 
 If you are encountering `NoClassDefFoundError` or other conflicts in dependency
