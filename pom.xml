@@ -8,7 +8,7 @@
   </parent>
   <groupId>com.github.jsimone</groupId>
   <artifactId>webapp-runner-parent</artifactId>
-  <version>8.5.31.1-SNAPSHOT</version>
+  <version>9.0.8.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>webapp-runner-parent</name>
   <description>Lightweight Application Launcher. Launch your webapp in the most popular open source web container available with a single command.</description>
@@ -66,20 +66,20 @@
   <properties>
     <assembly.plugin.version>2.6</assembly.plugin.version>
     <release.plugin.version>2.5.3</release.plugin.version>
-    <commons-io.version>2.5</commons-io.version>
+    <commons-io.version>2.6</commons-io.version>
     <gpg.plugin.version>1.6</gpg.plugin.version>
-    <compiler.plugin.version>3.5.1</compiler.plugin.version>
-    <tomcat-embed-logging-juli.version>8.5.2</tomcat-embed-logging-juli.version>
+    <compiler.plugin.version>3.7.0</compiler.plugin.version>
+    <tomcat-embed-logging-juli.version>9.0.0.M6</tomcat-embed-logging-juli.version>
     <memcached-session-manager-tc8.version>2.0.0</memcached-session-manager-tc8.version>
     <source.plugin.version>3.0.1</source.plugin.version>
-    <jcommander.version>1.48</jcommander.version>
+    <jcommander.version>1.72</jcommander.version>
     <invoker.plugin.version>2.0.0</invoker.plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <tomcat.version>8.5.31</tomcat.version>
+    <tomcat.version>9.0.8</tomcat.version>
     <javadoc.plugin.version>2.10.4</javadoc.plugin.version>
-    <nexus-staging.plugin.version>1.6.7</nexus-staging.plugin.version>
-    <testng.version>6.9.10</testng.version>
-    <tomcat-redis-session.version>8.5.5.0</tomcat-redis-session.version>
+    <nexus-staging.plugin.version>1.6.8</nexus-staging.plugin.version>
+    <testng.version>6.14.3</testng.version>
+    <redisson.version>3.6.5</redisson.version>
   </properties>
   <dependencies>
     <dependency>
