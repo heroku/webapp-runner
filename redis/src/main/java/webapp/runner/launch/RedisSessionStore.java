@@ -36,14 +36,13 @@ public class RedisSessionStore extends SessionStore {
 
       URI redisUri = URI.create(redisUriString);
 
-      Integer poolSize = Integer.valueOf(System.getenv("REDISSON_POOL_SIZE") != null ? System.getenv("REDISSON_POOL_SIZE") : "10");
-
       Config config = new Config();
       config.useSingleServer()
           .setAddress(redisUriString)
           .setPassword(redisUri.getUserInfo().substring(redisUri.getUserInfo().indexOf(":")+1))
-          .setConnectionPoolSize(poolSize)
-          .setConnectionMinimumIdleSize(poolSize);
+          .setConnectionPoolSize(commandLineParams.sessionStorePoolSize)
+          .setConnectionMinimumIdleSize(commandLineParams.sessionStorePoolSize)
+          .setTimeout(commandLineParams.sessionTimeout);
 
       try {
         File configFile = File.createTempFile("redisson", ".json");
