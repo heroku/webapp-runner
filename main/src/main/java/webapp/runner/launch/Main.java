@@ -1,19 +1,19 @@
 /**
  * Copyright (c) 2012, John Simone
  * All rights reserved.
- *
+ * <p>
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided
  * that the following conditions are met:
- *
- *    Redistributions of source code must retain the above copyright notice, this list of conditions and the
- *    following disclaimer.
- *
- *    Redistributions in binary form must reproduce the above copyright notice, this list of conditions and
- *    the following disclaimer in the documentation and/or other materials provided with the distribution.
- *
- *    Neither the name of John Simone nor the names of its contributors may be used to endorse or
- *    promote products derived from this software without specific prior written permission.
- *
+ * <p>
+ * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+ * following disclaimer.
+ * <p>
+ * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and
+ * the following disclaimer in the documentation and/or other materials provided with the distribution.
+ * <p>
+ * Neither the name of John Simone nor the names of its contributors may be used to endorse or
+ * promote products derived from this software without specific prior written permission.
+ * <p>
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
  * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
@@ -202,7 +202,7 @@ public class Main {
       String expandedDirName = commandLineParams.expandedDirName;
       Path expandedDirPath = Paths.get(expandedDirName);
 
-      if(expandedDirPath.isAbsolute()) {
+      if (expandedDirPath.isAbsolute()) {
         Host tempHost = tomcat.getHost();
         tempHost.setAppBase(new File(expandedDirName).getAbsolutePath()); // override defaults to use Host object within ExpandWar
         expandedDir = ExpandWar.expand(tempHost, fileUrl, "");
@@ -274,11 +274,11 @@ public class Main {
     tomcat.start();
 
     /*
-         * NamingContextListener.lifecycleEvent(LifecycleEvent event)
-         * cannot initialize GlobalNamingContext for Tomcat until
-         * the Lifecycle.CONFIGURE_START_EVENT occurs, so this block
-         * must sit after the call to tomcat.start() and it requires
-         * tomcat.enableNaming() to be called much earlier in the code.
+     * NamingContextListener.lifecycleEvent(LifecycleEvent event)
+     * cannot initialize GlobalNamingContext for Tomcat until
+     * the Lifecycle.CONFIGURE_START_EVENT occurs, so this block
+     * must sit after the call to tomcat.start() and it requires
+     * tomcat.enableNaming() to be called much earlier in the code.
      */
     if (commandLineParams.enableBasicAuth || commandLineParams.tomcatUsersLocation != null) {
       configureUserStore(tomcat, commandLineParams);
@@ -298,8 +298,8 @@ public class Main {
    */
   static String resolveTomcatBaseDir(Integer port, String tempDirectory) throws IOException {
     final File baseDir = tempDirectory != null
-            ? new File(tempDirectory)
-            : new File(System.getProperty("user.dir") + "/target/tomcat." + port);
+        ? new File(tempDirectory)
+        : new File(System.getProperty("user.dir") + "/target/tomcat." + port);
 
     if (!baseDir.isDirectory() && !baseDir.mkdirs()) {
       throw new IOException("Could not create temp dir: " + baseDir);
@@ -341,11 +341,11 @@ public class Main {
     javax.naming.Reference ref = new javax.naming.Reference("org.apache.catalina.UserDatabase");
     ref.add(new StringRefAddr("pathname", tomcatUsersLocation));
     MemoryUserDatabase memoryUserDatabase
-            = (MemoryUserDatabase) new MemoryUserDatabaseFactory().getObjectInstance(
-                    ref,
-                    new CompositeName("UserDatabase"),
-                    null,
-                    null);
+        = (MemoryUserDatabase) new MemoryUserDatabaseFactory().getObjectInstance(
+        ref,
+        new CompositeName("UserDatabase"),
+        null,
+        null);
 
     // Add basic auth user
     if (commandLineParams.basicAuthUser != null && commandLineParams.basicAuthPw != null) {
@@ -353,9 +353,9 @@ public class Main {
       memoryUserDatabase.setReadonly(false);
       Role user = memoryUserDatabase.createRole(AUTH_ROLE, AUTH_ROLE);
       memoryUserDatabase.createUser(
-              commandLineParams.basicAuthUser,
-              commandLineParams.basicAuthPw,
-              commandLineParams.basicAuthUser).addRole(user);
+          commandLineParams.basicAuthUser,
+          commandLineParams.basicAuthPw,
+          commandLineParams.basicAuthUser).addRole(user);
       memoryUserDatabase.save();
 
     } else if (System.getenv("BASIC_AUTH_USER") != null && System.getenv("BASIC_AUTH_PW") != null) {
@@ -363,9 +363,9 @@ public class Main {
       memoryUserDatabase.setReadonly(false);
       Role user = memoryUserDatabase.createRole(AUTH_ROLE, AUTH_ROLE);
       memoryUserDatabase.createUser(
-              System.getenv("BASIC_AUTH_USER"),
-              System.getenv("BASIC_AUTH_PW"),
-              System.getenv("BASIC_AUTH_USER")).addRole(user);
+          System.getenv("BASIC_AUTH_USER"),
+          System.getenv("BASIC_AUTH_PW"),
+          System.getenv("BASIC_AUTH_USER")).addRole(user);
       memoryUserDatabase.save();
     }
 
@@ -374,7 +374,7 @@ public class Main {
     tomcat.getServer().getGlobalNamingContext().addToEnvironment("UserDatabase", memoryUserDatabase);
 
     org.apache.tomcat.util.descriptor.web.ContextResource ctxRes
-            = new org.apache.tomcat.util.descriptor.web.ContextResource();
+        = new org.apache.tomcat.util.descriptor.web.ContextResource();
     ctxRes.setName("UserDatabase");
     ctxRes.setAuth("Container");
     ctxRes.setType("org.apache.catalina.UserDatabase");
