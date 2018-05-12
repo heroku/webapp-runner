@@ -224,40 +224,44 @@ Usage: <main class> [options]
        Set jar scanner scan bootstrap classpath.
        Default: false
     --session-store
-       Session store to use (valid options are 'memcache' or 'redis')
+      Session store to use (valid options are 'memcache' or 'redis')
     --session-store-ignore-pattern
-       Request pattern to not track sessions for. Valid only with memcache
-       session store. (default is '.*\.(png|gif|jpg|css|js)$'
-       Default: .*\.(png|gif|jpg|css|js)$
+      Request pattern to not track sessions for. Valid only with memcache
+      session store. (default is '.*\.(png|gif|jpg|css|js)$'. Has no effect
+      for 'redis')
+      Default: .*\.(png|gif|jpg|css|js)$
     --session-store-locking-mode
-       Session locking mode for use with memcache session store. (default is
-       all)
-       Default: all
+      Session locking mode for use with memcache session store. (default is
+      all. Has no effect for 'redis')
+      Default: all
     --session-store-operation-timeout
-       Operation timeout for the memcache session store. (default is 5000ms)
-       Default: 5000
+      Operation timeout for the memcache session store. (default is 5000ms)
+      Default: 5000
+    --session-store-pool-size
+      Pool size of the session store connections (default is 10. Has no effect
+      for 'memcache')
+      Default: 10
     --session-timeout
-       The number of minutes of inactivity before a user's session is timed out.
+      The number of minutes of inactivity before a user's session is timed
+      out.
     --shutdown-override
-       Overrides the default behavior and casues Tomcat to ignore lifecycle
-       failure events rather than shutting down when they occur.
-       Default: false
+      Overrides the default behavior and casues Tomcat to ignore lifecycle
+      failure events rather than shutting down when they occur.
+      Default: false
     --temp-directory
-       Define the temp directory, default value: ./target/tomcat.PORT
+      Define the temp directory, default value: ./target/tomcat.PORT
     --tomcat-users-location
-       Location of the tomcat-users.xml file. (relative to the location of the
-       webapp-runner jar file)
+      Location of the tomcat-users.xml file. (relative to the location of the
+      webapp-runner jar file)
     --uri-encoding
-       Set the URI encoding to be used for the Connector.
+      Set the URI encoding to be used for the Connector.
     --use-body-encoding-for-uri
-       Set if the entity body encoding should be used for the URI.
-       Default: false
-    --memcached-transcoder-factory-class
-       The class name of the factory that creates the transcoder to use for serializing/deserializing sessions to/from memcached.
+      Set if the entity body encoding should be used for the URI.
+      Default: false
     -A
-       Allows setting HTTP connector attributes. For example: -Acompression=on
-       Syntax: -Akey=value
-       Default: {}
+      Allows setting HTTP connector attributes. For example: -Acompression=on
+      Syntax: -Akey=value
+      Default: {}
 ```
 
 See the Tomcat documentation for a [complete list of HTTP connector attributes](https://tomcat.apache.org/tomcat-8.5-doc/config/http.html).
