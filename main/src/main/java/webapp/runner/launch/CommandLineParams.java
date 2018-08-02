@@ -119,4 +119,10 @@ public class CommandLineParams {
   @Parameter(names = "--enable-naming", description = "Enables JNDI naming")
   public boolean enableNaming = false;
 
+  @Parameter(names = "--access-log", description = "Enables AccessLogValue to STDOUT")
+  public boolean accessLog = false;
+
+  @Parameter(names = "--access-log-pattern", description = "If --access-log is enabled, sets the logging pattern")
+  public String accessLogPattern = "common";
+
 }
