@@ -34,16 +34,19 @@ import org.apache.catalina.startup.ExpandWar;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.users.MemoryUserDatabase;
 import org.apache.catalina.users.MemoryUserDatabaseFactory;
+import org.apache.catalina.valves.AccessLogValve;
 import org.apache.coyote.AbstractProtocol;
 import org.apache.coyote.ProtocolHandler;
 import org.apache.tomcat.util.descriptor.web.LoginConfig;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.apache.tomcat.util.scan.StandardJarScanner;
+import webapp.runner.launch.valves.StdoutAccessLogValve;
 
 import javax.naming.CompositeName;
 import javax.naming.StringRefAddr;
 import javax.servlet.annotation.ServletSecurity.TransportGuarantee;
+import java.io.CharArrayWriter;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -51,6 +54,10 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.StreamHandler;
 
 /**
  * This is the main entry point to webapp-runner. Helpers are called to parse the arguments. Tomcat configuration and
@@ -268,6 +275,14 @@ public class Main {
 
     if (commandLineParams.enableBasicAuth) {
       enableBasicAuth(ctx, commandLineParams.enableSSL);
+    }
+
+    if (commandLineParams.accessLog) {
+      Host host = tomcat.getHost();
+      StdoutAccessLogValve valve = new StdoutAccessLogValve();
+      valve.setEnabled(true);
+      valve.setPattern(commandLineParams.accessLogPattern);
+      host.getPipeline().addValve(valve);
     }
 
     //start the server

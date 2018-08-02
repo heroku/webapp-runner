@@ -163,6 +163,12 @@ $ java -jar webapp-runner.jar --help
 The specified path "src/main/webapp" does not exist.
 Usage: <main class> [options]
   Options:
+    --access-log
+      Enables AccessLogValue to STDOUT
+      Default: false
+    --access-log-pattern
+       If --access-log is enabled, sets the logging pattern
+       Default: common
     --basic-auth-pw
        Password to be used with basic auth. Defaults to BASIC_AUTH_PW env
        variable.
