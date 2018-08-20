@@ -1,4 +1,5 @@
-# Webapp Runner [![Build Status](https://travis-ci.org/jsimone/webapp-runner.svg?branch=master)](https://travis-ci.org/jsimone/webapp-runner) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.jsimone/webapp-runner/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.jsimone/webapp-runner)
+# Webapp Runner [![Build Status](https://travis-ci.org/jsimone/webapp-runner.svg?branch=master)](https://travis-ci.org/jsimone/webapp-runner)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.jsimone/webapp-runner/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.jsimone/webapp-runner)
 
 Webapp runner is designed to allow you to launch an exploded or compressed war that is on your filesystem into a tomcat container with a simple `java -jar` command. It supports the following version of Tomcat:
 
