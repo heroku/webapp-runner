@@ -3,6 +3,7 @@ package webapp.runner.launch;
 import org.apache.catalina.Context;
 import org.redisson.config.Config;
 import org.redisson.config.SingleServerConfig;
+import org.redisson.codec.FstCodec;
 import org.redisson.tomcat.RedissonSessionManager;
 
 import java.io.BufferedWriter;
@@ -44,6 +45,7 @@ public class RedisSessionStore extends SessionStore {
           .setConnectionPoolSize(commandLineParams.sessionStorePoolSize)
           .setConnectionMinimumIdleSize(commandLineParams.sessionStorePoolSize)
           .setTimeout(commandLineParams.sessionStoreOperationTimout);
+      config.setCodec(new FstCodec());
 
       if (redisUri.getUserInfo() != null) {
         serverConfig.setPassword(redisUri.getUserInfo().substring(redisUri.getUserInfo().indexOf(":")+1));
