@@ -11,24 +11,10 @@ try {
     def log = FileUtils.fileRead(new File(basedir, "build.log"));
     assert log.contains("BUILD SUCCESS"), "the build was not successful"
 
-    process = "heroku ps:restart -a${appName}".execute();
-    process.waitFor();
-    println(process.text)
-
-    Thread.sleep(10000)
-
     process = "heroku config -a${appName}".execute()
     process.waitFor()
     output = process.text
-    assert output.contains("REDISTOGO_URL"), "The Redis add-on was not added: ${output}"
-
-    Thread.sleep(10000)
-
-    process = "heroku logs -a${appName}".execute()
-    process.waitFor()
-    output = process.text
-    assert output.contains("--session-store redis"), "Did not pick up WEBAPP_RUNNER_OPTS: ${output}"
-    assert output.contains("org.redisson.tomcat.RedissonSessionManager"), "Did not use redis session store"
+    assert output.contains("REDIS_URL"), "The Redis add-on was not added: ${output}"
 
     process = "curl https://${appName}.herokuapp.com".execute()
     process.waitFor()
@@ -38,7 +24,7 @@ try {
     process = "curl https://${appName}.herokuapp.com/hello".execute()
     process.waitFor()
     output = process.text
-    assert output.contains("hello, world"), "Could not load /hello page!"
+    assert output.contains("org.redisson.tomcat.RedissonSession"), "Did not use Redis for session cache: ${output}"
 } finally {
     ("heroku destroy " + appName + " --confirm " + appName).execute().waitFor();
 }
