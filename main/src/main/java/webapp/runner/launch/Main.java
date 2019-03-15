@@ -285,6 +285,23 @@ public class Main {
       host.getPipeline().addValve(valve);
     }
 
+    if (!commandLineParams.bindOnInit && commandLineParams.bindOnInitStartConnectorProperty != null) {
+
+      boolean notStarted = true;
+      while (notStarted) {
+        boolean triggerStart = "true".equalsIgnoreCase(System.getProperty(commandLineParams.bindOnInitStartConnectorProperty));
+
+        if (triggerStart) {
+          tomcat.getConnector().start();
+          notStarted = false;
+        } else {
+          System.out.println("BindOnInit is false. bindOnInitStartConnectorProperty is still null. " +
+              "Sleeping until System property is set to trigger Tomcat's connector to start.");
+          Thread.sleep(2000);
+        }
+      }
+    }
+
     //start the server
     tomcat.start();
 

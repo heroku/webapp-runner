@@ -101,6 +101,9 @@ public class CommandLineParams {
   @Parameter(names = "--bind-on-init", description = "Controls when the socket used by the connector is bound. By default it is bound when the connector is initiated and unbound when the connector is destroyed., default value: true", arity = 1)
   public boolean bindOnInit = true;
 
+  @Parameter(names = "--bind-on-init-start-connector-property", description = "Defines a custom system property use to control when the socket used by the connector is bound.")
+  public String bindOnInitStartConnectorProperty = null;
+
   @Parameter(names = "--proxy-base-url", description = "Set proxy URL if tomcat is running behind reverse proxy")
   public String proxyBaseUrl = "";
 
