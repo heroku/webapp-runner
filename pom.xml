@@ -53,9 +53,9 @@
   </distributionManagement>
   <properties>
     <gpg.plugin.version>1.2</gpg.plugin.version>
-    <tomcat.version>7.0.92</tomcat.version>
-    <javadoc.plugin.version>2.7</javadoc.plugin.version>
+    <tomcat.version>7.0.94</tomcat.version>
     <source.plugin.version>2.1.2</source.plugin.version>
+    <javadoc.plugin.version>2.7</javadoc.plugin.version>
   </properties>
   <dependencies>
     <dependency>
