@@ -16,9 +16,9 @@
         <artifactId>maven-assembly-plugin</artifactId>
         <version>${assembly.plugin.version}</version>
         <configuration>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
+          <descriptors>
+            <descriptor>src/assembly/jar-with-deps-merge-services.xml</descriptor>
+          </descriptors>
           <finalName>${project.artifactId}</finalName>
           <appendAssemblyId>false</appendAssemblyId>
           <archive>
