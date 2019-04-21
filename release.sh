@@ -31,11 +31,11 @@ set -e
 #   </profile>
 # </profiles>
 
-./mvnw release:clean release:prepare -DdryRun
+./mvnw ${MAVEN_CUSTOM_OPTS:-} release:clean release:prepare -DdryRun
 
-./mvnw release:clean release:prepare
+./mvnw ${MAVEN_CUSTOM_OPTS:-} release:clean release:prepare
 
-./mvnw release:perform
+./mvnw ${MAVEN_CUSTOM_OPTS:-} release:perform
 
 echo "Now make sure you update these articles and projects:
 
