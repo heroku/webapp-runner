@@ -17,7 +17,7 @@ import static org.testng.Assert.fail;
 public class TomcatBaseDirResolutionTest {
 
 	private static final Integer PORT = 1234;
-	private static final File BASE_DIR = new File(System.getProperty("user.dir") + "/target/tomcat." + PORT);
+	private static final File BASE_DIR = new File(System.getProperty("user.dir"), new File("target", "tomcat." + PORT).toString());
 
 	@BeforeMethod
 	@AfterTest
@@ -59,7 +59,7 @@ public class TomcatBaseDirResolutionTest {
 	@Test
 	public void testSuggestBaseDir() throws IOException {
 
-		String suggest = System.getProperty("user.dir") + "/temp";
+		String suggest = System.getProperty("user.dir") + File.separator + "temp";
 		String tomcatBaseDir = Main.resolveTomcatBaseDir(PORT, suggest);
 
 		assertTrue(tomcatBaseDir.equals(suggest));
