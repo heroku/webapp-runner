@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.jsimone</groupId>
   <artifactId>webapp-runner-parent</artifactId>
-  <version>9.0.24.1-SNAPSHOT</version>
+  <version>9.0.24.1</version>
   <packaging>pom</packaging>
   <name>webapp-runner-parent</name>
   <description>Lightweight Application Launcher. Launch your webapp in the most popular open source web container available with a single command.</description>
@@ -46,7 +46,7 @@
     <connection>scm:git:git@github.com:jsimone/webapp-runner.git</connection>
     <developerConnection>scm:git:git@github.com:jsimone/webapp-runner.git</developerConnection>
     <url>https://github.com/jsimone/webapp-runner</url>
-    <tag>HEAD</tag>
+    <tag>webapp-runner-parent-9.0.24.1</tag>
   </scm>
   <issueManagement>
     <system>GitHub</system>
