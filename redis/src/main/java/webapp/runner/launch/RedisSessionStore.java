@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 public class RedisSessionStore extends SessionStore {
 
@@ -38,10 +39,18 @@ public class RedisSessionStore extends SessionStore {
       }
 
       URI redisUri = URI.create(redisUriString);
+      URI redisUriWithoutAuth;
+      try {
+        // https://github.com/redisson/redisson/issues/2370
+        redisUriWithoutAuth = new URI(redisUri.getScheme(), null, redisUri.getHost(), redisUri.getPort(), redisUri.getPath(), redisUri.getQuery(), redisUri.getFragment());
+      } catch (URISyntaxException e) {
+        System.out.printf("WARNING: could not write redis configuration for %s\n", redisUri);
+        return;
+      }
 
       Config config = new Config();
       SingleServerConfig serverConfig = config.useSingleServer()
-          .setAddress(redisUriString)
+          .setAddress(redisUriWithoutAuth.toString())
           .setConnectionPoolSize(commandLineParams.sessionStorePoolSize)
           .setConnectionMinimumIdleSize(commandLineParams.sessionStorePoolSize)
           .setTimeout(commandLineParams.sessionStoreOperationTimout);
