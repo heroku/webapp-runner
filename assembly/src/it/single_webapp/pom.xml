@@ -49,7 +49,7 @@
             <configuration>
               <artifactItems>
                 <artifactItem>
-                  <groupId>com.github.jsimone</groupId>
+                  <groupId>com.heroku</groupId>
                   <artifactId>webapp-runner</artifactId>
                   <version>@project.version@</version>
                   <destFileName>webapp-runner.jar</destFileName>

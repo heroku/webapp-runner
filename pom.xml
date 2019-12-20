@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.github.jsimone</groupId>
+  <groupId>com.heroku</groupId>
   <artifactId>webapp-runner-parent</artifactId>
   <version>8.5.47.3-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>webapp-runner-parent</name>
   <description>Lightweight Application Launcher. Launch your webapp in the most popular open source web container available with a single command.</description>
-  <url>http://jsimone.github.com/webapp-runner</url>
+  <url>https://github.com/heroku/webapp-runner</url>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
-      <url>https://github.com/jsimone/webapp-runner/blob/master/src/main/resources/license/header.txt</url>
+      <url>https://github.com/heroku/webapp-runner/blob/master/src/main/resources/license/header.txt</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
@@ -30,10 +30,10 @@
   <mailingLists>
     <mailingList>
       <name>Webapp runner issues</name>
-      <subscribe>https://github.com/jsimone/webapp-runner/toggle_watch</subscribe>
-      <unsubscribe>https://github.com/jsimone/webapp-runner/toggle_watch</unsubscribe>
-      <post>https://github.com/jsimone/webapp-runner/issues/new</post>
-      <archive>https://github.com/jsimone/webapp-runner/issues?state=closed</archive>
+      <subscribe>https://github.com/heroku/webapp-runner/toggle_watch</subscribe>
+      <unsubscribe>https://github.com/heroku/webapp-runner/toggle_watch</unsubscribe>
+      <post>https://github.com/heroku/webapp-runner/issues/new</post>
+      <archive>https://github.com/heroku/webapp-runner/issues?state=closed</archive>
     </mailingList>
   </mailingLists>
   <modules>
@@ -43,14 +43,14 @@
     <module>assembly</module>
   </modules>
   <scm>
-    <connection>scm:git:git@github.com:jsimone/webapp-runner.git</connection>
-    <developerConnection>scm:git:git@github.com:jsimone/webapp-runner.git</developerConnection>
-    <url>https://github.com/jsimone/webapp-runner</url>
+    <connection>scm:git:git@github.com:heroku/webapp-runner.git</connection>
+    <developerConnection>scm:git:git@github.com:heroku/webapp-runner.git</developerConnection>
+    <url>https://github.com/heroku/webapp-runner</url>
     <tag>HEAD</tag>
   </scm>
   <issueManagement>
     <system>GitHub</system>
-    <url>https://github.com/jsimone/webapp-runner/issues/new</url>
+    <url>https://github.com/heroku/webapp-runner/issues/new</url>
   </issueManagement>
   <distributionManagement>
     <snapshotRepository>

@@ -1,17 +1,17 @@
-# Webapp Runner [![Build Status](https://travis-ci.org/jsimone/webapp-runner.svg?branch=master)](https://travis-ci.org/jsimone/webapp-runner) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.jsimone/webapp-runner/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.jsimone/webapp-runner)
+# Webapp Runner [![Build Status](https://travis-ci.org/heroku/webapp-runner.svg?branch=master)](https://travis-ci.org/heroku/webapp-runner) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.heroku/webapp-runner/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.heroku/webapp-runner)
 
 Webapp runner is designed to allow you to launch an exploded or compressed war that is on your filesystem into a tomcat container with a simple `java -jar` command. It supports the following version of Tomcat:
 
-+  Tomcat 7.x: [tomcat7](https://github.com/jsimone/webapp-runner/tree/tomcat7) branch (deprecated)
-+  Tomcat 8.0: [tomcat8.0](https://github.com/jsimone/webapp-runner/tree/tomcat8.0) branch (deprecated)
-+  Tomcat 8.5: [master](https://github.com/jsimone/webapp-runner/tree/master) branch
-+  Tomcat 9.x: [tomcat9](https://github.com/jsimone/webapp-runner/tree/tomcat9) branch
++  Tomcat 7.x: [tomcat7](https://github.com/heroku/webapp-runner/tree/tomcat7) branch (deprecated)
++  Tomcat 8.0: [tomcat8.0](https://github.com/heroku/webapp-runner/tree/tomcat8.0) branch (deprecated)
++  Tomcat 8.5: [master](https://github.com/heroku/webapp-runner/tree/master) branch
++  Tomcat 9.x: [tomcat9](https://github.com/heroku/webapp-runner/tree/tomcat9) branch
 
 ## Usage
 
 ### Clone and Build
 
-    git clone https://github.com/jsimone/webapp-runner.git
+    git clone https://github.com/heroku/webapp-runner.git
     mvn package
 
 ### Execute
@@ -51,7 +51,7 @@ Add the following to your pom.xml:
                   <configuration>
                       <artifactItems>
                           <artifactItem>
-                              <groupId>com.github.jsimone</groupId>
+                              <groupId>com.heroku</groupId>
                               <artifactId>webapp-runner</artifactId>
                               <version>${webapp-runner.version</version>
                               <destFileName>webapp-runner.jar</destFileName>
@@ -77,13 +77,13 @@ You can exclude them by using `webapp-runner-main`:
 
 ```xml
 <dependency>
-  <groupId>com.github.jsimone</groupId>
+  <groupId>com.heroku</groupId>
   <artifactId>webapp-runner-main</artifactId>
   <version>${webapp-runner.version</version>
 </dependency>
 ```
 
-In most cases, this `groupId` and `artifactId` can be substituted for `com.github.jsimone:webapp-runner`.
+In most cases, this `groupId` and `artifactId` can be substituted for `com.heroku:webapp-runner`.
 
 ### Launching
 
@@ -132,7 +132,7 @@ Add the following dependency to your pom.xml:
 
 ```xml
 <dependency>
-  <groupId>com.github.jsimone</groupId>
+  <groupId>com.heroku</groupId>
   <artifactId>webapp-runner</artifactId>
   <version>8.5.11.3</version>
   <scope>provided</scope>
@@ -157,7 +157,6 @@ You can stop the application from the red square in the console pane or from the
 ### Maven Central
 Note: webapp runner is now available in Maven Central. The version scheme has also changed to match the version of
 Tomcat that it relies on. The format is `<tomcat version>.<minor webapp runner version>`.
-Versions 0.0.1 to 0.0.7 are still available at http://jsimone.github.com/webapp-runner/repository.
 
 ### Options
 
@@ -277,14 +276,14 @@ See the Tomcat documentation for a [complete list of HTTP connector attributes](
 
 ### Using without Memcached or Redis
 
-The default packaging of Webapp Runner (`com.github.jsimone:webapp-runner`) includes
+The default packaging of Webapp Runner (`com.heroku:webapp-runner`) includes
 client libraries for Memcached and Redis so they can easily be used for session storage.
 If you do not require these dependencies, you can alternative use the
 `webapp-runner-main` packaging thusly:
 
 ```xml
 <dependency>
-  <groupId>com.github.jsimone</groupId>
+  <groupId>com.heroku</groupId>
   <artifactId>webapp-runner-main</artifactId>
   <version>${webapp-runner.version</version>
 </dependency>
