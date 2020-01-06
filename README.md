@@ -7,7 +7,7 @@ Webapp runner is designed to allow you to launch an exploded or compressed war t
 +  Tomcat 8.5: [master](https://github.com/heroku/webapp-runner/tree/master) branch
 +  Tomcat 9.x: [tomcat9](https://github.com/heroku/webapp-runner/tree/tomcat9) branch
 
-### Notice: Group ID Change
+## Notice: Group ID Change
 
 Please note that this project was previously published under the `com.github.jsimone` group id.
 If you want to install a version <= `8.5.47.2` you must use the old group id.
