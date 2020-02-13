@@ -207,6 +207,9 @@ Usage: <main class> [options]
     --enable-naming
        Enables JNDI naming
        Default: false
+    --max-post-size
+       The maximum size in bytes of the POST which will be handled by the container FORM URL parameter parsing. The limit can be disabled by setting this attribute to a value less than zero. If not specified, this attribute is set to 2097152 (2 megabytes)
+       Default: 2097152
     --enable-ssl
        Specify -Djavax.net.ssl.keyStore, -Djavax.net.ssl.keyStorePassword,
        -Djavax.net.ssl.trustStore and -Djavax.net.ssl.trustStorePassword in JAVA_OPTS. Note: should not be
