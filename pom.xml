@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.heroku</groupId>
   <artifactId>webapp-runner-parent</artifactId>
@@ -46,7 +47,6 @@
     <connection>scm:git:git@github.com:heroku/webapp-runner.git</connection>
     <developerConnection>scm:git:git@github.com:heroku/webapp-runner.git</developerConnection>
     <url>https://github.com/heroku/webapp-runner</url>
-    <tag>HEAD</tag>
   </scm>
   <issueManagement>
     <system>GitHub</system>
@@ -69,12 +69,12 @@
     <source.plugin.version>3.0.1</source.plugin.version>
     <jcommander.version>1.72</jcommander.version>
     <redisson.version>3.11.5</redisson.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <invoker.plugin.version>2.0.0</invoker.plugin.version>
-    <tomcat.version>9.0.31</tomcat.version>
-    <javadoc.plugin.version>2.10.4</javadoc.plugin.version>
-    <nexus-staging.plugin.version>1.6.8</nexus-staging.plugin.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <tomcat.version>10.0.0-M1</tomcat.version>
     <testng.version>6.14.3</testng.version>
+    <nexus-staging.plugin.version>1.6.8</nexus-staging.plugin.version>
+    <javadoc.plugin.version>2.10.4</javadoc.plugin.version>
   </properties>
   <dependencies>
     <dependency>
