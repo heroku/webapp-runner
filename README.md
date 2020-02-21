@@ -290,7 +290,7 @@ If you do not require these dependencies, you can alternative use the
 <dependency>
   <groupId>com.heroku</groupId>
   <artifactId>webapp-runner-main</artifactId>
-  <version>${webapp-runner.version</version>
+  <version>${webapp-runner.version}</version>
 </dependency>
 ```
 
