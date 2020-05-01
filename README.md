@@ -21,15 +21,15 @@ If you want to install a version <= `8.5.47.2` you must use the old group id.
 
 ### Execute
 
-    java -jar target/webapp-runner.jar path/to/my/project
+    java -jar assembly/target/webapp-runner.jar path/to/my/project
 
 or
 
-    java -jar target/webapp-runner.jar myProject.war
+    java -jar assembly/target/webapp-runner.jar myProject.war
 
 ### Help
 
-    java -jar target/webapp-runner.jar --help
+    java -jar assembly/target/webapp-runner.jar --help
 
 Prints out all arguments accepted
 
