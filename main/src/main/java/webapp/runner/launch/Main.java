@@ -102,7 +102,7 @@ public class Main {
         nioConnector.setProperty(entry.getKey(), entry.getValue());
       }
     }
-
+    nioConnector.setMaxPostSize(commandLineParams.maxPostSize);
     if (commandLineParams.enableSSL) {
       nioConnector.setSecure(true);
       nioConnector.setProperty("SSLEnabled", "true");
