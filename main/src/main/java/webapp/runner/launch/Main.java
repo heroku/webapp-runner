@@ -98,8 +98,12 @@ public class Main {
       for (final Map.Entry<String, String> entry : commandLineParams.attributes.entrySet()) {
         final String key = entry.getKey();
         final String value = entry.getValue();
-        System.out.println("property: " + key + " - " + value);
-        nioConnector.setProperty(entry.getKey(), entry.getValue());
+
+        if (nioConnector.setProperty(entry.getKey(), entry.getValue())) {
+          System.out.println("property: " + key + " - " + value + "(OK)");
+        } else {
+          System.out.println("property: " + key + " - " + value + " (Could not be set, no effect!)");
+        }
       }
     }
     nioConnector.setMaxPostSize(commandLineParams.maxPostSize);
