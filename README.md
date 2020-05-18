@@ -58,7 +58,7 @@ Add the following to your pom.xml:
                           <artifactItem>
                               <groupId>com.heroku</groupId>
                               <artifactId>webapp-runner</artifactId>
-                              <version>${webapp-runner.version</version>
+                              <version>${webapp-runner.version}</version>
                               <destFileName>webapp-runner.jar</destFileName>
                           </artifactItem>
                       </artifactItems>
@@ -84,7 +84,7 @@ You can exclude them by using `webapp-runner-main`:
 <dependency>
   <groupId>com.heroku</groupId>
   <artifactId>webapp-runner-main</artifactId>
-  <version>${webapp-runner.version</version>
+  <version>${webapp-runner.version}</version>
 </dependency>
 ```
 
