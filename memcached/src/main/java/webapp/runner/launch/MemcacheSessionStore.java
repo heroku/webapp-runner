@@ -15,21 +15,13 @@ public class MemcacheSessionStore extends SessionStore {
     public void configureSessionStore(CommandLineParams commandLineParams, Context ctx){
         MemcachedBackupSessionManager manager = new MemcachedBackupSessionManager();
 
+
         if(System.getenv("MEMCACHE_SERVERS") != null) { //Using Memcache
-            if(System.getenv("MEMCACHE_USERNAME") == null
-                    || System.getenv("MEMCACHE_PASSWORD") == null) {
-                printNoConfigError();
-                return;
-            }
             manager.setMemcachedNodes(System.getenv("MEMCACHE_SERVERS") + ":11211");
             manager.setUsername(System.getenv("MEMCACHE_USERNAME"));
             manager.setPassword(System.getenv("MEMCACHE_PASSWORD"));
         } else if(System.getenv("MEMCACHIER_SERVERS") != null) { //Using Memcachier
-            if(System.getenv("MEMCACHIER_USERNAME") == null
-                    || System.getenv("MEMCACHIER_PASSWORD") == null) {
-                printNoConfigError();
-                return;
-            }
+
             String[] servers = System.getenv("MEMCACHIER_SERVERS").split(",");
             if (servers.length > 1) {
               for (int i = 0; i < servers.length; ++i) {
@@ -44,11 +36,6 @@ public class MemcacheSessionStore extends SessionStore {
             manager.setUsername(System.getenv("MEMCACHIER_USERNAME"));
             manager.setPassword(System.getenv("MEMCACHIER_PASSWORD"));
         } else if (System.getenv("MEMCACHEDCLOUD_SERVERS") != null) { //Using Memcached Cloud
-            if (System.getenv("MEMCACHEDCLOUD_USERNAME") == null
-                || System.getenv("MEMCACHEDCLOUD_PASSWORD") == null) {
-                printNoConfigError();
-                return;
-            }
 
             manager.setMemcachedNodes(System.getenv("MEMCACHEDCLOUD_SERVERS"));
             manager.setUsername(System.getenv("MEMCACHEDCLOUD_USERNAME"));
