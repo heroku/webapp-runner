@@ -69,7 +69,7 @@
     <tomcat-embed-logging-juli.version>8.5.2</tomcat-embed-logging-juli.version>
     <memcached-session-manager-tc8.version>2.3.0</memcached-session-manager-tc8.version>
     <source.plugin.version>3.0.1</source.plugin.version>
-    <jcommander.version>1.72</jcommander.version>
+    <jcommander.version>1.78</jcommander.version>
     <redisson.version>3.11.4</redisson.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <invoker.plugin.version>2.0.0</invoker.plugin.version>
