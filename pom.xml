@@ -155,7 +155,7 @@
         <executions>
           <execution>
             <id>attach-source</id>
-            <phase>package</phase>
+            <phase>deploy</phase>
             <goals>
               <goal>jar-no-fork</goal>
             </goals>
@@ -168,7 +168,7 @@
         <executions>
           <execution>
             <id>attach-javadoc</id>
-            <phase>package</phase>
+            <phase>deploy</phase>
             <goals>
               <goal>jar</goal>
             </goals>
@@ -185,7 +185,7 @@
         <executions>
           <execution>
             <id>sign-artifacts</id>
-            <phase>package</phase>
+            <phase>deploy</phase>
             <goals>
               <goal>sign</goal>
             </goals>
