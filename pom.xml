@@ -62,7 +62,7 @@
     </snapshotRepository>
   </distributionManagement>
   <properties>
-    <assembly.plugin.version>2.6</assembly.plugin.version>
+    <assembly.plugin.version>3.3.0</assembly.plugin.version>
     <commons-io.version>2.6</commons-io.version>
     <gpg.plugin.version>1.6</gpg.plugin.version>
     <compiler.plugin.version>3.7.0</compiler.plugin.version>
@@ -72,7 +72,7 @@
     <jcommander.version>1.78</jcommander.version>
     <redisson.version>3.11.4</redisson.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <invoker.plugin.version>2.0.0</invoker.plugin.version>
+    <invoker.plugin.version>3.2.1</invoker.plugin.version>
     <tomcat.version>8.5.56</tomcat.version>
     <testng.version>6.14.3</testng.version>
     <nexus-staging.plugin.version>1.6.8</nexus-staging.plugin.version>
