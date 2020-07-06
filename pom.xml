@@ -72,7 +72,6 @@
     <jcommander.version>1.78</jcommander.version>
     <redisson.version>3.11.4</redisson.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
     <invoker.plugin.version>3.2.1</invoker.plugin.version>
     <tomcat.version>8.5.57</tomcat.version>
     <testng.version>6.14.3</testng.version>
