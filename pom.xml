@@ -224,49 +224,5 @@
         </plugins>
       </build>
     </profile>
-    <profile>
-      <id>license-check</id>
-      <activation>
-        <property>
-          <name>staticAnalysis</name>
-          <value>true</value>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>com.mycila.maven-license-plugin</groupId>
-            <artifactId>maven-license-plugin</artifactId>
-            <executions>
-              <execution>
-                <phase>test</phase>
-                <goals>
-                  <goal>check</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <aggregate>true</aggregate>
-              <header>webapp.runner.launch.license/header.txt</header>
-              <excludes>
-                <exclude>target/**</exclude>
-                <exclude>**/webapp.runner.launch.license/header.txt</exclude>
-                <exclude>**/*.md</exclude>
-                <exclude>**/.gitignore</exclude>
-              </excludes>
-              <failIfMissing>${staticAnalysis.failOnError}</failIfMissing>
-              <headerDefinitions>
-                <headerDefinition>webapp.runner.launch.license/stringtemplatedefinition.xml</headerDefinition>
-              </headerDefinitions>
-              <mapping>
-                <policy>DOUBLESLASH_STYLE</policy>
-                <props>SCRIPT_STYLE</props>
-              </mapping>
-              <strictCheck>true</strictCheck>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
   </profiles>
 </project>
