@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>webapp-runner</artifactId>
   <parent>
     <artifactId>webapp-runner-parent</artifactId>
     <groupId>com.heroku</groupId>
     <version>8.5.57.0-SNAPSHOT</version>
   </parent>
-  <modelVersion>4.0.0</modelVersion>
-
-  <artifactId>webapp-runner</artifactId>
 
   <build>
     <finalName>webapp-runner</finalName>
@@ -37,9 +36,44 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>${source.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>attach-source</id>
+            <phase>deploy</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+            <configuration>
+              <forceCreation>true</forceCreation>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${javadoc.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>attach-javadoc</id>
+            <phase>deploy</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <source>1.8</source>
+              <additionalparam>-Xdoclint:none</additionalparam>
+              <sourcepath>
+                ${project.parent.basedir}/main/src/main/java:${project.parent.basedir}/memcached/src/main/java:${project.parent.basedir}/redis/src/main/java
+              </sourcepath>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
-
   <profiles>
     <profile>
       <id>fatjar</id>
@@ -73,55 +107,6 @@
           <scope>compile</scope>
         </dependency>
       </dependencies>
-    </profile>
-    <profile>
-      <id>release</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <property>
-          <name>prepareForCentral</name>
-          <value>true</value>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-source-plugin</artifactId>
-            <version>${source.plugin.version}</version>
-            <executions>
-              <execution>
-                <id>attach-source</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>jar-no-fork</goal>
-                </goals>
-                <configuration>
-                  <forceCreation>true</forceCreation>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>${javadoc.plugin.version}</version>
-            <executions>
-              <execution>
-                <id>attach-javadoc</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-                <configuration>
-                  <additionalparam>-Xdoclint:none</additionalparam>
-                  <sourcepath>
-                    ${project.parent.basedir}/main/src/main/java:${project.parent.basedir}/memcached/src/main/java:${project.parent.basedir}/redis/src/main/java
-                  </sourcepath>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
     </profile>
     <profile>
       <id>integration-test</id>

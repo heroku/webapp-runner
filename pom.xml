@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <prerequisites>
+    <maven>3.6.1</maven>
+  </prerequisites>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.heroku</groupId>
   <artifactId>webapp-runner-parent</artifactId>
@@ -11,7 +14,7 @@
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
-      <url>https://github.com/heroku/webapp-runner/blob/master/src/main/resources/license/header.txt</url>
+      <url>https://github.com/heroku/webapp-runner/blob/master/LICENSE</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
@@ -59,18 +62,18 @@
     </snapshotRepository>
   </distributionManagement>
   <properties>
-    <assembly.plugin.version>2.6</assembly.plugin.version>
-    <release.plugin.version>2.5.3</release.plugin.version>
+    <assembly.plugin.version>3.3.0</assembly.plugin.version>
     <commons-io.version>2.6</commons-io.version>
     <gpg.plugin.version>1.6</gpg.plugin.version>
     <compiler.plugin.version>3.7.0</compiler.plugin.version>
     <tomcat-embed-logging-juli.version>8.5.2</tomcat-embed-logging-juli.version>
     <memcached-session-manager-tc8.version>2.3.0</memcached-session-manager-tc8.version>
     <source.plugin.version>3.0.1</source.plugin.version>
-    <jcommander.version>1.72</jcommander.version>
+    <jcommander.version>1.78</jcommander.version>
     <redisson.version>3.11.4</redisson.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <invoker.plugin.version>2.0.0</invoker.plugin.version>
+
+    <invoker.plugin.version>3.2.1</invoker.plugin.version>
     <tomcat.version>8.5.57</tomcat.version>
     <testng.version>6.14.3</testng.version>
     <nexus-staging.plugin.version>1.6.8</nexus-staging.plugin.version>
@@ -151,122 +154,54 @@
         </configuration>
       </plugin>
       <plugin>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>${release.plugin.version}</version>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>${source.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>attach-source</id>
+            <phase>deploy</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${javadoc.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>attach-javadoc</id>
+            <phase>deploy</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <source>1.8</source>
+              <additionalparam>-Xdoclint:none</additionalparam>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>${gpg.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>deploy</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
-          <autoVersionSubmodules>true</autoVersionSubmodules>
-          <useReleaseProfile>false</useReleaseProfile>
-          <releaseProfiles>release</releaseProfiles>
-          <goals>deploy</goals>
+          <gpgArguments>
+            <arg>--pinentry-mode</arg>
+            <arg>loopback</arg>
+          </gpgArguments>
         </configuration>
       </plugin>
     </plugins>
   </build>
-  <profiles>
-    <profile>
-      <id>release</id>
-      <activation>
-        <property>
-          <name>prepareForCentral</name>
-          <value>true</value>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-source-plugin</artifactId>
-            <version>${source.plugin.version}</version>
-            <executions>
-              <execution>
-                <id>attach-source</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>jar-no-fork</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>${javadoc.plugin.version}</version>
-            <executions>
-              <execution>
-                <id>attach-javadoc</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-                <configuration>
-                  <additionalparam>-Xdoclint:none</additionalparam>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>${gpg.plugin.version}</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <gpgArguments>
-                <arg>--pinentry-mode</arg>
-                <arg>loopback</arg>
-              </gpgArguments>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>license-check</id>
-      <activation>
-        <property>
-          <name>staticAnalysis</name>
-          <value>true</value>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>com.mycila.maven-license-plugin</groupId>
-            <artifactId>maven-license-plugin</artifactId>
-            <executions>
-              <execution>
-                <phase>test</phase>
-                <goals>
-                  <goal>check</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <aggregate>true</aggregate>
-              <header>webapp.runner.launch.license/header.txt</header>
-              <excludes>
-                <exclude>target/**</exclude>
-                <exclude>**/webapp.runner.launch.license/header.txt</exclude>
-                <exclude>**/*.md</exclude>
-                <exclude>**/.gitignore</exclude>
-              </excludes>
-              <failIfMissing>${staticAnalysis.failOnError}</failIfMissing>
-              <headerDefinitions>
-                <headerDefinition>webapp.runner.launch.license/stringtemplatedefinition.xml</headerDefinition>
-              </headerDefinitions>
-              <mapping>
-                <policy>DOUBLESLASH_STYLE</policy>
-                <props>SCRIPT_STYLE</props>
-              </mapping>
-              <strictCheck>true</strictCheck>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>
