@@ -60,7 +60,6 @@
   </distributionManagement>
   <properties>
     <assembly.plugin.version>2.6</assembly.plugin.version>
-    <release.plugin.version>2.5.3</release.plugin.version>
     <commons-io.version>2.6</commons-io.version>
     <gpg.plugin.version>1.6</gpg.plugin.version>
     <compiler.plugin.version>3.7.0</compiler.plugin.version>
@@ -148,16 +147,6 @@
           <serverId>ossrh</serverId>
           <nexusUrl>https://oss.sonatype.org/</nexusUrl>
           <autoReleaseAfterClose>true</autoReleaseAfterClose>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>${release.plugin.version}</version>
-        <configuration>
-          <autoVersionSubmodules>true</autoVersionSubmodules>
-          <useReleaseProfile>false</useReleaseProfile>
-          <releaseProfiles>release</releaseProfiles>
-          <goals>deploy</goals>
         </configuration>
       </plugin>
     </plugins>
