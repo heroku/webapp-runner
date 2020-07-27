@@ -1,10 +1,10 @@
-# Webapp Runner [![Build Status](https://travis-ci.org/heroku/webapp-runner.svg?branch=master)](https://travis-ci.org/heroku/webapp-runner) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.heroku/webapp-runner/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.heroku/webapp-runner)
+# Webapp Runner [![Build Status](https://travis-ci.com/heroku/webapp-runner.svg?branch=main)](https://travis-ci.com/heroku/webapp-runner) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.heroku/webapp-runner/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.heroku/webapp-runner)
 
 Webapp runner is designed to allow you to launch an exploded or compressed war that is on your filesystem into a tomcat container with a simple `java -jar` command. It supports the following version of Tomcat:
 
 +  Tomcat 7.x: [tomcat7](https://github.com/heroku/webapp-runner/tree/tomcat7) branch (deprecated)
 +  Tomcat 8.0: [tomcat8.0](https://github.com/heroku/webapp-runner/tree/tomcat8.0) branch (deprecated)
-+  Tomcat 8.5: [master](https://github.com/heroku/webapp-runner/tree/master) branch
++  Tomcat 8.5: [main](https://github.com/heroku/webapp-runner/tree/main) branch
 +  Tomcat 9.x: [tomcat9](https://github.com/heroku/webapp-runner/tree/tomcat9) branch
 
 ## Notice: Group ID Change
