@@ -37,92 +37,45 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>${source.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>attach-source</id>
+            <phase>deploy</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+            <configuration>
+              <forceCreation>true</forceCreation>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${javadoc.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>attach-javadoc</id>
+            <phase>deploy</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <additionalparam>-Xdoclint:none</additionalparam>
+              <sourcepath>
+                ${project.parent.basedir}/main/src/main/java:${project.parent.basedir}/memcached/src/main/java:${project.parent.basedir}/redis/src/main/java
+              </sourcepath>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
   <profiles>
-    <profile>
-      <id>fatjar</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <file>
-          <!--
-            This will ensure the profile is always active, but Maven/Gradle won't resolve and install the
-            module dependencies when adding webapp-runner as a dependency to another project.
-          -->
-          <missing>bogus-file-87fwqy8efadhda</missing>
-        </file>
-      </activation>
-      <dependencies>
-        <dependency>
-          <groupId>com.heroku</groupId>
-          <artifactId>webapp-runner-main</artifactId>
-          <version>${project.version}</version>
-          <scope>compile</scope>
-        </dependency>
-        <dependency>
-          <groupId>com.heroku</groupId>
-          <artifactId>webapp-runner-memcached</artifactId>
-          <version>${project.version}</version>
-          <scope>compile</scope>
-        </dependency>
-        <dependency>
-          <groupId>com.heroku</groupId>
-          <artifactId>webapp-runner-redis</artifactId>
-          <version>${project.version}</version>
-          <scope>compile</scope>
-        </dependency>
-      </dependencies>
-    </profile>
-    <profile>
-      <id>release</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-        <property>
-          <name>prepareForCentral</name>
-          <value>true</value>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-source-plugin</artifactId>
-            <version>${source.plugin.version}</version>
-            <executions>
-              <execution>
-                <id>attach-source</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>jar-no-fork</goal>
-                </goals>
-                <configuration>
-                  <forceCreation>true</forceCreation>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <version>${javadoc.plugin.version}</version>
-            <executions>
-              <execution>
-                <id>attach-javadoc</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>jar</goal>
-                </goals>
-                <configuration>
-                  <additionalparam>-Xdoclint:none</additionalparam>
-                  <sourcepath>
-                    ${project.parent.basedir}/main/src/main/java:${project.parent.basedir}/memcached/src/main/java:${project.parent.basedir}/redis/src/main/java
-                  </sourcepath>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
     <profile>
       <id>integration-test</id>
       <properties>
