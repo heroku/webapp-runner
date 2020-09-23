@@ -77,6 +77,39 @@
 
   <profiles>
     <profile>
+      <id>fatjar</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+        <file>
+          <!--
+            This will ensure the profile is always active, but Maven/Gradle won't resolve and install the
+            module dependencies when adding webapp-runner as a dependency to another project.
+          -->
+          <missing>bogus-file-87fwqy8efadhda</missing>
+        </file>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>com.heroku</groupId>
+          <artifactId>webapp-runner-main</artifactId>
+          <version>${project.version}</version>
+          <scope>compile</scope>
+        </dependency>
+        <dependency>
+          <groupId>com.heroku</groupId>
+          <artifactId>webapp-runner-memcached</artifactId>
+          <version>${project.version}</version>
+          <scope>compile</scope>
+        </dependency>
+        <dependency>
+          <groupId>com.heroku</groupId>
+          <artifactId>webapp-runner-redis</artifactId>
+          <version>${project.version}</version>
+          <scope>compile</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+    <profile>
       <id>integration-test</id>
       <properties>
         <invoker.skip>false</invoker.skip>
