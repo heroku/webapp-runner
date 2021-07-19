@@ -1,0 +1,33 @@
+version: 2.1
+
+orbs:
+  heroku: circleci/heroku@1.2.6
+
+executors:
+  openjdk-8:
+    docker:
+      - image: circleci/openjdk:8
+  openjdk-11:
+    docker:
+      - image: circleci/openjdk:11
+
+jobs:
+  test:
+    parameters:
+      executor:
+        type: "string"
+    executor:
+      name: << parameters.executor >>
+    steps:
+      - checkout
+      - heroku/install
+      - run: "./mvnw clean install -Pintegration-test"
+
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - test:
+          matrix:
+            parameters:
+              executor: [ "openjdk-8", "openjdk-11" ]
