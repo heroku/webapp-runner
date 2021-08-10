@@ -63,7 +63,7 @@
   </distributionManagement>
   <properties>
     <assembly.plugin.version>3.3.0</assembly.plugin.version>
-    <commons-io.version>2.6</commons-io.version>
+    <commons-io.version>2.7</commons-io.version>
     <gpg.plugin.version>1.6</gpg.plugin.version>
     <compiler.plugin.version>3.7.0</compiler.plugin.version>
     <tomcat-embed-logging-juli.version>8.5.2</tomcat-embed-logging-juli.version>
