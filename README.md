@@ -1,4 +1,4 @@
-# Webapp Runner [![CircleCI](https://circleci.com/gh/heroku/webapp-runner/tree/main.svg?style=shield)](https://circleci.com/gh/heroku/webapp-runner/tree/main) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.heroku/webapp-runner/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.heroku/webapp-runner)
+# Webapp Runner [![CircleCI](https://circleci.com/gh/heroku/webapp-runner/tree/tomcat9.svg?style=shield)](https://circleci.com/gh/heroku/webapp-runner/tree/main) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.heroku/webapp-runner/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.heroku/webapp-runner)
 
 Webapp runner is designed to allow you to launch an exploded or compressed war that is on your filesystem into a tomcat container with a simple `java -jar` command. It supports the following version of Tomcat:
 
