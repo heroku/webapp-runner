@@ -1,4 +1,0 @@
-language: java
-sudo: true
-before_install: "./etc/travis-setup.sh"
-script: ./mvnw clean install $([ -n "$HEROKU_API_KEY" ] && echo "-Pintegration-test")
