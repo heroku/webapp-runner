@@ -14,24 +14,24 @@ def testProcess = { String command, String expectedText, String errorMessage ->
         }
     }
     process.waitForOrKill(15000)
-    assert foundText, "${errorMessage}: ${output}"
+    assert foundText, "ERROR: ${errorMessage}\nExpected output to contain: '${expectedText}' but it did not\nOutput: ${output}"
 }
 
 testProcess(
         "java -cp target/classes -jar ${basedir}/target/dependency/webapp-runner.jar ${basedir}/src/main/webapp",
-        "Starting Servlet Engine: Apache Tomcat",
+        "Starting Servlet engine: [Apache Tomcat",
         "The web process did not start (filesystem)"
 )
 
 testProcess(
         "java -jar ${basedir}/target/dependency/webapp-runner.jar ${basedir}/target/single_webapp",
-        "Starting Servlet Engine: Apache Tomcat",
+        "Starting Servlet engine: [Apache Tomcat",
         "The web process did not start (target dir)"
 )
 
 testProcess(
         "java -jar ${basedir}/target/dependency/webapp-runner.jar ${basedir}/target/single_webapp.war",
-        "Starting Servlet Engine: Apache Tomcat",
+        "Starting Servlet engine: [Apache Tomcat",
         "The web process did not start (war file)"
 )
 
@@ -43,7 +43,7 @@ testProcess(
 
 testProcess(
         "java -jar ${basedir}/target/dependency/webapp-runner.jar --max-threads 42 ${basedir}/target/single_webapp.war",
-        "Starting Servlet Engine: Apache Tomcat",
+        "Starting Servlet engine: [Apache Tomcat",
         "The web process did not set maxThreads"
 )
 
