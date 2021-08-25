@@ -22,7 +22,7 @@ if [[ $(echo "${tomcatCoreVersion}" | wc -l) -ne 1 ]]; then
 	exit 1
 fi
 
-if [[ $webappRunnerVersion != "${tomcatCoreVersion}"* ]]; then
+if [[ "${webappRunnerVersion}" != "${tomcatCoreVersion}"* ]]; then
 	cat <<-EOF
 		Incorrect webapp-runner Version!
 		================================
