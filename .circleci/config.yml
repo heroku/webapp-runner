@@ -22,11 +22,19 @@ jobs:
       - checkout
       - heroku/install
       - run: "./mvnw clean install -Pintegration-test"
-
+  check-version:
+    executor:
+      name: "openjdk-11"
+    steps:
+      - checkout
+      - run:
+          name: "Check POM version constraints"
+          command: ./scripts/check-version.sh
 workflows:
   version: 2
   ci:
     jobs:
+      - check-version
       - test:
           matrix:
             parameters:
