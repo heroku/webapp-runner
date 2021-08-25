@@ -7,7 +7,7 @@ set -euo pipefail
 ./mvnw --quiet help:help &>/dev/null
 
 webappRunnerVersion="$(./mvnw org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression=project.version -q -B -DforceStdout)"
-tomcatCoreVersion="$(./mvnw -DskipTests install dependency:list | awk -F: '/org.apache.tomcat.embeda:tomcat-embed-core/{print $4}' | sort | uniq)"
+tomcatCoreVersion="$(./mvnw -DskipTests install dependency:list | awk -F: '/org.apache.tomcat.embed:tomcat-embed-core/{print $4}' | sort | uniq)"
 
 if [[ $(echo "${tomcatCoreVersion}" | wc -l) -ne 1 ]]; then
 	cat <<-EOF
