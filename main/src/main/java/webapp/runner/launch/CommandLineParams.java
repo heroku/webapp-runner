@@ -122,6 +122,9 @@ public class CommandLineParams {
   @Parameter(names = "--access-log", description = "Enables AccessLogValue to STDOUT")
   public boolean accessLog = false;
 
+  @Parameter(names = "--secure-error-report-valve", description = "Set true to set ErrorReportValve properties showReport and showServerInfo to false")
+  public boolean secureErrorReportValve = false;
+
   @Parameter(names = "--max-post-size", description = "The maximum size in bytes of the POST which will be handled by the container FORM URL parameter parsing. The limit can be disabled by setting this attribute to a value less than zero. If not specified, this attribute is set to 2097152 (2 megabytes)")
   public Integer maxPostSize = 2097152;
 

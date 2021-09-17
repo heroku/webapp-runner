@@ -239,6 +239,9 @@ Usage: <main class> [options]
     --scanBootstrapClassPath
        Set jar scanner scan bootstrap classpath.
        Default: false
+    --secure-error-report-valve
+      Set true to set ErrorReportValve properties showReport and showServerInfo to false. This protects from Apache stacktrace logging of malicious http requests. 
+      Default: false
     --session-store
       Session store to use (valid options are 'memcache' or 'redis')
     --session-store-ignore-pattern
