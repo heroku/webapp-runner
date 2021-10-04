@@ -67,7 +67,7 @@
     <gpg.plugin.version>1.6</gpg.plugin.version>
     <compiler.plugin.version>3.8.1</compiler.plugin.version>
     <tomcat-embed-logging-juli.version>8.5.2</tomcat-embed-logging-juli.version>
-    <memcached-session-manager-tc8.version>2.3.0</memcached-session-manager-tc8.version>
+    <memcached-session-manager-tc8.version>2.3.2</memcached-session-manager-tc8.version>
     <source.plugin.version>3.0.1</source.plugin.version>
     <jcommander.version>1.81</jcommander.version>
     <redisson.version>3.11.4</redisson.version>
