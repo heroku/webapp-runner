@@ -63,20 +63,20 @@
   </distributionManagement>
   <properties>
     <assembly.plugin.version>3.3.0</assembly.plugin.version>
-    <commons-io.version>2.7</commons-io.version>
+    <commons-io.version>2.11.0</commons-io.version>
     <gpg.plugin.version>1.6</gpg.plugin.version>
-    <compiler.plugin.version>3.7.0</compiler.plugin.version>
+    <compiler.plugin.version>3.8.1</compiler.plugin.version>
     <tomcat-embed-logging-juli.version>8.5.2</tomcat-embed-logging-juli.version>
-    <memcached-session-manager-tc8.version>2.3.0</memcached-session-manager-tc8.version>
-    <source.plugin.version>3.0.1</source.plugin.version>
-    <jcommander.version>1.78</jcommander.version>
+    <memcached-session-manager-tc8.version>2.3.2</memcached-session-manager-tc8.version>
+    <source.plugin.version>3.2.1</source.plugin.version>
+    <jcommander.version>1.81</jcommander.version>
     <redisson.version>3.11.4</redisson.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <invoker.plugin.version>3.2.1</invoker.plugin.version>
+    <invoker.plugin.version>3.2.2</invoker.plugin.version>
     <tomcat.version>8.5.68</tomcat.version>
-    <testng.version>6.14.3</testng.version>
+    <testng.version>7.4.0</testng.version>
     <nexus-staging.plugin.version>1.6.8</nexus-staging.plugin.version>
-    <javadoc.plugin.version>2.10.4</javadoc.plugin.version>
+    <javadoc.plugin.version>3.3.1</javadoc.plugin.version>
   </properties>
   <dependencies>
     <dependency>
