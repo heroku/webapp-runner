@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.heroku</groupId>
   <artifactId>webapp-runner-parent</artifactId>
-  <version>8.5.68.1-SNAPSHOT</version>
+  <version>8.5.68.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>webapp-runner-parent</name>
   <description>Lightweight Application Launcher. Launch your webapp in the most popular open source web container available with a single command.</description>
