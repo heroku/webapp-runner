@@ -50,6 +50,7 @@ public class RedisSessionStore extends SessionStore {
 
       Config config = new Config();
       SingleServerConfig serverConfig = config.useSingleServer()
+          .setSslEnableEndpointIdentification(commandLineParams.sessionStoreSslEndpointIdentification)
           .setAddress(redisUriWithoutAuth.toString())
           .setConnectionPoolSize(commandLineParams.sessionStorePoolSize)
           .setConnectionMinimumIdleSize(commandLineParams.sessionStorePoolSize)
