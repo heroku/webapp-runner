@@ -74,7 +74,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <invoker.plugin.version>3.2.2</invoker.plugin.version>
     <tomcat.version>8.5.68</tomcat.version>
-    <testng.version>7.4.0</testng.version>
+    <testng.version>7.5</testng.version>
     <nexus-staging.plugin.version>1.6.8</nexus-staging.plugin.version>
     <javadoc.plugin.version>3.3.1</javadoc.plugin.version>
   </properties>
