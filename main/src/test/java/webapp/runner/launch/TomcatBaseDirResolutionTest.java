@@ -43,7 +43,7 @@ public class TomcatBaseDirResolutionTest {
 	@Test
 	public void testBaseDirAlreadyExistsAsFile() throws Exception {
 		BASE_DIR.getParentFile().mkdirs();
-		new PrintWriter(BASE_DIR).append("");
+		new PrintWriter(BASE_DIR).append("").close();
 		assertTrue(BASE_DIR.isFile());
 
 		try {
