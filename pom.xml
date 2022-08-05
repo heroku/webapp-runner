@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.heroku</groupId>
   <artifactId>webapp-runner-parent</artifactId>
-  <version>9.0.52.2-SNAPSHOT</version>
+  <version>9.0.65.0</version>
   <packaging>pom</packaging>
   <name>webapp-runner-parent</name>
   <description>Lightweight Application Launcher. Launch your webapp in the most popular open source web container available with a single command.</description>
@@ -71,7 +71,7 @@
     <redisson.version>3.11.5</redisson.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <invoker.plugin.version>2.0.0</invoker.plugin.version>
-    <tomcat.version>9.0.52</tomcat.version>
+    <tomcat.version>9.0.65</tomcat.version>
     <javadoc.plugin.version>2.10.4</javadoc.plugin.version>
     <nexus-staging.plugin.version>1.6.8</nexus-staging.plugin.version>
     <testng.version>6.14.3</testng.version>
