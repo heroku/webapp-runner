@@ -49,6 +49,9 @@ public class CommandLineParams {
   @Parameter(names = "--session-store-ignore-pattern", description = "Request pattern to not track sessions for. Valid only with memcache session store. (default is '.*\\.(png|gif|jpg|css|js)$'. Has no effect for 'redis')")
   public String sessionStoreIgnorePattern = ".*\\.(png|gif|jpg|css|js)$";
 
+  @Parameter(names = "--session-store-ssl-endpoint-identification", description = "Enables or disables SSL endpoint identification for the redis session store. (default is true. Has no effect for 'memcache')", arity = 1)
+  public boolean sessionStoreSslEndpointIdentification = true;
+
   @Parameter(names = "--help", help = true)
   public boolean help;
 
