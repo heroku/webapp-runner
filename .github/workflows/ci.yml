@@ -1,0 +1,32 @@
+name: heroku/webapp-runner/ci
+on:
+  push:
+env:
+  HEROKU_API_KEY: xxxxxxx
+  HEROKU_API_USER: xxxxxxx
+jobs:
+  check-version:
+    runs-on: sfdc-hk-ubuntu-latest
+    container:
+      image: openjdk:11
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check POM version constraints
+      run: "./scripts/check-version.sh"
+  test:
+    runs-on: sfdc-hk-ubuntu-latest
+    strategy:
+      matrix:
+        executor:
+        - openjdk-8
+        - openjdk-11
+    steps:
+    - uses: actions/checkout@v2
+    - shell: bash
+      run: |-
+        if [[ $(command -v heroku) == "" ]]; then
+          curl https://cli-assets.heroku.com/install.sh | sh
+        else
+          echo "Heroku is already installed. No operation was performed."
+        fi
+    - run: "./mvnw clean install -Pintegration-test"
