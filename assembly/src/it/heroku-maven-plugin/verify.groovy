@@ -18,6 +18,10 @@ try {
 
     process = "curl https://${appName}.herokuapp.com".execute()
     process.waitFor()
+
+    process = "heroku logs -a${appName}".execute()
+    process.waitFor()
+
     output = process.text
     assert output.contains("hello, JSP"), "app is not running: ${output}"
 
