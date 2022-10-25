@@ -2,5 +2,11 @@ version: 2
 updates:
   - package-ecosystem: "maven"
     directory: "/"
+    target-branch: "main"
+    schedule:
+      interval: "monthly"
+  - package-ecosystem: "maven"
+    directory: "/"
+    target-branch: "tomcat9"
     schedule:
       interval: "monthly"
