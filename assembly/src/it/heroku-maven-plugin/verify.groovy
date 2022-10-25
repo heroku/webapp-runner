@@ -16,6 +16,13 @@ try {
     output = process.text
     assert output.contains("REDIS_URL"), "The Redis add-on was not added: ${output}"
 
+    echo "heroku logs:"
+
+    process = "heroku logs -a${appName}".execute()
+    process.waitFor()
+
+    echo "heroku logs end"
+
     process = "curl https://${appName}.herokuapp.com".execute()
     process.waitFor()
     output = process.text
