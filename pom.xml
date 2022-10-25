@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.heroku</groupId>
   <artifactId>webapp-runner-parent</artifactId>
-  <version>8.5.68.2-SNAPSHOT</version>
+  <version>8.5.83.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>webapp-runner-parent</name>
   <description>Lightweight Application Launcher. Launch your webapp in the most popular open source web container available with a single command.</description>
@@ -70,10 +70,10 @@
     <memcached-session-manager-tc8.version>2.3.2</memcached-session-manager-tc8.version>
     <source.plugin.version>3.2.1</source.plugin.version>
     <jcommander.version>1.82</jcommander.version>
-    <redisson.version>3.11.4</redisson.version>
+    <redisson.version>3.17.7</redisson.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <invoker.plugin.version>3.3.0</invoker.plugin.version>
-    <tomcat.version>8.5.68</tomcat.version>
+    <tomcat.version>8.5.83</tomcat.version>
     <testng.version>7.5</testng.version>
     <nexus-staging.plugin.version>1.6.13</nexus-staging.plugin.version>
     <javadoc.plugin.version>3.4.1</javadoc.plugin.version>
@@ -199,6 +199,37 @@
           <serverId>ossrh</serverId>
           <nexusUrl>https://oss.sonatype.org/</nexusUrl>
           <autoReleaseAfterClose>true</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>2.13.0</version>
+        <configuration>
+          <ruleSet>
+            <rules>
+              <!-- We only support Tomcat 8.5. It is still maintained and gets security fixes until 2025. -->
+              <rule>
+                <groupId>org.apache.tomcat*</groupId>
+                <ignoreVersions>
+                  <ignoreVersion>
+                    <type>regex</type>
+                    <version>^(?!8\.5\.).*</version>
+                  </ignoreVersion>
+                </ignoreVersions>
+              </rule>
+              <!-- testng does only support Java 11 in version >= 7.6. -->
+              <rule>
+                <groupId>org.testng</groupId>
+                <ignoreVersions>
+                  <ignoreVersion>
+                    <type>regex</type>
+                    <version>^(?!7\.5\.).*</version>
+                  </ignoreVersion>
+                </ignoreVersions>
+              </rule>
+            </rules>
+          </ruleSet>
         </configuration>
       </plugin>
     </plugins>
