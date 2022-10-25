@@ -199,6 +199,37 @@
           <autoReleaseAfterClose>true</autoReleaseAfterClose>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>2.13.0</version>
+        <configuration>
+          <ruleSet>
+            <rules>
+              <!-- We only support Tomcat 9. -->
+              <rule>
+                <groupId>org.apache.tomcat*</groupId>
+                <ignoreVersions>
+                  <ignoreVersion>
+                    <type>regex</type>
+                    <version>^(?!9\.).*</version>
+                  </ignoreVersion>
+                </ignoreVersions>
+              </rule>
+              <!-- testng does only support Java 11 in version >= 7.6. -->
+              <rule>
+                <groupId>org.testng</groupId>
+                <ignoreVersions>
+                  <ignoreVersion>
+                    <type>regex</type>
+                    <version>^(?!7\.5\.).*</version>
+                  </ignoreVersion>
+                </ignoreVersions>
+              </rule>
+            </rules>
+          </ruleSet>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <profiles>
