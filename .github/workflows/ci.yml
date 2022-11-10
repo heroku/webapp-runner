@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - tomcat9
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  maven:
+    name: "Execute build, run tests (Java ${{ matrix.java-version }})"
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        java-version:
+          - 8
+          - 11
+    env:
+      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      HEROKU_API_USER: ${{ secrets.HEROKU_API_USER }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: zulu
+          java-version: ${{ matrix.java-version }}
+      - name: Install Heroku CLI
+        run: curl https://cli-assets.heroku.com/install.sh | sh
+      - run: "./mvnw --batch-mode clean install -Pintegration-test"
+  version-check:
+    name: "Check POM version constraints"
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: zulu
+          java-version: 8
+      - run: ./scripts/check-version.sh
