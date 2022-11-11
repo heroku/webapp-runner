@@ -1,8 +1,7 @@
 package webapp.runner.launch.valves;
 
-import org.apache.catalina.valves.AbstractAccessLogValve;
-
 import java.io.CharArrayWriter;
+import org.apache.catalina.valves.AbstractAccessLogValve;
 
 public class StdoutAccessLogValve extends AbstractAccessLogValve {
   @Override

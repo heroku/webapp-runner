@@ -23,7 +23,7 @@ jobs:
         with:
           distribution: zulu
           java-version: ${{ matrix.java-version }}
-      - run: "./mvnw --batch-mode clean install"
+      - run: "./mvnw --batch-mode clean verify package"
   version-check:
     name: "Check POM version constraints"
     runs-on: ubuntu-22.04
