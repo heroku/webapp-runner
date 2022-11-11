@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - tomcat9
   pull_request:
 
 permissions:

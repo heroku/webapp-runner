@@ -1,16 +1,8 @@
 # Webapp Runner [![CI](https://github.com/heroku/webapp-runner/actions/workflows/ci.yml/badge.svg?branch=tomcat9)](https://github.com/heroku/webapp-runner/actions/workflows/ci.yml) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.heroku/webapp-runner/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.heroku/webapp-runner)
 
-Webapp runner is designed to allow you to launch an exploded or compressed war that is on your filesystem into a tomcat container with a simple `java -jar` command. It supports the following version of Tomcat:
-
-+  Tomcat 7.x: [tomcat7](https://github.com/heroku/webapp-runner/tree/tomcat7) branch
-+  Tomcat 8.0: [tomcat8.0](https://github.com/heroku/webapp-runner/tree/tomcat8.0) branch
-+  Tomcat 8.5: [main](https://github.com/heroku/webapp-runner/tree/main) branch
-+  Tomcat 9.x: [tomcat9](https://github.com/heroku/webapp-runner/tree/tomcat9) branch
-
-## Notice: Group ID Change
-
-Please note that this project was previously published under the `com.github.jsimone` group id.
-If you want to install a version <= `9.0.27.1` you must use the old group id.
+Webapp runner is designed to allow you to launch an exploded or compressed war that is on your filesystem into a 
+tomcat container with a simple `java -jar` command. It currently supports Tomcat 9, older versions of `webapp-runner`
+for other Tomcat versions are no longer maintained.
 
 ## Usage
 

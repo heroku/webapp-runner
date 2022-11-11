@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>webapp-runner-parent</artifactId>
-    <groupId>com.heroku</groupId>
-    <version>9.0.68.1-SNAPSHOT</version>
-  </parent>
-  <modelVersion>4.0.0</modelVersion>
-
-  <artifactId>webapp-runner-memcached</artifactId>
-  <dependencies>
-    <dependency>
-      <groupId>com.heroku</groupId>
-      <artifactId>webapp-runner-main</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>de.javakaffee.msm</groupId>
-      <artifactId>memcached-session-manager-tc9</artifactId>
-      <version>${memcached-session-manager.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>com.couchbase.client</groupId>
-          <artifactId>couchbase-client</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>redis.clients</groupId>
-          <artifactId>jedis</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-  </dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>webapp-runner-parent</artifactId>
+        <groupId>com.heroku</groupId>
+        <version>9.0.68.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>webapp-runner-memcached</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.heroku</groupId>
+            <artifactId>webapp-runner-main</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.javakaffee.msm</groupId>
+            <artifactId>memcached-session-manager-tc9</artifactId>
+            <version>${memcached-session-manager.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.couchbase.client</groupId>
+                    <artifactId>couchbase-client</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>redis.clients</groupId>
+                    <artifactId>jedis</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
 </project>
