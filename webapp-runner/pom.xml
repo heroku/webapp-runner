@@ -107,41 +107,5 @@
                 </dependency>
             </dependencies>
         </profile>
-        <profile>
-            <id>integration-test</id>
-            <properties>
-                <invoker.skip>false</invoker.skip>
-            </properties>
-            <build>
-                <defaultGoal>install</defaultGoal>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-invoker-plugin</artifactId>
-                        <version>${invoker.plugin.version}</version>
-                        <configuration>
-                            <projectsDirectory>src/it</projectsDirectory>
-                            <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
-                            <preBuildHookScript>setup.groovy</preBuildHookScript>
-                            <postBuildHookScript>verify.groovy</postBuildHookScript>
-                            <streamLogs>true</streamLogs>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>integration-test</id>
-                                <goals>
-                                    <goal>install</goal>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <pomIncludes>
-                                        <pomInclude>*/pom.xml</pomInclude>
-                                    </pomIncludes>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
     </profiles>
 </project>

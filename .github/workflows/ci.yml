@@ -17,18 +17,13 @@ jobs:
       matrix:
         java-version:
           - 11
-    env:
-      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      HEROKU_API_USER: ${{ secrets.HEROKU_API_USER }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
         with:
           distribution: zulu
           java-version: ${{ matrix.java-version }}
-      - name: Install Heroku CLI
-        run: curl https://cli-assets.heroku.com/install.sh | sh
-      - run: "./mvnw --batch-mode clean install -Pintegration-test"
+      - run: "./mvnw --batch-mode clean install"
   version-check:
     name: "Check POM version constraints"
     runs-on: ubuntu-22.04
