@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - tomcat9
   pull_request:
 
 permissions:
@@ -17,20 +16,14 @@ jobs:
     strategy:
       matrix:
         java-version:
-          - 8
           - 11
-    env:
-      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      HEROKU_API_USER: ${{ secrets.HEROKU_API_USER }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
         with:
           distribution: zulu
           java-version: ${{ matrix.java-version }}
-      - name: Install Heroku CLI
-        run: curl https://cli-assets.heroku.com/install.sh | sh
-      - run: "./mvnw --batch-mode clean install -Pintegration-test"
+      - run: "./mvnw --batch-mode clean verify package"
   version-check:
     name: "Check POM version constraints"
     runs-on: ubuntu-22.04
@@ -39,5 +32,5 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: zulu
-          java-version: 8
+          java-version: 11
       - run: ./scripts/check-version.sh
