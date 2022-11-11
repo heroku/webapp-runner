@@ -11,13 +11,6 @@
         available with a single command.
     </description>
     <url>https://heroku.github.com/webapp-runner</url>
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>https://github.com/heroku/webapp-runner/blob/main/src/main/resources/license/header.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
     <mailingLists>
         <mailingList>
             <name>Webapp runner issues</name>
