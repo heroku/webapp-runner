@@ -52,20 +52,20 @@
     <properties>
         <assembly.plugin.version>2.6</assembly.plugin.version>
         <release.plugin.version>2.5.3</release.plugin.version>
-        <commons-io.version>2.6</commons-io.version>
+        <commons-io.version>2.11.0</commons-io.version>
         <gpg.plugin.version>1.6</gpg.plugin.version>
         <compiler.plugin.version>3.7.0</compiler.plugin.version>
         <tomcat-embed-logging-juli.version>9.0.0.M6</tomcat-embed-logging-juli.version>
-        <memcached-session-manager.version>2.3.0</memcached-session-manager.version>
+        <memcached-session-manager.version>2.3.2</memcached-session-manager.version>
         <source.plugin.version>3.0.1</source.plugin.version>
-        <jcommander.version>1.72</jcommander.version>
-        <redisson.version>3.11.5</redisson.version>
+        <jcommander.version>1.82</jcommander.version>
+        <redisson.version>3.18.0</redisson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <invoker.plugin.version>2.0.0</invoker.plugin.version>
         <tomcat.version>9.0.68</tomcat.version>
         <javadoc.plugin.version>2.10.4</javadoc.plugin.version>
         <nexus-staging.plugin.version>1.6.8</nexus-staging.plugin.version>
-        <testng.version>6.14.3</testng.version>
+        <testng.version>7.6.1</testng.version>
     </properties>
     <dependencies>
         <dependency>
