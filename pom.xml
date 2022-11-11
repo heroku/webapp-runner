@@ -28,10 +28,10 @@
         </mailingList>
     </mailingLists>
     <modules>
-        <module>main</module>
-        <module>memcached</module>
-        <module>redis</module>
-        <module>assembly</module>
+        <module>webapp-runner</module>
+        <module>webapp-runner-main</module>
+        <module>webapp-runner-memcached</module>
+        <module>webapp-runner-redis</module>
     </modules>
     <scm>
         <connection>scm:git:git@github.com:heroku/webapp-runner.git</connection>
