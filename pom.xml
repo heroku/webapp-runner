@@ -50,7 +50,7 @@
         <compiler.plugin.version>3.7.0</compiler.plugin.version>
         <tomcat-embed-logging-juli.version>9.0.0.M6</tomcat-embed-logging-juli.version>
         <memcached-session-manager.version>2.3.2</memcached-session-manager.version>
-        <source.plugin.version>3.0.1</source.plugin.version>
+        <source.plugin.version>3.2.1</source.plugin.version>
         <jcommander.version>1.82</jcommander.version>
         <redisson.version>3.18.0</redisson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
