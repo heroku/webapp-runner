@@ -63,9 +63,9 @@
                             <goal>jar</goal>
                         </goals>
                         <configuration>
-                            <additionalparam>-Xdoclint:none</additionalparam>
+                            <doclint>none</doclint>
                             <sourcepath>
-                                ${project.parent.basedir}/main/src/main/java:${project.parent.basedir}/memcached/src/main/java:${project.parent.basedir}/redis/src/main/java
+                                ${project.parent.basedir}/webapp-runner-main/src/main/java:${project.parent.basedir}/webapp-runner-memcached/src/main/java:${project.parent.basedir}/webapp-runner-redis/src/main/java
                             </sourcepath>
                         </configuration>
                     </execution>
