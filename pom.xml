@@ -11,6 +11,17 @@
         available with a single command.
     </description>
     <url>https://heroku.github.com/webapp-runner</url>
+    <licenses>
+        <license>
+            <name>BSD-3-Clause</name>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Manuel Fuchs</name>
+            <organization>Salesforce, Inc.</organization>
+        </developer>
+    </developers>
     <mailingLists>
         <mailingList>
             <name>Webapp runner issues</name>
@@ -170,7 +181,7 @@
                         </goals>
                         <configuration>
                             <source>1.8</source>
-                            <additionalparam>-Xdoclint:none</additionalparam>
+                            <doclint>none</doclint>
                         </configuration>
                     </execution>
                 </executions>
