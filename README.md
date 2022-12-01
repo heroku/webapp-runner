@@ -234,6 +234,9 @@ Usage: <main class> [options]
     --use-body-encoding-for-uri
       Set if the entity body encoding should be used for the URI.
       Default: false
+    --secure-error-report-valve
+      Set true to set ErrorReportValve properties showReport and showServerInfo to false. This protects from Apache stacktrace logging of malicious http requests. 
+      Default: false
     -A
       Allows setting HTTP connector attributes. For example: -Acompression=on
       Syntax: -Akey=value

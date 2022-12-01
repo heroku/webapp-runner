@@ -44,6 +44,7 @@ import org.apache.catalina.startup.ExpandWar;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.users.MemoryUserDatabase;
 import org.apache.catalina.users.MemoryUserDatabaseFactory;
+import org.apache.catalina.valves.ErrorReportValve;
 import org.apache.coyote.AbstractProtocol;
 import org.apache.coyote.ProtocolHandler;
 import org.apache.tomcat.util.descriptor.web.LoginConfig;
@@ -298,6 +299,13 @@ public class Main {
       host.getPipeline().addValve(valve);
     }
 
+    if (commandLineParams.secureErrorReportValve) {
+      Host host = tomcat.getHost();
+      ErrorReportValve valve = new ErrorReportValve();
+      valve.setShowReport(false);
+      valve.setShowServerInfo(false);
+      host.getPipeline().addValve(valve);
+    }
     // start the server
     tomcat.start();
 
