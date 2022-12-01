@@ -131,7 +131,10 @@ public class CommandLineParams {
               + " jar file)")
   public String tomcatUsersLocation;
 
-  @Parameter(names = "--secure-error-report-valve", description = "Set true to set ErrorReportValve properties showReport and showServerInfo to false")
+  @Parameter(
+      names = "--secure-error-report-valve",
+      description =
+          "Set true to set ErrorReportValve properties showReport and showServerInfo to false")
   public boolean secureErrorReportValve = false;
 
   // Not actually useful because it can only be set to true. We're keeping it here for backward
