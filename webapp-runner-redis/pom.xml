@@ -24,5 +24,11 @@
             <artifactId>redisson-tomcat-9</artifactId>
             <version>${redisson.version}</version>
         </dependency>
+        <!-- This dependency is required by redisson when the FstCodec is used -->
+        <dependency>
+            <groupId>de.ruedigermoeller</groupId>
+            <artifactId>fst</artifactId>
+            <version>2.57</version>
+        </dependency>
     </dependencies>
 </project>
