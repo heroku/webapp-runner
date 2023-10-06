@@ -3,6 +3,13 @@ name: Prepare release
 on:
   workflow_dispatch:
 
+defaults:
+  run:
+    # Setting an explicit bash shell ensures GitHub Actions enables pipefail mode too, rather
+    # than only error on exit. This is important for UX since this workflow uses pipes. See:
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsshell
+    shell: bash
+
 jobs:
   prepare-release:
     name: Prepare Release
@@ -27,6 +34,8 @@ jobs:
       - name: Record latest release version
         id: old-version
         run: echo "version=$(gh release view --json tagName | jq -j .tagName)" >> "${GITHUB_OUTPUT}"
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       - name: Drop -SNAPSHOT suffix from version
         run: ./mvnw versions:set -DremoveSnapshot -DgenerateBackupPoms=false
