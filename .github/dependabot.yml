@@ -4,7 +4,11 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    labels:
+      - "skip changelog"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "monthly"
+    labels:
+      - "skip changelog"
