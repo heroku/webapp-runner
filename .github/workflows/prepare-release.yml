@@ -1,7 +1,6 @@
 name: Prepare release
 
-on:
-  workflow_dispatch:
+on: workflow_dispatch
 
 defaults:
   run:
@@ -35,7 +34,7 @@ jobs:
         id: old-version
         run: echo "version=$(gh release view --json tagName | jq -j .tagName)" >> "${GITHUB_OUTPUT}"
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ steps.generate-token.outputs.app_token }}
 
       - name: Drop -SNAPSHOT suffix from version
         run: ./mvnw versions:set -DremoveSnapshot -DgenerateBackupPoms=false
