@@ -47,7 +47,7 @@ jobs:
 
       - name: Check GitHub release does not already exist
         run: |
-          if gh release view '${{ steps.new-version.outputs.version }}' --json url --jq '.url'; then
+          if gh release view 'v${{ steps.new-version.outputs.version }}' --json url --jq '.url'; then
             echo "Aborting since a GitHub release already exists for ${{ steps.new-version.outputs.version }}!" >&2
             echo "If you are sure you want to recreate the release, delete the existing one first." >&2
             exit 1
@@ -76,7 +76,7 @@ jobs:
         uses: softprops/action-gh-release@v0.1.15
         with:
           token: ${{ steps.generate-token.outputs.app_token }}
-          tag_name: ${{ steps.new-version.outputs.version }}
+          tag_name: v${{ steps.new-version.outputs.version }}
           body: ${{ steps.changelog-entry.outputs.content }}
 
       - name: Record next version
@@ -99,6 +99,8 @@ jobs:
           delete-branch: true
           committer: ${{ vars.LINGUIST_GH_APP_USERNAME }} <${{ vars.LINGUIST_GH_APP_EMAIL }}>
           author: ${{ vars.LINGUIST_GH_APP_USERNAME }} <${{ vars.LINGUIST_GH_APP_EMAIL }}>
+          labels: |
+            skip changelog
 
       - name: Configure pull request
         if: steps.pr.outputs.pull-request-operation == 'created'
