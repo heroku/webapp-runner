@@ -6,6 +6,7 @@ import static org.testng.Assert.fail;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -29,6 +30,7 @@ public class TomcatBaseDirResolutionTest {
 
   @Test
   public void testBaseDirNotExists() throws Exception {
+    Files.deleteIfExists(BASE_DIR.toPath());
     Main.resolveTomcatBaseDir(PORT, null);
     assertTrue(BASE_DIR.isDirectory());
   }
@@ -43,7 +45,14 @@ public class TomcatBaseDirResolutionTest {
   @Test
   public void testBaseDirAlreadyExistsAsFile() throws Exception {
     BASE_DIR.getParentFile().mkdirs();
-    new PrintWriter(BASE_DIR).append("");
+    PrintWriter out = null;
+    try {
+      out = new PrintWriter(BASE_DIR).append("");
+    } finally {
+      if (out != null) {
+        out.close();
+      }
+    }
     assertTrue(BASE_DIR.isFile());
 
     try {

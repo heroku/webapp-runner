@@ -4,7 +4,7 @@
     <parent>
         <artifactId>webapp-runner-parent</artifactId>
         <groupId>com.heroku</groupId>
-        <version>9.0.80.1-SNAPSHOT</version>
+        <version>10.1.13.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>webapp-runner-redis</artifactId>
@@ -21,7 +21,7 @@
         </dependency>
         <dependency>
             <groupId>org.redisson</groupId>
-            <artifactId>redisson-tomcat-9</artifactId>
+            <artifactId>redisson-tomcat-10</artifactId>
             <version>${redisson.version}</version>
         </dependency>
         <!-- This dependency is required by redisson when the FstCodec is used -->
