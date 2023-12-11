@@ -1,6 +1,15 @@
 name: Prepare release
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      major-version:
+        description: 'Major Version'
+        required: true
+        default: '9'
+        type: choice
+        options:
+          - '9'
 
 defaults:
   run:
@@ -32,16 +41,22 @@ jobs:
 
       - name: Record latest release version
         id: old-version
-        run: echo "version=$(gh release view --json tagName | jq -j '.tagName | sub("v"; "")')" >> "${GITHUB_OUTPUT}"
+        # We can't just use `gh release view` since we have to deal with multiple versions that may semantically the
+        # "latest version", depending on the subproject we prepare the release for. Additionally, `gh release list`
+        # does not support JSON output at the time of writing: https://github.com/cli/cli/issues/4572
+        run: echo "version=$(gh api /repos/heroku/webapp-runner/releases | jq -j 'map(select(.tag_name | startswith("v${{ inputs.major-version }}"))) | sort_by(.published_at | fromdateiso8601) | last | .tag_name[1:]')" >> "${GITHUB_OUTPUT}"
+        working-directory: webapp-runner-${{ inputs.major-version }}
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.app_token }}
 
       - name: Drop -SNAPSHOT suffix from version
         run: ./mvnw versions:set -DremoveSnapshot -DgenerateBackupPoms=false
+        working-directory: webapp-runner-${{ inputs.major-version }}
 
       - name: Record new version
         id: new-version
         run: echo "version=$(./mvnw org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression=project.version -q -B -DforceStdout)" >> "${GITHUB_OUTPUT}"
+        working-directory: webapp-runner-${{ inputs.major-version }}
 
       - name: Update changelog
         run: |
@@ -55,6 +70,7 @@ jobs:
             --expression "s~(^## \[Unreleased\])$~\1\n\n\n## [${NEW_VERSION}] - ${DATE_TODAY}~" \
             --expression "s~(^\[unreleased\]:) .*$~\1 ${UNRELEASED_URL}\n[${NEW_VERSION}]: ${NEW_VERSION_URL}~" \
             CHANGELOG.md
+        working-directory: webapp-runner-${{ inputs.major-version }}
 
       - name: Create pull request
         id: pr

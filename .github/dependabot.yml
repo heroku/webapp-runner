@@ -1,11 +1,12 @@
 version: 2
 updates:
   - package-ecosystem: "maven"
-    directory: "/"
+    directory: "/webapp-runner-9"
     schedule:
       interval: "monthly"
     labels:
       - "skip changelog"
+      - "tomcat 9"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:

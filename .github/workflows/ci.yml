@@ -11,12 +11,14 @@ permissions:
 
 jobs:
   maven:
-    name: "Execute build, run tests (Java ${{ matrix.java-version }})"
+    name: "Execute build, run tests (Tomcat ${{ matrix.major-version }}, Java ${{ matrix.java-version }})"
     runs-on: ubuntu-22.04
     strategy:
       matrix:
         java-version:
           - 11
+        major-version:
+          - 9
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -24,13 +26,20 @@ jobs:
           distribution: zulu
           java-version: ${{ matrix.java-version }}
       - run: "./mvnw --batch-mode clean verify package"
+        working-directory: webapp-runner-${{ matrix.major-version }}
+
   version-check:
-    name: "Check POM version constraints"
+    name: "Check POM version constraints (Tomcat ${{ matrix.major-version }})"
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        major-version:
+          - 9
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: zulu
           java-version: 11
-      - run: ./scripts/check-version.sh
+      - run: ../scripts/check-version.sh
+        working-directory: webapp-runner-${{ matrix.major-version }}

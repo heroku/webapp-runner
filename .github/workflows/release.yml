@@ -1,6 +1,15 @@
 name: Release
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      major-version:
+        description: 'Major Version'
+        required: true
+        default: '9'
+        type: choice
+        options:
+          - '9'
 
 defaults:
   run:
@@ -44,6 +53,7 @@ jobs:
       - name: Record new version
         id: new-version
         run: echo "version=$(./mvnw org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression=project.version -q -B -DforceStdout)" >> "${GITHUB_OUTPUT}"
+        working-directory: webapp-runner-${{ inputs.major-version }}
 
       - name: Check GitHub release does not already exist
         run: |
@@ -61,12 +71,13 @@ jobs:
         run: |
           {
             echo 'content<<CHANGELOG_END'
-            awk '/^## \[${{ steps.new-version.outputs.version }}\]/{flag=1; next} /^## /{flag=0} flag' CHANGELOG.md
+            awk '/^## \[${{ steps.new-version.outputs.version }}\]/{flag=1; next} /^## /{flag=0} flag' webapp-runner-${{ inputs.major-version }}/CHANGELOG.md
             echo CHANGELOG_END
           } >> "${GITHUB_OUTPUT}"
 
       - name: Deploy project
         run: ./mvnw --batch-mode deploy
+        working-directory: webapp-runner-${{ inputs.major-version }}
         env:
           MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
@@ -85,6 +96,7 @@ jobs:
 
       - name: Update version
         run: ./mvnw versions:set -DgenerateBackupPoms=false -DnewVersion="${{ steps.next-version.outputs.version }}"
+        working-directory: webapp-runner-${{ inputs.major-version }}
 
       - name: Create pull request
         id: pr

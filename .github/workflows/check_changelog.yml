@@ -16,5 +16,9 @@ jobs:
         uses: actions/checkout@v4
       - name: Check that CHANGELOG is touched
         run: |
-          git fetch origin ${{ github.base_ref }} --depth 1 && \
-          git diff remotes/origin/${{ github.base_ref }} --name-only | grep CHANGELOG.md
+          git fetch origin ${{ github.base_ref }} --depth 1 || exit 1
+
+          changed_root_dirs=$(git diff remotes/origin/main --name-only | awk -F'/' 'NF!=1{print $1}' | grep '^webapp-runner-' | uniq)
+          for changed_root_dir in $changed_root_dirs; do
+            git diff remotes/origin/${{ github.base_ref }} --name-only | grep "${changed_root_dir}/CHANGELOG.md" || exit 1
+          done

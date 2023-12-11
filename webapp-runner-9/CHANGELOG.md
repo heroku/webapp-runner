@@ -4,6 +4,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+- Update release process. ([#389](https://github.com/heroku/webapp-runner/pull/389))
 
 ## [9.0.83.0] - 2023-11-20
 
