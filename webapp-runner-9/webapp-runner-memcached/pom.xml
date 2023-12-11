@@ -4,7 +4,7 @@
     <parent>
         <artifactId>webapp-runner-parent</artifactId>
         <groupId>com.heroku</groupId>
-        <version>9.0.83.1-SNAPSHOT</version>
+        <version>9.0.83.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>webapp-runner-memcached</artifactId>
