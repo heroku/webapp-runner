@@ -26,6 +26,7 @@
 package webapp.runner.launch;
 
 import com.beust.jcommander.JCommander;
+import jakarta.servlet.annotation.ServletSecurity;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -35,7 +36,6 @@ import java.nio.file.Paths;
 import java.util.Map;
 import javax.naming.CompositeName;
 import javax.naming.StringRefAddr;
-import javax.servlet.annotation.ServletSecurity.TransportGuarantee;
 import org.apache.catalina.*;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.StandardContext;
@@ -73,7 +73,7 @@ public class Main {
     }
 
     // default to src/main/webapp
-    if (commandLineParams.paths.size() == 0) {
+    if (commandLineParams.paths.isEmpty()) {
       commandLineParams.paths.add("src/main/webapp");
     }
 
@@ -106,25 +106,25 @@ public class Main {
       if (pathToTrustStore != null) {
         nioConnector.setProperty("sslProtocol", "tls");
         File truststoreFile = new File(pathToTrustStore);
-        nioConnector.setAttribute("truststoreFile", truststoreFile.getAbsolutePath());
+        nioConnector.setProperty("truststoreFile", truststoreFile.getAbsolutePath());
         System.out.println(truststoreFile.getAbsolutePath());
-        nioConnector.setAttribute(
+        nioConnector.setProperty(
             "trustStorePassword", System.getProperty("javax.net.ssl.trustStorePassword"));
       }
       String pathToKeystore = System.getProperty("javax.net.ssl.keyStore");
       if (pathToKeystore != null) {
         File keystoreFile = new File(pathToKeystore);
-        nioConnector.setAttribute("keystoreFile", keystoreFile.getAbsolutePath());
+        nioConnector.setProperty("keystoreFile", keystoreFile.getAbsolutePath());
         System.out.println(keystoreFile.getAbsolutePath());
-        nioConnector.setAttribute(
+        nioConnector.setProperty(
             "keystorePass", System.getProperty("javax.net.ssl.keyStorePassword"));
       }
       if (commandLineParams.enableClientAuth) {
-        nioConnector.setAttribute("clientAuth", true);
+        nioConnector.setProperty("clientAuth", "true");
       }
     }
 
-    if (commandLineParams.proxyBaseUrl.length() > 0) {
+    if (!commandLineParams.proxyBaseUrl.isEmpty()) {
       URI uri = new URI(commandLineParams.proxyBaseUrl);
       String scheme = uri.getScheme();
       nioConnector.setProxyName(uri.getHost());
@@ -191,7 +191,7 @@ public class Main {
     // Use the commandline context-path (or default)
     // warn if the contextPath doesn't start with a '/'. This causes issues serving content at the
     // context root.
-    if (commandLineParams.contextPath.length() > 0
+    if (!commandLineParams.contextPath.isEmpty()
         && !commandLineParams.contextPath.startsWith("/")) {
       System.out.println(
           "WARNING: You entered a path: ["
@@ -361,7 +361,8 @@ public class Main {
     SecurityConstraint securityConstraint = new SecurityConstraint();
     securityConstraint.addAuthRole(AUTH_ROLE);
     if (enableSSL) {
-      securityConstraint.setUserConstraint(TransportGuarantee.CONFIDENTIAL.toString());
+      securityConstraint.setUserConstraint(
+          ServletSecurity.TransportGuarantee.CONFIDENTIAL.toString());
     }
     SecurityCollection securityCollection = new SecurityCollection();
     securityCollection.addPattern("/*");
