@@ -4,6 +4,9 @@ updates:
     directory: "/webapp-runner-9"
     schedule:
       interval: "monthly"
+    ignore:
+      - dependency-name: "tomcat.version"
+        update-types: ["version-update:semver-major"]
     labels:
       - "skip changelog"
       - "tomcat 9"
@@ -11,6 +14,9 @@ updates:
     directory: "/webapp-runner-10"
     schedule:
       interval: "monthly"
+    ignore:
+      - dependency-name: "tomcat.version"
+        update-types: ["version-update:semver-major"]
     labels:
       - "skip changelog"
       - "tomcat 10"
