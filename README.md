@@ -1,7 +1,7 @@
 # Webapp Runner [![CI](https://github.com/heroku/webapp-runner/actions/workflows/ci.yml/badge.svg?branch=tomcat9)](https://github.com/heroku/webapp-runner/actions/workflows/ci.yml) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.heroku/webapp-runner/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.heroku/webapp-runner)
 
 Webapp Runner is designed to allow you to launch an exploded or compressed war that is on your filesystem into a 
-tomcat container with a simple `java -jar` command. It currently supports Tomcat 9, older versions of `webapp-runner`
+tomcat container with a simple `java -jar` command. It currently supports Tomcat `9.0.x` and `10.1.x`, older versions of `webapp-runner`
 for other Tomcat versions are no longer maintained.
 
 ## Table of Contents
@@ -14,7 +14,6 @@ for other Tomcat versions are no longer maintained.
 - [Using behind a reverse proxy server](#using-behind-a-reverse-proxy-server)
 - [Options](#options)
 - [Development](#development)
-- [License](#license)
 
 ## Usage
 
