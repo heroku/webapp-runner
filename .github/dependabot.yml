@@ -7,6 +7,13 @@ updates:
     labels:
       - "skip changelog"
       - "tomcat 9"
+  - package-ecosystem: "maven"
+    directory: "/webapp-runner-10"
+    schedule:
+      interval: "monthly"
+    labels:
+      - "skip changelog"
+      - "tomcat 10"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
