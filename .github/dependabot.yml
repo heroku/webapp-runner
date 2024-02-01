@@ -10,6 +10,7 @@ updates:
     labels:
       - "skip changelog"
       - "tomcat 9"
+      - "dependencies"
   - package-ecosystem: "maven"
     directory: "/webapp-runner-10"
     schedule:
@@ -20,9 +21,11 @@ updates:
     labels:
       - "skip changelog"
       - "tomcat 10"
+      - "dependencies"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "monthly"
     labels:
       - "skip changelog"
+      - "dependencies"
