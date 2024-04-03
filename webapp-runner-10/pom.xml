@@ -56,7 +56,7 @@
     <properties>
         <assembly.plugin.version>3.6.0</assembly.plugin.version>
         <release.plugin.version>2.5.3</release.plugin.version>
-        <commons-io.version>2.15.1</commons-io.version>
+        <commons-io.version>2.16.0</commons-io.version>
         <gpg.plugin.version>3.1.0</gpg.plugin.version>
         <compiler.plugin.version>3.12.1</compiler.plugin.version>
         <tomcat-embed-logging-juli.version>9.0.0.M6</tomcat-embed-logging-juli.version>
