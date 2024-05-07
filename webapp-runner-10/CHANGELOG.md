@@ -4,6 +4,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+- Update Tomcat to version `10.1.23`. ([#456](https://github.com/heroku/webapp-runner/pull/456))
 
 ## [10.1.20.0] - 2024-04-03
 
