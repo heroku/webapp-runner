@@ -66,7 +66,7 @@
         <redisson.version>3.31.0</redisson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <invoker.plugin.version>2.0.0</invoker.plugin.version>
-        <tomcat.version>10.1.23</tomcat.version>
+        <tomcat.version>10.1.24</tomcat.version>
         <javadoc.plugin.version>3.7.0</javadoc.plugin.version>
         <nexus-staging.plugin.version>1.7.0</nexus-staging.plugin.version>
         <testng.version>7.10.2</testng.version>
