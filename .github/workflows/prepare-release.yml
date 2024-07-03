@@ -25,11 +25,11 @@ jobs:
     runs-on: pub-hk-ubuntu-22.04-small
     steps:
       - name: Get token for GH application (Linguist)
-        uses: heroku/use-app-token-action@main
+        uses: actions/create-githubapp-token@v1
         id: generate-token
         with:
-          app_id: ${{ vars.LINGUIST_GH_APP_ID }}
-          private_key: ${{ secrets.LINGUIST_GH_PRIVATE_KEY }}
+          app-id: ${{ vars.LINGUIST_GH_APP_ID }}
+          private-key: ${{ secrets.LINGUIST_GH_PRIVATE_KEY }}
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,7 +38,7 @@ jobs:
           ref: main
           # Using the GH application token here will configure the local git config for this repo with credentials
           # that can be used to make signed commits that are attributed to the GH application user
-          token: ${{ steps.generate-token.outputs.app_token }}
+          token: ${{ steps.generate-token.outputs.token }}
 
       - name: Record latest release version
         id: old-version
@@ -48,7 +48,7 @@ jobs:
         run: echo "version=$(gh api /repos/heroku/webapp-runner/releases | jq -j 'map(select(.tag_name | startswith("v${{ inputs.major-version }}"))) | sort_by(.published_at | fromdateiso8601) | last | .tag_name[1:]')" >> "${GITHUB_OUTPUT}"
         working-directory: webapp-runner-${{ inputs.major-version }}
         env:
-          GH_TOKEN: ${{ steps.generate-token.outputs.app_token }}
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
 
       - name: Drop -SNAPSHOT suffix from version
         run: ./mvnw versions:set -DremoveSnapshot -DgenerateBackupPoms=false
@@ -77,7 +77,7 @@ jobs:
         id: pr
         uses: peter-evans/create-pull-request@v6.0.5
         with:
-          token: ${{ steps.generate-token.outputs.app_token }}
+          token: ${{ steps.generate-token.outputs.token }}
           title: Prepare release v${{ steps.new-version.outputs.version }}
           body: |
             Changes:
@@ -92,4 +92,4 @@ jobs:
         if: steps.pr.outputs.pull-request-operation == 'created'
         run: gh pr merge --auto --squash "${{ steps.pr.outputs.pull-request-number }}"
         env:
-          GH_TOKEN: ${{ steps.generate-token.outputs.app_token }}
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
