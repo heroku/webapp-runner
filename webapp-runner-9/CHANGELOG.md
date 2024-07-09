@@ -4,6 +4,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+
+## [9.0.91.0] - 2024-07-09
+
 - Update Tomcat to version `9.0.91`. ([#494](https://github.com/heroku/webapp-runner/pull/494))
 
 ## [9.0.89.0] - 2024-06-03
@@ -44,7 +47,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Update Tomcat to version `9.0.80`. ([#356](https://github.com/heroku/webapp-runner/pull/356))
 
-[unreleased]: https://github.com/heroku/webapp-runner/compare/v9.0.89.0...HEAD
+[unreleased]: https://github.com/heroku/webapp-runner/compare/v9.0.91.0...HEAD
+[9.0.91.0]: https://github.com/heroku/webapp-runner/compare/v9.0.89.0...v9.0.91.0
 [9.0.89.0]: https://github.com/heroku/webapp-runner/compare/v9.0.88.0...v9.0.89.0
 [9.0.88.0]: https://github.com/heroku/webapp-runner/compare/v9.0.87.0...v9.0.88.0
 [9.0.87.0]: https://github.com/heroku/webapp-runner/compare/v9.0.86.0...v9.0.87.0
