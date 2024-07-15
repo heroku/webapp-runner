@@ -24,7 +24,7 @@ jobs:
     name: Release
     # Prevent accidentally performing a release from a branch other than `main`.
     if: github.ref == 'refs/heads/main'
-    runs-on: pub-hk-ubuntu-22.04-small
+    runs-on: pub-hk-ubuntu-24.04-ip
     steps:
       - name: Get token for GH application (Linguist)
         uses: actions/create-github-app-token@v1
