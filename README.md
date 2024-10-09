@@ -43,7 +43,7 @@ for any external dependencies other than those specified in your build to run yo
               <configuration>
                   <artifactItems>
                       <artifactItem>
-                          <groupId>com.github.heroku</groupId>
+                          <groupId>com.heroku</groupId>
                           <artifactId>webapp-runner</artifactId>
                           <version>${webapp-runner.version}</version>
                           <destFileName>webapp-runner.jar</destFileName>
@@ -73,7 +73,7 @@ them by using `webapp-runner-main` instead of `webapp-runner`:
 
 ```xml
 <artifactItem>
-    <groupId>com.github.heroku</groupId>
+    <groupId>com.heroku</groupId>
     <artifactId>webapp-runner-main</artifactId>
     <version>${webapp-runner.version}</version>
     <destFileName>webapp-runner.jar</destFileName>
