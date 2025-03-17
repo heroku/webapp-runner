@@ -29,3 +29,8 @@ updates:
     labels:
       - "skip changelog"
       - "dependencies"
+    groups:
+      github-actions:
+        update-types:
+          - "minor"
+          - "patch"
