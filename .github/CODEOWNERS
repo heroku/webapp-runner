@@ -1,3 +1,5 @@
+#ECCN:Open Source
+#GUSINFO:Languages,Heroku JVM Platform
 * @heroku/languages
 
 # Reduce team review request noise for Dependabot updates and automated release PRs.
