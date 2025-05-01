@@ -27,7 +27,7 @@ jobs:
     runs-on: pub-hk-ubuntu-24.04-ip
     steps:
       - name: Get token for GH application (Linguist)
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@v2
         id: generate-token
         with:
           app-id: ${{ vars.LINGUIST_GH_APP_ID }}
