@@ -4,7 +4,7 @@
     <parent>
         <artifactId>webapp-runner-parent</artifactId>
         <groupId>com.heroku</groupId>
-        <version>10.1.43.0</version>
+        <version>10.1.43.1-SNAPSHOT</version>
     </parent>
     <name>webapp-runner-main</name>
     <modelVersion>4.0.0</modelVersion>
