@@ -32,7 +32,7 @@ jobs:
           private-key: ${{ secrets.LINGUIST_GH_PRIVATE_KEY }}
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           # We always want the version bump/changelog and resultant PR to target main, not the branch of the workflow_dispatch.
           ref: main
