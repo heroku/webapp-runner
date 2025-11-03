@@ -1,0 +1,72 @@
+name: 'Update project version to match Apache Tomcat version'
+
+on:
+  pull_request:
+    types: [opened, reopened]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch name to update (e.g., dependabot/maven/webapp-runner-1337/tomcat.version-1.33.7)'
+        required: true
+        type: string
+
+# Disable all GITHUB_TOKEN permissions, since the GitHub App token is used instead.
+permissions: {}
+
+jobs:
+  update-version:
+    name: 'Update project version to match Apache Tomcat version'
+    runs-on: pub-hk-ubuntu-24.04-ip
+    steps:
+      - name: Get token for GH application (Linguist)
+        uses: actions/create-github-app-token@v2
+        id: generate-token
+        with:
+          app-id: ${{ vars.LINGUIST_GH_APP_ID }}
+          private-key: ${{ secrets.LINGUIST_GH_PRIVATE_KEY }}
+
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.branch || github.event.pull_request.head.ref }}
+          token: ${{ steps.generate-token.outputs.token }}
+          # Need full history to compare against origin/main when detecting which pom.xml files changed
+          fetch-depth: 0
+
+      - name: Check for relevant changed pom.xml files
+        id: check-poms
+        run: |
+          # https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#multiline-strings
+          echo "changed_poms<<EOF" >> $GITHUB_OUTPUT
+          echo "$(git diff --name-only origin/main | grep '^[^/]*/pom\.xml$' || true)" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - uses: actions/setup-java@v5
+        if: steps.check-poms.outputs.changed_poms != ''
+        with:
+          distribution: zulu
+          java-version: 11
+
+      - name: Update versions for all relevant changed pom.xml files
+        if: steps.check-poms.outputs.changed_poms != ''
+        run: |
+          for pom_file in "${{ steps.check-poms.outputs.changed_poms }}"; do
+            (
+              cd "$(dirname "${pom_file}")"
+
+              tomcat_version=$(./mvnw -DskipTests install dependency:list | awk -F: '/org.apache.tomcat.embed:tomcat-embed-core/{print $4}' | sort | uniq)
+              webapp_runner_version=$(./mvnw org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression=project.version -q -B -DforceStdout)
+
+              if [[ "${webapp_runner_version}" != "${tomcat_version}"* ]]; then
+                ./mvnw versions:set -DnewVersion="${tomcat_version}.0-SNAPSHOT" -DgenerateBackupPoms=false
+              fi
+            )
+          done
+
+          if ! git diff --quiet; then
+            git config user.name "${{ vars.LINGUIST_GH_APP_USERNAME }}"
+            git config user.email "${{ vars.LINGUIST_GH_APP_EMAIL }}"
+
+            git add .
+            git commit -m "Update project version(s)"
+            git push
+          fi
