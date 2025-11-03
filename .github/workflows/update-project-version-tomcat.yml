@@ -17,7 +17,7 @@ permissions:
 jobs:
   update-version:
     name: 'Update project version to match Apache Tomcat version'
-    runs-on: ubuntu-latest
+    runs-on: pub-hk-ubuntu-24.04-ip
     steps:
       - name: Get token for GH application (Linguist)
         uses: actions/create-github-app-token@v2
