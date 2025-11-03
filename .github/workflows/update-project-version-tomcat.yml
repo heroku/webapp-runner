@@ -10,9 +10,8 @@ on:
         required: true
         type: string
 
-permissions:
-  contents: write
-  pull-requests: read
+# Disable all GITHUB_TOKEN permissions, since the GitHub App token is used instead.
+permissions: {}
 
 jobs:
   update-version:
