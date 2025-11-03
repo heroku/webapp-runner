@@ -19,6 +19,13 @@ jobs:
     name: 'Update project version to match Apache Tomcat version'
     runs-on: ubuntu-latest
     steps:
+      - name: Get token for GH application (Linguist)
+        uses: actions/create-github-app-token@v2
+        id: generate-token
+        with:
+          app-id: ${{ vars.LINGUIST_GH_APP_ID }}
+          private-key: ${{ secrets.LINGUIST_GH_PRIVATE_KEY }}
+
       - uses: actions/checkout@v5
         with:
           ref: ${{ inputs.branch || github.event.pull_request.head.ref }}
@@ -33,14 +40,6 @@ jobs:
           echo "changed_poms<<EOF" >> $GITHUB_OUTPUT
           echo "$(git diff --name-only origin/main | grep '^[^/]*/pom\.xml$' || true)" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
-
-      - name: Get token for GH application (Linguist)
-        uses: actions/create-github-app-token@v2
-        if: steps.check-poms.outputs.changed_poms != ''
-        id: generate-token
-        with:
-          app-id: ${{ vars.LINGUIST_GH_APP_ID }}
-          private-key: ${{ secrets.LINGUIST_GH_PRIVATE_KEY }}
 
       - uses: actions/setup-java@v5
         if: steps.check-poms.outputs.changed_poms != ''
