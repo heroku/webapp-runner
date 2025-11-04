@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [9.0.111.0] - 2025-11-04
 
+- Update Tomcat to version `9.0.111`. ([#685](https://github.com/heroku/webapp-runner/pull/685))
 
 ## [9.0.109.0] - 2025-10-01
 
