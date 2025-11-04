@@ -49,7 +49,7 @@ jobs:
       - name: Update versions for all relevant changed pom.xml files
         if: steps.check-poms.outputs.changed_poms != ''
         run: |
-          for pom_file in "${{ steps.check-poms.outputs.changed_poms }}"; do
+          while IFS= read -r pom_file; do
             (
               cd "$(dirname "${pom_file}")"
 
@@ -60,7 +60,7 @@ jobs:
                 ./mvnw versions:set -DnewVersion="${tomcat_version}.0-SNAPSHOT" -DgenerateBackupPoms=false
               fi
             )
-          done
+          done <<< "${{ steps.check-poms.outputs.changed_poms }}"
 
           if ! git diff --quiet; then
             git config user.name "${{ vars.LINGUIST_GH_APP_USERNAME }}"
