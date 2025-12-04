@@ -1,8 +1,6 @@
 name: 'Update project version to match Apache Tomcat version'
 
 on:
-  pull_request:
-    types: [opened, reopened]
   workflow_dispatch:
     inputs:
       branch:
