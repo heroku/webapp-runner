@@ -1,6 +1,7 @@
 target
 tomcat.8080
 .classpath
+.DS_Store
 .project
 .settings/
 tomcat.*/
