@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 
+## [10.1.55.0] - 2026-05-28
+
+
 ## [10.1.54.0] - 2026-04-30
 
 - Update Tomcat to version `10.1.54`. ([#740](https://github.com/heroku/webapp-runner/pull/740))
@@ -95,7 +98,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Initial release with Tomcat 10.1 support. ([#397](https://github.com/heroku/webapp-runner/pull/397))
 
-[unreleased]: https://github.com/heroku/webapp-runner/compare/v10.1.54.0...HEAD
+[unreleased]: https://github.com/heroku/webapp-runner/compare/v10.1.55.0...HEAD
+[10.1.55.0]: https://github.com/heroku/webapp-runner/compare/v10.1.54.0...v10.1.55.0
 [10.1.54.0]: https://github.com/heroku/webapp-runner/compare/v10.1.53.0...v10.1.54.0
 [10.1.53.0]: https://github.com/heroku/webapp-runner/compare/v10.1.50.0...v10.1.53.0
 [10.1.50.0]: https://github.com/heroku/webapp-runner/compare/v10.1.49.0...v10.1.50.0
