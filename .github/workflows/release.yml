@@ -41,7 +41,7 @@ jobs:
           token: ${{ steps.generate-token.outputs.token }}
 
       - name: Set up Java
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v5.6.0
         with:
           distribution: 'zulu'
           java-version: '11'
@@ -85,7 +85,7 @@ jobs:
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@718ea10b132b3b2eba29c1007bb80653f286566b # v3.0.1
+        uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228 # v3.0.2
         with:
           token: ${{ steps.generate-token.outputs.token }}
           tag_name: v${{ steps.new-version.outputs.version }}
