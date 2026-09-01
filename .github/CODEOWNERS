@@ -4,5 +4,8 @@
 
 # Reduce team review request noise for Dependabot updates and automated release PRs.
 CHANGELOG.md @Malax
+.mvn/ @Malax
+mvnw @Malax
+mvnw.cmd @Malax
 pom.xml @Malax
 /.github/workflows/ @Malax
