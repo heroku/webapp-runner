@@ -38,7 +38,7 @@ jobs:
           echo "$(git diff --name-only origin/main | grep '^[^/]*/pom\.xml$' || true)" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
-      - uses: actions/setup-java@v5.6.0
+      - uses: actions/setup-java@v6.0.0
         if: steps.check-poms.outputs.changed_poms != ''
         with:
           distribution: zulu
