@@ -1,7 +1,9 @@
 version: 2
 updates:
   - package-ecosystem: "maven"
-    directory: "/webapp-runner-9"
+    directories:
+      - "/webapp-runner-9"
+      - "/webapp-runner-10"
     schedule:
       interval: "monthly"
     ignore:
@@ -9,19 +11,13 @@ updates:
         update-types: ["version-update:semver-major"]
     labels:
       - "skip changelog"
-      - "tomcat 9"
       - "dependencies"
-  - package-ecosystem: "maven"
-    directory: "/webapp-runner-10"
-    schedule:
-      interval: "monthly"
-    ignore:
-      - dependency-name: "tomcat.version"
-        update-types: ["version-update:semver-major"]
-    labels:
-      - "skip changelog"
-      - "tomcat 10"
-      - "dependencies"
+    groups:
+      maven-dependencies:
+        update-types:
+          - "minor"
+          - "patch"
+        group-by: dependency-name
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
