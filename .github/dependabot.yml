@@ -1,9 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: "maven"
-    directories:
-      - "/webapp-runner-9"
-      - "/webapp-runner-10"
+    directory: "/webapp-runner-9"
     schedule:
       interval: "monthly"
     ignore:
@@ -11,13 +9,59 @@ updates:
         update-types: ["version-update:semver-major"]
     labels:
       - "skip changelog"
+      - "tomcat 9"
       - "dependencies"
     groups:
+      tomcat:
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "org.apache.tomcat*:*"
+      maven-plugins:
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "org.apache.maven.plugins:*"
       maven-dependencies:
         update-types:
           - "minor"
           - "patch"
-        group-by: dependency-name
+        exclude-patterns:
+          - "org.apache.tomcat*:*"
+          - "org.apache.maven.plugins:*"
+  - package-ecosystem: "maven"
+    directory: "/webapp-runner-10"
+    schedule:
+      interval: "monthly"
+    ignore:
+      - dependency-name: "tomcat.version"
+        update-types: ["version-update:semver-major"]
+    labels:
+      - "skip changelog"
+      - "tomcat 10"
+      - "dependencies"
+    groups:
+      tomcat:
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "org.apache.tomcat*:*"
+      maven-plugins:
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "org.apache.maven.plugins:*"
+      maven-dependencies:
+        update-types:
+          - "minor"
+          - "patch"
+        exclude-patterns:
+          - "org.apache.tomcat*:*"
+          - "org.apache.maven.plugins:*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
