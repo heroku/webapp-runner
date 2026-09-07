@@ -11,6 +11,26 @@ updates:
       - "skip changelog"
       - "tomcat 9"
       - "dependencies"
+    groups:
+      tomcat:
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "org.apache.tomcat*:*"
+      maven-plugins:
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "org.apache.maven.plugins:*"
+      maven-dependencies:
+        update-types:
+          - "minor"
+          - "patch"
+        exclude-patterns:
+          - "org.apache.tomcat*:*"
+          - "org.apache.maven.plugins:*"
   - package-ecosystem: "maven"
     directory: "/webapp-runner-10"
     schedule:
@@ -22,6 +42,26 @@ updates:
       - "skip changelog"
       - "tomcat 10"
       - "dependencies"
+    groups:
+      tomcat:
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "org.apache.tomcat*:*"
+      maven-plugins:
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "org.apache.maven.plugins:*"
+      maven-dependencies:
+        update-types:
+          - "minor"
+          - "patch"
+        exclude-patterns:
+          - "org.apache.tomcat*:*"
+          - "org.apache.maven.plugins:*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
