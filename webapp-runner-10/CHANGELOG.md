@@ -15,15 +15,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [10.1.59.0] - 2026-09-01
 
+- Update Tomcat to version `10.1.59`. ([#779](https://github.com/heroku/webapp-runner/pull/779))
 
 ## [10.1.57.0] - 2026-08-10
 
+- Update Tomcat to version `10.1.57`. ([#769](https://github.com/heroku/webapp-runner/pull/769))
 
 ## [10.1.56.0] - 2026-07-06
 
+- Update Tomcat to version `10.1.56`. ([#761](https://github.com/heroku/webapp-runner/pull/761))
 
 ## [10.1.55.0] - 2026-05-28
 
+- Update Tomcat to version `10.1.55`. ([#753](https://github.com/heroku/webapp-runner/pull/753))
 
 ## [10.1.54.0] - 2026-04-30
 
@@ -31,15 +35,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [10.1.53.0] - 2026-04-02
 
-- Update Tomcat to version `10.1.53`. ([#733](https://github.com/heroku-webapp-runner/pull/733))
+- Update Tomcat to version `10.1.53`. ([#733](https://github.com/heroku/webapp-runner/pull/733))
 
 ## [10.1.50.0] - 2026-01-07
 
-- Update Tomcat to version `10.1.50`. ([#713](https://github.com/heroku-webapp-runner/pull/713))
+- Update Tomcat to version `10.1.50`. ([#713](https://github.com/heroku/webapp-runner/pull/713))
 
 ## [10.1.49.0] - 2025-12-04
 
-- Update Tomcat to version `10.1.49`. ([#699](https://github.com/heroku-webapp-runner/pull/699))
+- Update Tomcat to version `10.1.49`. ([#699](https://github.com/heroku/webapp-runner/pull/699))
 
 ## [10.1.48.0] - 2025-11-04
 
