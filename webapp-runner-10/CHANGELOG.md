@@ -15,15 +15,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [10.1.59.0] - 2026-09-01
 
+- Update Tomcat to version `10.1.59`. ([#779](https://github.com/heroku/webapp-runner/pull/779))
 
 ## [10.1.57.0] - 2026-08-10
 
+- Update Tomcat to version `10.1.57`. ([#769](https://github.com/heroku/webapp-runner/pull/769))
 
 ## [10.1.56.0] - 2026-07-06
 
+- Update Tomcat to version `10.1.56`. ([#761](https://github.com/heroku/webapp-runner/pull/761))
 
 ## [10.1.55.0] - 2026-05-28
 
+- Update Tomcat to version `10.1.55`. ([#753](https://github.com/heroku/webapp-runner/pull/753))
 
 ## [10.1.54.0] - 2026-04-30
 
