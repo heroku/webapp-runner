@@ -25,14 +25,14 @@ jobs:
     runs-on: pub-hk-ubuntu-24.04-ip
     steps:
       - name: Get token for GH application (Linguist)
-        uses: actions/create-github-app-token@v3
+        uses: actions/create-github-app-token@f418cff399f7aef4c2f0ad47e25ca7a6abbdd6fc # v3.4.0
         id: generate-token
         with:
           app-id: ${{ vars.LINGUIST_GH_APP_ID }}
           private-key: ${{ secrets.LINGUIST_GH_PRIVATE_KEY }}
 
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           # We always want the version bump/changelog and resultant PR to target main, not the branch of the workflow_dispatch.
           ref: main
